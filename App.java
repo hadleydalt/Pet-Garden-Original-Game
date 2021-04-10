@@ -1,6 +1,7 @@
 package indy;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -14,7 +15,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        /* TODO: EVERYTHING!!! */
+        PaneOrganizer organizer = new PaneOrganizer();
+        stage.setTitle("Pet Garden");
+        stage.show();
+        Scene scene = new Scene(organizer.getRoot(), 550, 700);
+        stage.setScene(scene);
     }
 
     public static void main(String[] args) {
