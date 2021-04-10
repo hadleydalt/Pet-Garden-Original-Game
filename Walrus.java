@@ -24,7 +24,7 @@ public class Walrus extends Pet{
     }
     @Override
     public Color getPetColor(){
-        return Color.SANDYBROWN;
+        return Color.LIGHTSKYBLUE;
     }
 
     @Override

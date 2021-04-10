@@ -52,4 +52,30 @@ public class Constants {
     public static final int EAR_1_X = 8;
     public static final int EAR_1_Y = 16;
 
+    //FOX
+    public static final int STOMACH_X = 45;
+    public static final int STOMACH_Y = 36;
+    public static final int EYE_BACK_X = 18;
+    public static final int EYE_BACK_Y = 24;
+
+    //GIRAFFE
+    public static final int SPOT_S_RAD = 7;
+    public static final int SPOT_M_RAD = 10;
+    public static final int SPOT_L_RAD = 14;
+    public static final int THING_X = 7;
+    public static final int THING_Y = 18;
+    public static final int THING_1_X = 8;
+    public static final int THING_1_Y = 5;
+
+    //OWL
+    public static final int BIG_EYE_RAD = 10;
+    public static final int OWL_EAR_1_X = 5;
+    public static final int OWL_EAR_1_Y = 12;
+    public static final int OWL_BEAK = 15;
+
+    //SHEEP
+    public static final int FLUFF_RAD = 12;
+    public static final int FACE_X = 38;
+    public static final int FACE_Y = 31;
+
 }

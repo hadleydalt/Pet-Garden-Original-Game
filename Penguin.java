@@ -9,6 +9,11 @@ public class Penguin extends Pet{
     private Ellipse _eye2;
     private Ellipse _pupil1;
     private Ellipse _pupil2;
+    private Ellipse _stomach;
+    private Ellipse _eyeback1;
+    private Ellipse _eyeback2;
+    private Ellipse _beak;
+
     public Penguin(Pane root){
         super(root);
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -19,8 +24,18 @@ public class Penguin extends Pet{
         _pupil2 = new Ellipse(Constants.PUPIL_RAD, Constants.PUPIL_RAD);
         _pupil1.setFill(Color.WHITE);
         _pupil2.setFill(Color.WHITE);
+        _stomach = new Ellipse(Constants.STOMACH_X, Constants.STOMACH_Y);
+        _stomach.setFill(Color.WHITE);
+        _eyeback1 = new Ellipse(Constants.EYE_BACK_X, Constants.EYE_BACK_Y);
+        _eyeback1.setFill(Color.WHITE);
+        _eyeback1.setRotate(-20);
+        _eyeback2 = new Ellipse(Constants.EYE_BACK_X, Constants.EYE_BACK_Y);
+        _eyeback2.setFill(Color.WHITE);
+        _eyeback2.setRotate(20);
+        _beak = new Ellipse(Constants.BEAK_X, Constants.BEAK_Y);
+        _beak.setFill(Color.ORANGE);
 
-        root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2);
+        root.getChildren().addAll(_eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2, _stomach, _beak);
     }
 
     @Override
@@ -40,5 +55,13 @@ public class Penguin extends Pet{
         _pupil1.setCenterY(y-21);
         _pupil2.setCenterX(x+17);
         _pupil2.setCenterY(y-21);
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+22);
+        _eyeback1.setCenterX(x-20);
+        _eyeback1.setCenterY(y-15);
+        _eyeback2.setCenterX(x+20);
+        _eyeback2.setCenterY(y-15);
+        _beak.setCenterX(x);
+        _beak.setCenterY(y-7);
     }
 }
