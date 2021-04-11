@@ -115,9 +115,13 @@ public class Constants {
     //STORE
     public static final int STORE_BG_X = 550;
     public static final int STORE_BG_Y = 700;
+    public static final int TOPBG_X = 130;
+    public static final int TOPBG_Y = 45;
+    public static final int ACCENT_X = 90;
+    public static final int ACCENT_Y = 8;
 
     //TITLE
-    public static final int TITLE_BG_X= 300;
+    public static final int TITLE_BG_X= 1440;
     public static final int TITLE_BG_Y= 800;
 
 }

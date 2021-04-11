@@ -23,6 +23,7 @@ public class Cat extends Pet{
     private Ellipse _tail;
     private Label _muzzle1;
     private Label _muzzle2;
+    private Ellipse _stomach;
 
     public Cat(Pane root){
         super(root);
@@ -64,10 +65,12 @@ public class Cat extends Pet{
         _muzzle2.setRotate(100);
         _muzzle2.setTextFill(Color.GRAY);
         _muzzle2.setFont(font);
+        _stomach = new Ellipse(Constants.REINDEER_STOMACH_X, Constants.REINDEER_STOMACH_Y);
+        _stomach.setFill(Color.rgb(240, 240, 240));
 
         root.getChildren().addAll(_eye1, _eye2, _mouth, _pupil1, _pupil2, _nose, _ear1, _ear2,
                  _leftSideStripe1, _leftSideStripe2, _rightSideStripe1,
-                _rightSideStripe2, _tail, _muzzle1, _muzzle2);
+                _rightSideStripe2, _tail, _muzzle1, _muzzle2, _stomach);
     }
 
     @Override
@@ -107,6 +110,8 @@ public class Cat extends Pet{
         _tail.setCenterY(y+48); //331
         _muzzle1.relocate(x-7, y-9);
         _muzzle2.relocate(x+5, y-8);
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+35);
     }
 
     @Override

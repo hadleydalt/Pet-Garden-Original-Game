@@ -1,6 +1,13 @@
 package indy;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class Game {
     private Pane petPane;
@@ -23,20 +30,11 @@ public class Game {
     private Store _store;
     private Pane titlePane;
     private Title _title;
+    private boolean _titleNotCompressed;
 
     public Game(){
-        petPane = new Pane();
-        gardenPane = new Pane();
-        storePane = new Pane();
-        titlePane = new Pane();
-        _garden = new Garden(gardenPane);
-        _garden.setLoc(30, 200);
-        _store = new Store(storePane);
-        _store.setLoc(620, 50);
-        _title = new Title(titlePane);
-        _title.setLoc(1205, 0);
-
-        /*cat = new Cat(petPane);
+        this.setupGame();
+        cat = new Cat(petPane);
         cat.setLoc(340, 390);
         chicken = new Chicken(petPane);
         chicken.setLoc(80, 390);
@@ -61,7 +59,7 @@ public class Game {
         tiger = new Tiger(petPane);
         tiger.setLoc(80, 520);
         walrus = new Walrus(petPane);
-        walrus.setLoc(210, 520); */
+        walrus.setLoc(210, 520);
     }
 
     public Pane getPetPane(){
@@ -79,4 +77,45 @@ public class Game {
     public Pane getTitlePane(){
         return titlePane;
     }
+
+    public void setupGame(){
+        petPane = new Pane();
+        gardenPane = new Pane();
+        storePane = new Pane();
+        titlePane = new Pane();
+        _garden = new Garden(gardenPane);
+        _garden.setLoc(30, 200);
+        _store = new Store(storePane);
+        _store.setLoc(620, 50);
+        _title = new Title(titlePane);
+        _title.setLoc(0, 0);
+        _titleNotCompressed = true;
+        titlePane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
+        titlePane.setFocusTraversable(true);
+    }
+
+    private class TitleMover implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            _title.getNode().setWidth(_title.getNode().getWidth() - 120);
+            _title.setXLoc(_title.getXLoc()+120);
+        }
+    }
+
+    private class TitleMoverOnKey implements EventHandler<KeyEvent> {
+        public void setupTimeline() {
+            KeyFrame kf = new KeyFrame(Duration.millis(25), new TitleMover());
+            Timeline timeline = new Timeline(kf);
+            timeline.setCycleCount(10);
+            timeline.play();
+        }
+        public void handle (KeyEvent event){
+            if (_titleNotCompressed) {
+                if (event.getCode() == KeyCode.SPACE) {
+                    this.setupTimeline();
+                    _titleNotCompressed = false;
+                }
+            }
+        }
+    }
+
 }

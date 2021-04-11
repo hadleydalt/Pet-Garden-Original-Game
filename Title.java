@@ -30,6 +30,18 @@ public class Title {
     public void setLoc(double x, double y){
         _bg.setX(x);
         _bg.setY(y);
-        _title.relocate(867, 300);
+        _title.relocate(862, 300);
+    }
+
+    public void setXLoc(double x){
+        _bg.setX(x);
+    }
+
+    public double getXLoc(){
+        return _bg.getX();
+    }
+
+    public Rectangle getNode(){
+        return _bg;
     }
 }
