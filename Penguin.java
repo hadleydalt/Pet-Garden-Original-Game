@@ -64,4 +64,9 @@ public class Penguin extends Pet{
         _beak.setCenterX(x);
         _beak.setCenterY(y-7);
     }
+
+    @Override
+    public String getType(){
+        return "penguin";
+    }
 }

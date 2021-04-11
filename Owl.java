@@ -129,4 +129,9 @@ public class Owl extends Pet{
         _fluff6.relocate(x-8, y+32);
         _fluff7.relocate(x+8, y+32);
     }
+
+    @Override
+    public String getType(){
+        return "owl";
+    }
 }

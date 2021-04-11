@@ -77,5 +77,47 @@ public class Constants {
     public static final int FLUFF_RAD = 12;
     public static final int FACE_X = 38;
     public static final int FACE_Y = 31;
+    public static final int SHEEP_EAR_X = 25;
+    public static final int SHEEP_EAR_Y = 10;
+
+    //REINDEER
+    public static final int REINDEER_STOMACH_X = 30;
+    public static final int REINDEER_STOMACH_Y = 21;
+
+    //TIGER
+    public static final int EAR_2_X = 12;
+    public static final int EAR_2_Y = 20;
+
+    //WALRUS
+    public static final int NOSE_DIVIDE_X = 1;
+    public static final int NOSE_DIVIDE_Y = 22;
+    public static final int SPOT_RAD = 2;
+    public static final int TUSK_X = 4;
+    public static final int TUSK_Y = 17;
+    public static final int FLIPPER_X = 20;
+    public static final int FLIPPER_Y = 10;
+
+    //GARDEN
+    public static final int CLOUD_X = 70;
+    public static final int CLOUD_Y = 35;
+    public static final int MED_CLOUD_X = 60;
+    public static final int MED_CLOUD_Y = 30;
+    public static final int SUN_RAD = 70;
+    public static final int LEAF_X = 50;
+    public static final int LEAF_Y = 100;
+    public static final int BIG_LEAF_X = 60;
+    public static final int BIG_LEAF_Y = 120;
+    public static final int FRAMER_X = 30;
+    public static final int FRAMER_Y = 300;
+    public static final int FRAME_X = 540;
+    public static final int FRAME_Y = 690;
+
+    //STORE
+    public static final int STORE_BG_X = 550;
+    public static final int STORE_BG_Y = 700;
+
+    //TITLE
+    public static final int TITLE_BG_X= 300;
+    public static final int TITLE_BG_Y= 800;
 
 }

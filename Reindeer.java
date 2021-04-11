@@ -22,6 +22,7 @@ public class Reindeer extends Pet{
     private Rectangle _thing2;
     private Rectangle _thing3;
     private Rectangle _thing4;
+    private Ellipse _stomach;
 
     public Reindeer(Pane root){
         super(root);
@@ -64,9 +65,12 @@ public class Reindeer extends Pet{
         _thing4 = new Rectangle(Constants.THING_X, Constants.THING_Y);
         _thing4.setFill(Color.rgb(135, 115, 89));
         _thing4.setRotate(-40);
+        _stomach = new Ellipse(Constants.REINDEER_STOMACH_X, Constants.REINDEER_STOMACH_Y);
+        _stomach.setFill(Color.WHEAT);
+
 
         root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _mouth, _nose, _muzzle1, _muzzle2, _ear11, _ear12,
-                _thing1, _thing2, _thing3, _thing4);
+                _thing1, _thing2, _thing3, _thing4, _stomach);
     }
 
     @Override
@@ -104,6 +108,12 @@ public class Reindeer extends Pet{
         _thing3.setY(y-78);
         _thing4.setX(x+12);
         _thing4.setY(y-78);
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+35);
+    }
 
+    @Override
+    public String getType(){
+        return "reindeer";
     }
 }

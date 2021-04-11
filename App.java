@@ -18,7 +18,7 @@ public class App extends Application {
         PaneOrganizer organizer = new PaneOrganizer();
         stage.setTitle("Pet Garden");
         stage.show();
-        Scene scene = new Scene(organizer.getRoot(), 550, 700);
+        Scene scene = new Scene(organizer.getRoot(), 1440, 800);
         stage.setScene(scene);
     }
 

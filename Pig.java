@@ -68,4 +68,9 @@ public class Pig extends Pet{
         _ear2.setX(x+20);
         _ear2.setY(y-60);
     }
+
+    @Override
+    public String getType(){
+        return "pig";
+    }
 }

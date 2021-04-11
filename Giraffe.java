@@ -138,4 +138,9 @@ public class Giraffe extends Pet{
         _thing22.setCenterX(x+20);
         _thing22.setCenterY(y-75);
     }
+
+    @Override
+    public String getType(){
+        return "giraffe";
+    }
 }

@@ -22,4 +22,8 @@ public class Pet {
     public Ellipse getBody(){
         return _body;
     }
+
+    public String getType(){
+        return null;
+    }
 }

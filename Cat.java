@@ -108,4 +108,9 @@ public class Cat extends Pet{
         _muzzle1.relocate(x-7, y-9);
         _muzzle2.relocate(x+5, y-8);
     }
+
+    @Override
+    public String getType(){
+        return "cat";
+    }
 }

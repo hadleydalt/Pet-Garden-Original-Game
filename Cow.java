@@ -108,4 +108,9 @@ public class Cow extends Pet{
         _ear2int.setCenterX(x+43);
         _ear2int.setCenterY(y-52);
     }
+
+    @Override
+    public String getType(){
+        return "cow";
+    }
 }

@@ -99,4 +99,9 @@ public class Dog extends Pet{
         _ear22.setCenterX(x+50);
         _ear22.setCenterY(y-63);
     }
+
+    @Override
+    public String getType(){
+        return "dog";
+    }
 }

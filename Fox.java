@@ -99,4 +99,9 @@ public class Fox extends Pet{
         _tail.setCenterX(x+47);
         _tail.setCenterY(y+48);
     }
+
+    @Override
+    public String getType(){
+        return "fox";
+    }
 }

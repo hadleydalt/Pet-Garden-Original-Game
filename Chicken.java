@@ -81,4 +81,9 @@ public class Chicken extends Pet{
         _top3.setCenterX(x+10);
         _top3.setCenterY(y-55);
     }
+
+    @Override
+    public String getType(){
+        return "chicken";
+    }
 }

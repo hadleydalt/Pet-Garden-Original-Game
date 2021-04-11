@@ -26,6 +26,8 @@ public class Sheep extends Pet{
     private Label _muzzle1;
     private Label _muzzle2;
     private Ellipse _face;
+    private Ellipse _ear1;
+    private Ellipse _ear2;
 
     public Sheep(Pane root){
         super(root);
@@ -72,9 +74,15 @@ public class Sheep extends Pet{
         _muzzle2.setFont(font);
         _face = new Ellipse(Constants.FACE_X, Constants.FACE_Y);
         _face.setFill(Color.rgb(227, 213, 197));
+        _ear1 = new Ellipse(Constants.SHEEP_EAR_X, Constants.SHEEP_EAR_Y);
+        _ear1.setFill(Color.rgb(227, 213, 197));
+        _ear1.setRotate(-55);
+        _ear2 = new Ellipse(Constants.SHEEP_EAR_X, Constants.SHEEP_EAR_Y);
+        _ear2.setFill(Color.rgb(227, 213, 197));
+        _ear2.setRotate(55);
 
         root.getChildren().addAll(_face, _eye1, _eye2, _pupil1, _pupil2, _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6,
-                _fluff7, _fluff8, _fluff9, _fluff10, _mouth, _nose, _muzzle1, _muzzle2);
+                _fluff7, _fluff8, _fluff9, _fluff10, _mouth, _nose, _muzzle1, _muzzle2, _ear1, _ear2);
     }
 
     @Override
@@ -104,12 +112,12 @@ public class Sheep extends Pet{
         _fluff4.setCenterX(x+60);
         _fluff4.setCenterY(y-20);
         _fluff5.setCenterX(x+60);
-        _fluff5.setCenterY(y);
+        _fluff5.setCenterY(y+23);
         _fluff6.setCenterX(x+43);
         _fluff6.setCenterY(y-35);
 
-        _fluff7.setCenterX(x-60);
-        _fluff7.setCenterY(y);
+        _fluff7.setCenterX(x-55);
+        _fluff7.setCenterY(y-23);
         _fluff8.setCenterX(x-45);
         _fluff8.setCenterY(y+35);
         _fluff9.setCenterX(x-53);
@@ -128,5 +136,15 @@ public class Sheep extends Pet{
 
         _face.setCenterX(x);
         _face.setCenterY(y-15);
+
+        _ear1.setCenterX(x-45);
+        _ear1.setCenterY(y-10);
+        _ear2.setCenterX(x+45);
+        _ear2.setCenterY(y-10);
+    }
+
+    @Override
+    public String getType(){
+        return "sheep";
     }
 }

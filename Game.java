@@ -17,10 +17,26 @@ public class Game {
     private Sheep sheep;
     private Tiger tiger;
     private Walrus walrus;
+    private Pane gardenPane;
+    private Garden _garden;
+    private Pane storePane;
+    private Store _store;
+    private Pane titlePane;
+    private Title _title;
 
     public Game(){
         petPane = new Pane();
-        cat = new Cat(petPane);
+        gardenPane = new Pane();
+        storePane = new Pane();
+        titlePane = new Pane();
+        _garden = new Garden(gardenPane);
+        _garden.setLoc(30, 200);
+        _store = new Store(storePane);
+        _store.setLoc(620, 50);
+        _title = new Title(titlePane);
+        _title.setLoc(1205, 0);
+
+        /*cat = new Cat(petPane);
         cat.setLoc(340, 390);
         chicken = new Chicken(petPane);
         chicken.setLoc(80, 390);
@@ -45,10 +61,22 @@ public class Game {
         tiger = new Tiger(petPane);
         tiger.setLoc(80, 520);
         walrus = new Walrus(petPane);
-        walrus.setLoc(210, 520);
+        walrus.setLoc(210, 520); */
     }
 
     public Pane getPetPane(){
         return petPane;
+    }
+
+    public Pane getGardenPane(){
+        return gardenPane;
+    }
+
+    public Pane getStorePane(){
+        return storePane;
+    }
+
+    public Pane getTitlePane(){
+        return titlePane;
     }
 }
