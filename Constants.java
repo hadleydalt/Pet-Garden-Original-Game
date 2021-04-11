@@ -123,5 +123,7 @@ public class Constants {
     //TITLE
     public static final int TITLE_BG_X= 1440;
     public static final int TITLE_BG_Y= 800;
+    public static final int LOADINGBG_X = 300;
+    public static final int LOADINGBG_Y = 30;
 
 }

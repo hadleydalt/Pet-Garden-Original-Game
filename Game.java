@@ -31,6 +31,8 @@ public class Game {
     private Pane titlePane;
     private Title _title;
     private boolean _titleNotCompressed;
+    private int _intPercent;
+    public int _counter;
 
     public Game(){
         this.setupGame();
@@ -92,6 +94,36 @@ public class Game {
         _titleNotCompressed = true;
         titlePane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
         titlePane.setFocusTraversable(true);
+        this.setupLoadingBarTimeline();
+        _intPercent = _title.getPercent();
+        _counter = 0;
+        this.setupCounter();
+    }
+
+    public void setupLoadingBarTimeline() {
+        KeyFrame kf = new KeyFrame(Duration.millis(90), new LoadingBarFiller());
+        Timeline timeline = new Timeline(kf);
+        timeline.setCycleCount(25);
+        timeline.play();
+    }
+
+    public void setupCounter() {
+        KeyFrame kf2 = new KeyFrame(Duration.millis(1), new Counter());
+        Timeline timeline = new Timeline(kf2);
+        timeline.setCycleCount(2250);
+        timeline.play();
+    }
+
+    private class Counter implements EventHandler<ActionEvent>{
+        public void handle(ActionEvent event){
+            _counter ++;
+            if (_counter == 2250){
+                _title.getLoadingBar().setOpacity(0);
+                _title.getLoadingBG().setOpacity(0);
+                _title.getPercentLabel().setOpacity(0);
+                _title.getPressSpace().setOpacity(1);
+            }
+        }
     }
 
     private class TitleMover implements EventHandler<ActionEvent> {
@@ -101,17 +133,27 @@ public class Game {
         }
     }
 
+    private class LoadingBarFiller implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            _title.getLoadingBar().setWidth(_title.getLoadingBar().getWidth()+12);
+            _intPercent +=4;
+            _title.getPercentLabel().setText(_intPercent + "%");
+        }
+    }
+
     private class TitleMoverOnKey implements EventHandler<KeyEvent> {
-        public void setupTimeline() {
-            KeyFrame kf = new KeyFrame(Duration.millis(25), new TitleMover());
-            Timeline timeline = new Timeline(kf);
+        public void setupTitleBGTimeline() {
+            KeyFrame kf1 = new KeyFrame(Duration.millis(25), new TitleMover());
+            Timeline timeline = new Timeline(kf1);
             timeline.setCycleCount(10);
             timeline.play();
         }
+
         public void handle (KeyEvent event){
             if (_titleNotCompressed) {
                 if (event.getCode() == KeyCode.SPACE) {
-                    this.setupTimeline();
+                    this.setupTitleBGTimeline();
+                    _title.getPressSpace().setOpacity(0);
                     _titleNotCompressed = false;
                 }
             }
