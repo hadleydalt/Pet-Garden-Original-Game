@@ -32,7 +32,9 @@ public class Game {
     private Title _title;
     private boolean _titleNotCompressed;
     private int _intPercent;
-    public int _counter;
+    private int _counter;
+    private int _titleXLoc;
+    private int _titleYLoc;
 
     public Game(){
         this.setupGame();
@@ -97,6 +99,8 @@ public class Game {
         this.setupLoadingBarTimeline();
         _intPercent = _title.getPercent();
         _counter = 0;
+        _titleXLoc = 318;
+        _titleYLoc = 270;
         this.setupCounter();
     }
 
@@ -128,8 +132,12 @@ public class Game {
 
     private class TitleMover implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
-            _title.getNode().setWidth(_title.getNode().getWidth() - 120);
-            _title.setXLoc(_title.getXLoc()+120);
+            _title.getBG().setWidth(_title.getBG().getWidth() - 120);
+            _title.setBGXLoc(_title.getBGXLoc()+120);
+            _title.getTitle().setRotate(_title.getTitle().getRotate()+9);
+            _titleXLoc += 49.5;
+            _titleYLoc += 3;
+            _title.setTitleLoc(_titleXLoc + 49.5, _titleYLoc + 3);
         }
     }
 
@@ -150,7 +158,7 @@ public class Game {
         }
 
         public void handle (KeyEvent event){
-            if (_titleNotCompressed) {
+            if ((_titleNotCompressed) && (_counter == 2250)) {
                 if (event.getCode() == KeyCode.SPACE) {
                     this.setupTitleBGTimeline();
                     _title.getPressSpace().setOpacity(0);

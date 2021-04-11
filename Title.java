@@ -26,7 +26,6 @@ public class Title {
         Font font = new Font("Gill Sans", 170);
         _title = new Label("Pet Garden");
         _title.setTextFill(Color.ALICEBLUE);
-        //_title.setRotate(90);
         _title.setFont(font);
         _loadingbg = new Rectangle(Constants.LOADINGBG_X, Constants.LOADINGBG_Y);
         _loadingbg.setFill(Color.WHITE);
@@ -59,15 +58,19 @@ public class Title {
         _pressSpace.relocate(540, 480);
     }
 
-    public void setXLoc(double x){
+    public void setBGXLoc(double x){
         _bg.setX(x);
     }
 
-    public double getXLoc(){
+    public double getBGXLoc(){
         return _bg.getX();
     }
 
-    public Rectangle getNode(){
+    public void setTitleLoc(double x, double y){
+        _title.relocate(x, y);
+    }
+
+    public Rectangle getBG(){
         return _bg;
     }
 
@@ -89,5 +92,9 @@ public class Title {
 
     public Label getPressSpace(){
         return _pressSpace;
+    }
+
+    public Label getTitle(){
+        return _title;
     }
 }
