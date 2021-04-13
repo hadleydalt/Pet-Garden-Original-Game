@@ -15,9 +15,11 @@ public class Pig extends Pet{
     private Ellipse _nostril2;
     private Rectangle _ear1;
     private Rectangle _ear2;
+    private Pet[][] _pets;
 
-    public Pig(Pane root){
-        super(root);
+    public Pig(Pane root, Pet[][] pets){
+        super(root, pets);
+        _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye1.setFill(Color.BLACK);
@@ -47,30 +49,75 @@ public class Pig extends Pet{
 
     @Override
     public void setLoc(double x, double y){
-        this.getBody().setCenterX(x);
-        this.getBody().setCenterY(y);
-        _eye1.setCenterX(x-15);
-        _eye1.setCenterY(y-20);
-        _eye2.setCenterX(x+15);
-        _eye2.setCenterY(y-20);
-        _pupil1.setCenterX(x-13);
-        _pupil1.setCenterY(y-21);
-        _pupil2.setCenterX(x+17);
-        _pupil2.setCenterY(y-21);
-        _mouth.setCenterX(x);
-        _mouth.setCenterY(y-4);
-        _nostril1.setCenterX(x-7);
-        _nostril1.setCenterY(y-6);
-        _nostril2.setCenterX(x+7);
-        _nostril2.setCenterY(y-6);
-        _ear1.setX(x-40);
-        _ear1.setY(y-63);
-        _ear2.setX(x+20);
-        _ear2.setY(y-60);
+        if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            this.getBody().setCenterX(x);
+            this.getBody().setCenterY(y);
+            _eye1.setCenterX(x-15);
+            _eye1.setCenterY(y-20);
+            _eye2.setCenterX(x+15);
+            _eye2.setCenterY(y-20);
+            _pupil1.setCenterX(x-13);
+            _pupil1.setCenterY(y-21);
+            _pupil2.setCenterX(x+17);
+            _pupil2.setCenterY(y-21);
+            _mouth.setCenterX(x);
+            _mouth.setCenterY(y-4);
+            _nostril1.setCenterX(x-7);
+            _nostril1.setCenterY(y-6);
+            _nostril2.setCenterX(x+7);
+            _nostril2.setCenterY(y-6);
+            _ear1.setX(x-40);
+            _ear1.setY(y-63);
+            _ear2.setX(x+20);
+            _ear2.setY(y-60);
+        }
+        else {
+            this.setLoc(this.petXLoc(), this.petYLoc());
+        }
     }
 
     @Override
     public String getType(){
         return "pig";
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
     }
 }

@@ -26,9 +26,11 @@ public class Owl extends Pet{
     private Label _fluff5;
     private Label _fluff6;
     private Label _fluff7;
+    private Pet[][] _pets;
 
-    public Owl(Pane root){
-        super(root);
+    public Owl(Pane root, Pet[][] pets){
+        super(root, pets);
+        _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye1.setFill(Color.BLACK);
@@ -97,41 +99,86 @@ public class Owl extends Pet{
 
     @Override
     public void setLoc(double x, double y){
-        this.getBody().setCenterX(x);
-        this.getBody().setCenterY(y);
-        _eye1.setCenterX(x-15);
-        _eye1.setCenterY(y-20);
-        _eye2.setCenterX(x+15);
-        _eye2.setCenterY(y-20);
-        _pupil1.setCenterX(x-13);
-        _pupil1.setCenterY(y-21);
-        _pupil2.setCenterX(x+17);
-        _pupil2.setCenterY(y-21);
-        _wing1.setCenterX(x-38);
-        _wing1.setCenterY(y+5);
-        _wing2.setCenterX(x+38);
-        _wing2.setCenterY(y+5);
-        _beak.setX(x-8);
-        _beak.setY(y-14);
-        _bigeye1.setCenterX(x-15);
-        _bigeye1.setCenterY(y-20);
-        _bigeye2.setCenterX(x+15);
-        _bigeye2.setCenterY(y-20);
-        _ear11.setCenterX(x-35);
-        _ear11.setCenterY(y-60);
-        _ear12.setCenterX(x+35);
-        _ear12.setCenterY(y-60);
-        _fluff1.relocate(x-8, y+7);
-        _fluff2.relocate(x+8, y+8);
-        _fluff3.relocate(x-18, y+20);
-        _fluff4.relocate(x-2, y+20);
-        _fluff5.relocate(x+14, y+20);
-        _fluff6.relocate(x-8, y+32);
-        _fluff7.relocate(x+8, y+32);
+        if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            this.getBody().setCenterX(x);
+            this.getBody().setCenterY(y);
+            _eye1.setCenterX(x-15);
+            _eye1.setCenterY(y-20);
+            _eye2.setCenterX(x+15);
+            _eye2.setCenterY(y-20);
+            _pupil1.setCenterX(x-13);
+            _pupil1.setCenterY(y-21);
+            _pupil2.setCenterX(x+17);
+            _pupil2.setCenterY(y-21);
+            _wing1.setCenterX(x-38);
+            _wing1.setCenterY(y+5);
+            _wing2.setCenterX(x+38);
+            _wing2.setCenterY(y+5);
+            _beak.setX(x-8);
+            _beak.setY(y-14);
+            _bigeye1.setCenterX(x-15);
+            _bigeye1.setCenterY(y-20);
+            _bigeye2.setCenterX(x+15);
+            _bigeye2.setCenterY(y-20);
+            _ear11.setCenterX(x-35);
+            _ear11.setCenterY(y-60);
+            _ear12.setCenterX(x+35);
+            _ear12.setCenterY(y-60);
+            _fluff1.relocate(x-8, y+7);
+            _fluff2.relocate(x+8, y+8);
+            _fluff3.relocate(x-18, y+20);
+            _fluff4.relocate(x-2, y+20);
+            _fluff5.relocate(x+14, y+20);
+            _fluff6.relocate(x-8, y+32);
+            _fluff7.relocate(x+8, y+32);
+        }
+        else {
+            this.setLoc(this.petXLoc(), this.petYLoc());
+        }
     }
 
     @Override
     public String getType(){
         return "owl";
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
     }
 }

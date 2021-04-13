@@ -13,9 +13,11 @@ public class Penguin extends Pet{
     private Ellipse _eyeback1;
     private Ellipse _eyeback2;
     private Ellipse _beak;
+    private Pet[][] _pets;
 
-    public Penguin(Pane root){
-        super(root);
+    public Penguin(Pane root, Pet[][] pets){
+        super(root, pets);
+        _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye1.setFill(Color.BLACK);
@@ -45,28 +47,73 @@ public class Penguin extends Pet{
 
     @Override
     public void setLoc(double x, double y){
-        this.getBody().setCenterX(x);
-        this.getBody().setCenterY(y);
-        _eye1.setCenterX(x-15);
-        _eye1.setCenterY(y-20);
-        _eye2.setCenterX(x+15);
-        _eye2.setCenterY(y-20);
-        _pupil1.setCenterX(x-13);
-        _pupil1.setCenterY(y-21);
-        _pupil2.setCenterX(x+17);
-        _pupil2.setCenterY(y-21);
-        _stomach.setCenterX(x);
-        _stomach.setCenterY(y+22);
-        _eyeback1.setCenterX(x-20);
-        _eyeback1.setCenterY(y-15);
-        _eyeback2.setCenterX(x+20);
-        _eyeback2.setCenterY(y-15);
-        _beak.setCenterX(x);
-        _beak.setCenterY(y-7);
+        if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            this.getBody().setCenterX(x);
+            this.getBody().setCenterY(y);
+            _eye1.setCenterX(x-15);
+            _eye1.setCenterY(y-20);
+            _eye2.setCenterX(x+15);
+            _eye2.setCenterY(y-20);
+            _pupil1.setCenterX(x-13);
+            _pupil1.setCenterY(y-21);
+            _pupil2.setCenterX(x+17);
+            _pupil2.setCenterY(y-21);
+            _stomach.setCenterX(x);
+            _stomach.setCenterY(y+22);
+            _eyeback1.setCenterX(x-20);
+            _eyeback1.setCenterY(y-15);
+            _eyeback2.setCenterX(x+20);
+            _eyeback2.setCenterY(y-15);
+            _beak.setCenterX(x);
+            _beak.setCenterY(y-7);
+        }
+        else {
+            this.setLoc(this.petXLoc(), this.petYLoc());
+        }
     }
 
     @Override
     public String getType(){
         return "penguin";
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
     }
 }

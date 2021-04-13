@@ -28,9 +28,11 @@ public class Sheep extends Pet{
     private Ellipse _face;
     private Ellipse _ear1;
     private Ellipse _ear2;
+    private Pet[][] _pets;
 
-    public Sheep(Pane root){
-        super(root);
+    public Sheep(Pane root, Pet[][] pets){
+        super(root, pets);
+        _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye1.setFill(Color.BLACK);
@@ -92,59 +94,104 @@ public class Sheep extends Pet{
 
     @Override
     public void setLoc(double x, double y){
-        this.getBody().setCenterX(x);
-        this.getBody().setCenterY(y);
-        _eye1.setCenterX(x-15);
-        _eye1.setCenterY(y-20);
-        _eye2.setCenterX(x+15);
-        _eye2.setCenterY(y-20);
-        _pupil1.setCenterX(x-13);
-        _pupil1.setCenterY(y-21);
-        _pupil2.setCenterX(x+17);
-        _pupil2.setCenterY(y-21);
-        _fluff1.setCenterX(x-30);
-        _fluff1.setCenterY(y-60);
-        _fluff2.setCenterX(x-7);
-        _fluff2.setCenterY(y-60);
-        _fluff3.setCenterX(x-43);
-        _fluff3.setCenterY(y-40);
+        if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            this.getBody().setCenterX(x);
+            this.getBody().setCenterY(y);
+            _eye1.setCenterX(x-15);
+            _eye1.setCenterY(y-20);
+            _eye2.setCenterX(x+15);
+            _eye2.setCenterY(y-20);
+            _pupil1.setCenterX(x-13);
+            _pupil1.setCenterY(y-21);
+            _pupil2.setCenterX(x+17);
+            _pupil2.setCenterY(y-21);
+            _fluff1.setCenterX(x-30);
+            _fluff1.setCenterY(y-60);
+            _fluff2.setCenterX(x-7);
+            _fluff2.setCenterY(y-60);
+            _fluff3.setCenterX(x-43);
+            _fluff3.setCenterY(y-40);
 
-        _fluff4.setCenterX(x+60);
-        _fluff4.setCenterY(y-20);
-        _fluff5.setCenterX(x+60);
-        _fluff5.setCenterY(y+23);
-        _fluff6.setCenterX(x+43);
-        _fluff6.setCenterY(y-35);
+            _fluff4.setCenterX(x+60);
+            _fluff4.setCenterY(y-20);
+            _fluff5.setCenterX(x+60);
+            _fluff5.setCenterY(y+23);
+            _fluff6.setCenterX(x+43);
+            _fluff6.setCenterY(y-35);
 
-        _fluff7.setCenterX(x-55);
-        _fluff7.setCenterY(y-23);
-        _fluff8.setCenterX(x-45);
-        _fluff8.setCenterY(y+35);
-        _fluff9.setCenterX(x-53);
-        _fluff9.setCenterY(y+20);
+            _fluff7.setCenterX(x-55);
+            _fluff7.setCenterY(y-23);
+            _fluff8.setCenterX(x-45);
+            _fluff8.setCenterY(y+35);
+            _fluff9.setCenterX(x-53);
+            _fluff9.setCenterY(y+20);
 
-        _fluff10.setCenterX(x+45);
-        _fluff10.setCenterY(y+40);
+            _fluff10.setCenterX(x+45);
+            _fluff10.setCenterY(y+40);
 
-        _mouth.setCenterX(x);
-        _mouth.setCenterY(y-4);
+            _mouth.setCenterX(x);
+            _mouth.setCenterY(y-4);
 
-        _nose.setCenterX(x);
-        _nose.setCenterY(y-7);
-        _muzzle1.relocate(x-7, y-9);
-        _muzzle2.relocate(x+5, y-8);
+            _nose.setCenterX(x);
+            _nose.setCenterY(y-7);
+            _muzzle1.relocate(x-7, y-9);
+            _muzzle2.relocate(x+5, y-8);
 
-        _face.setCenterX(x);
-        _face.setCenterY(y-15);
+            _face.setCenterX(x);
+            _face.setCenterY(y-15);
 
-        _ear1.setCenterX(x-45);
-        _ear1.setCenterY(y-10);
-        _ear2.setCenterX(x+45);
-        _ear2.setCenterY(y-10);
+            _ear1.setCenterX(x-45);
+            _ear1.setCenterY(y-10);
+            _ear2.setCenterX(x+45);
+            _ear2.setCenterY(y-10);
+        }
+        else {
+            this.setLoc(this.petXLoc(), this.petYLoc());
+        }
     }
 
     @Override
     public String getType(){
         return "sheep";
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
     }
 }

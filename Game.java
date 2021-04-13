@@ -35,10 +35,13 @@ public class Game {
     private int _counter;
     private int _titleXLoc;
     private int _titleYLoc;
+    private Pet[][] _pets;
+    private Pet[] _pet;
 
     public Game(){
         this.setupGame();
-        cat = new Cat(petPane);
+        this.setupInitialPets();
+        /*cat = new Cat(petPane);
         cat.setLoc(340, 390);
         chicken = new Chicken(petPane);
         chicken.setLoc(80, 390);
@@ -63,7 +66,7 @@ public class Game {
         tiger = new Tiger(petPane);
         tiger.setLoc(80, 520);
         walrus = new Walrus(petPane);
-        walrus.setLoc(210, 520);
+        walrus.setLoc(210, 520); */
     }
 
     public Pane getPetPane(){
@@ -104,6 +107,115 @@ public class Game {
         this.setupCounter();
     }
 
+    public Pet generatePet(){
+        Pet pet = null;
+        int rand_int = (int) (Math.random() * 12);
+        switch (rand_int) {
+            case 0:
+                pet = new Cat(petPane, _pets);
+                break;
+            case 1:
+                pet = new Chicken(petPane, _pets);
+                break;
+            case 2:
+                pet = new Cow(petPane, _pets);
+                break;
+            case 3:
+                pet = new Dog(petPane, _pets);
+                break;
+            case 4:
+                pet = new Fox(petPane, _pets);
+                break;
+            case 5:
+                pet = new Giraffe(petPane, _pets);
+                break;
+            case 6:
+                pet = new Owl(petPane, _pets);
+                break;
+            case 7:
+                pet = new Penguin(petPane, _pets);
+                break;
+            case 8:
+                pet = new Pig(petPane, _pets);
+                break;
+            case 9:
+                pet = new Reindeer(petPane, _pets);
+                break;
+            case 10:
+                pet = new Sheep(petPane, _pets);
+                break;
+            case 11:
+                pet = new Tiger(petPane, _pets);
+                break;
+            default:
+                pet = new Walrus(petPane, _pets);
+                break;
+        }
+        return pet;
+    }
+
+    public void setupInitialPets(){ //should assign 4 generated pets to a randomly assigned location on the array IF it is null
+        _pets = new Pet[4][4];
+        _pet = new Pet[4];
+        for (int i = 0; i < 4; i++){
+            _pet[i] = this.generatePet();
+            _pet[i].setLoc(this.petXLoc(), this.petYLoc());
+            _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
+        }
+    }
+
+    /*public void setupInitialPets(){ //should assign 4 generated pets to a randomly assigned location on the array IF it is null
+        _pets = new Pet[4][4];
+        for (int i = 0; i < 4; i++){
+            if (i % 4 == 0){
+                for (int j = 0; j < 4; j++) {
+                    _pets[i][j] = this.generatePet();
+                    _pets[i][j].setLoc(this.petXLoc(), this.petYLoc());
+                }
+            }
+        }
+    } */
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 3);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
+    }
+
     public void setupLoadingBarTimeline() {
         KeyFrame kf = new KeyFrame(Duration.millis(90), new LoadingBarFiller());
         Timeline timeline = new Timeline(kf);
@@ -114,14 +226,14 @@ public class Game {
     public void setupCounter() {
         KeyFrame kf2 = new KeyFrame(Duration.millis(1), new Counter());
         Timeline timeline = new Timeline(kf2);
-        timeline.setCycleCount(2250);
+        timeline.setCycleCount(2500);
         timeline.play();
     }
 
     private class Counter implements EventHandler<ActionEvent>{
         public void handle(ActionEvent event){
             _counter ++;
-            if (_counter == 2250){
+            if (_counter == 2500){
                 _title.getLoadingBar().setOpacity(0);
                 _title.getLoadingBG().setOpacity(0);
                 _title.getPercentLabel().setOpacity(0);
@@ -158,7 +270,7 @@ public class Game {
         }
 
         public void handle (KeyEvent event){
-            if ((_titleNotCompressed) && (_counter == 2250)) {
+            if ((_titleNotCompressed) && (_counter == 2500)) {
                 if (event.getCode() == KeyCode.SPACE) {
                     this.setupTitleBGTimeline();
                     _title.getPressSpace().setOpacity(0);

@@ -6,13 +6,25 @@ import javafx.scene.shape.Ellipse;
 
 public class Pet {
     private Ellipse _body;
-    public Pet(Pane root){
+    private Pet[][] _pets;
+    public Pet(Pane root, Pet[][] pets){
+        _pets = pets;
         _body = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
         _body.setFill(this.getPetColor());
         root.getChildren().addAll(_body);
     }
 
     public void setLoc(double x, double y){
+        // if the desired location is null on the array, else if call the method again with one more, else call the method
+        // again with one less
+    }
+
+    public double getXLoc(){
+        return _body.getCenterX();
+    }
+
+    public double getYLoc(){
+        return _body.getCenterY();
     }
 
     public Color getPetColor(){
