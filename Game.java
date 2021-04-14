@@ -5,27 +5,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+// press P to "pause" pets but really it just returns them to their original location
+// fix overlapping
+
 public class Game {
     private Pane petPane;
-    private Cat cat;
-    private Chicken chicken;
-    private Cow cow;
-    private Dog dog;
-    private Fox fox;
-    private Giraffe giraffe;
-    private Owl owl;
-    private Penguin penguin;
-    private Pig pig;
-    private Reindeer reindeer;
-    private Sheep sheep;
-    private Tiger tiger;
-    private Walrus walrus;
     private Pane gardenPane;
+    private Pane buttonPane;
     private Garden _garden;
     private Pane storePane;
     private Store _store;
@@ -38,40 +30,20 @@ public class Game {
     private int _titleYLoc;
     private Pet[][] _pets;
     private Pet[] _pet;
-    private double _pet1loc;
-    private double _pet2loc;
-    private double _pet3loc;
-    private double _pet4loc;
+    private double _pet1XLoc;
+    private double _pet2XLoc;
+    private double _pet3XLoc;
+    private double _pet4XLoc;
+    private double _pet1YLoc;
+    private double _pet2YLoc;
+    private double _pet3YLoc;
+    private double _pet4YLoc;
+    private Button _verChanger;
+    private Timeline _timeline;
 
     public Game(){
         this.setupGame();
         this.setupInitialPets();
-        /*cat = new Cat(petPane);
-        cat.setLoc(340, 390);
-        chicken = new Chicken(petPane);
-        chicken.setLoc(80, 390);
-        cow = new Cow(petPane);
-        cow.setLoc(80, 130);
-        dog = new Dog(petPane);
-        dog.setLoc(210, 130);
-        fox = new Fox(petPane);
-        fox.setLoc(340, 130);
-        giraffe = new Giraffe(petPane);
-        giraffe.setLoc(470, 130);
-        owl = new Owl(petPane);
-        owl.setLoc(210, 390);
-        penguin = new Penguin(petPane);
-        penguin.setLoc(80, 260);
-        pig = new Pig(petPane);
-        pig.setLoc(210, 260);
-        reindeer = new Reindeer(petPane);
-        reindeer.setLoc(340, 260);
-        sheep = new Sheep(petPane);
-        sheep.setLoc(470, 260);
-        tiger = new Tiger(petPane);
-        tiger.setLoc(80, 520);
-        walrus = new Walrus(petPane);
-        walrus.setLoc(210, 520); */
     }
 
     public Pane getPetPane(){
@@ -89,6 +61,8 @@ public class Game {
     public Pane getTitlePane(){
         return titlePane;
     }
+
+    public Pane getButtonPane() {return buttonPane;}
 
     public void setupGame(){
         petPane = new Pane();
@@ -110,6 +84,32 @@ public class Game {
         _titleXLoc = 318;
         _titleYLoc = 270;
         this.setupCounter();
+        buttonPane = new Pane();
+        buttonPane.relocate(30, 755);
+        _verChanger = new Button("Static Version");
+        _verChanger.setOnAction(new VersionChanger());
+        _verChanger.setOpacity(0);
+        buttonPane.getChildren().add(_verChanger);
+    }
+
+    private class VersionChanger implements EventHandler<ActionEvent> {
+        boolean isAnimated = true;
+        public void handle(ActionEvent event) {
+            if (isAnimated) {
+                _timeline.stop();
+                _pet[0].setBounceLoc(_pet1XLoc, _pet1YLoc);
+                _pet[1].setBounceLoc(_pet2XLoc, _pet2YLoc);
+                _pet[2].setBounceLoc(_pet3XLoc, _pet3YLoc);
+                _pet[3].setBounceLoc(_pet4XLoc, _pet4YLoc);
+                _verChanger.setText("Animated Version");
+                isAnimated = false;
+            }
+            else {
+                _timeline.play();
+                _verChanger.setText("Static Version");
+                isAnimated = true;
+            }
+        }
     }
 
     public Pet generatePet(){
@@ -160,10 +160,14 @@ public class Game {
     }
 
     public void getOriginalLocs(){
-        _pet1loc = _pet[0].getYLoc();
-        _pet2loc = _pet[1].getYLoc();
-        _pet3loc = _pet[2].getYLoc();
-        _pet4loc = _pet[3].getYLoc();
+        _pet1XLoc = _pet[0].getXLoc();
+        _pet2XLoc = _pet[1].getXLoc();
+        _pet3XLoc = _pet[2].getXLoc();
+        _pet4XLoc = _pet[3].getXLoc();
+        _pet1YLoc = _pet[0].getYLoc();
+        _pet2YLoc = _pet[1].getYLoc();
+        _pet3YLoc = _pet[2].getYLoc();
+        _pet4YLoc = _pet[3].getYLoc();
     }
 
     public void setupInitialPets(){
@@ -237,6 +241,7 @@ public class Game {
         Timeline timeline = new Timeline(kf3);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+        _timeline = timeline;
     }
 
     private class Counter implements EventHandler<ActionEvent>{
@@ -262,13 +267,13 @@ public class Game {
                         _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() - 2);
                     }
             }
-            if ((_pet[0].getYLoc() < (_pet1loc - 2)) && (_pet[1].getYLoc() < (_pet2loc - 4)) && (_pet[2].getYLoc() < (_pet3loc - 6))
-            && (_pet[3].getYLoc() < (_pet4loc - 8))){
+            if ((_pet[0].getYLoc() < (_pet1YLoc - 2)) && (_pet[1].getYLoc() < (_pet2YLoc - 4)) && (_pet[2].getYLoc() < (_pet3YLoc - 6))
+            && (_pet[3].getYLoc() < (_pet4YLoc - 8))){
                 _direction = !_direction;
             }
 
-            if ((_pet[0].getYLoc() > (_pet1loc + 2)) && (_pet[1].getYLoc() > (_pet2loc + 3)) && (_pet[2].getYLoc() > (_pet3loc + 4))
-                    && (_pet[3].getYLoc() > (_pet4loc + 5))){
+            if ((_pet[0].getYLoc() > (_pet1YLoc + 2)) && (_pet[1].getYLoc() > (_pet2YLoc + 3)) && (_pet[2].getYLoc() > (_pet3YLoc + 4))
+                    && (_pet[3].getYLoc() > (_pet4YLoc + 5))){
                 _direction = !_direction;
             }
         }
@@ -307,6 +312,7 @@ public class Game {
                     this.setupTitleBGTimeline();
                     _title.getPressSpace().setOpacity(0);
                     _titleNotCompressed = false;
+                    _verChanger.setOpacity(1);
                 }
             }
         }
