@@ -1,5 +1,6 @@
 package indy;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -37,6 +38,10 @@ public class Game {
     private int _titleYLoc;
     private Pet[][] _pets;
     private Pet[] _pet;
+    private double _pet1loc;
+    private double _pet2loc;
+    private double _pet3loc;
+    private double _pet4loc;
 
     public Game(){
         this.setupGame();
@@ -154,7 +159,14 @@ public class Game {
         return pet;
     }
 
-    public void setupInitialPets(){ //should assign 4 generated pets to a randomly assigned location on the array IF it is null
+    public void getOriginalLocs(){
+        _pet1loc = _pet[0].getYLoc();
+        _pet2loc = _pet[1].getYLoc();
+        _pet3loc = _pet[2].getYLoc();
+        _pet4loc = _pet[3].getYLoc();
+    }
+
+    public void setupInitialPets(){
         _pets = new Pet[4][4];
         _pet = new Pet[4];
         for (int i = 0; i < 4; i++){
@@ -162,19 +174,9 @@ public class Game {
             _pet[i].setLoc(this.petXLoc(), this.petYLoc());
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
         }
+        this.getOriginalLocs();
+        this.setupPetMover();
     }
-
-    /*public void setupInitialPets(){ //should assign 4 generated pets to a randomly assigned location on the array IF it is null
-        _pets = new Pet[4][4];
-        for (int i = 0; i < 4; i++){
-            if (i % 4 == 0){
-                for (int j = 0; j < 4; j++) {
-                    _pets[i][j] = this.generatePet();
-                    _pets[i][j].setLoc(this.petXLoc(), this.petYLoc());
-                }
-            }
-        }
-    } */
 
     public int petXLoc(){
         int loc = 0;
@@ -230,6 +232,13 @@ public class Game {
         timeline.play();
     }
 
+    public void setupPetMover(){
+        KeyFrame kf3 = new KeyFrame(Duration.millis(45), new PetMover());
+        Timeline timeline = new Timeline(kf3);
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
     private class Counter implements EventHandler<ActionEvent>{
         public void handle(ActionEvent event){
             _counter ++;
@@ -238,6 +247,29 @@ public class Game {
                 _title.getLoadingBG().setOpacity(0);
                 _title.getPercentLabel().setOpacity(0);
                 _title.getPressSpace().setOpacity(1);
+            }
+        }
+    }
+
+    private class PetMover implements EventHandler<ActionEvent>{
+        boolean _direction = true;
+
+        public void handle(ActionEvent event){
+            for (int i = 0; i < 4; i++){
+                    if (_direction) {
+                        _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() + 2);
+                    } else {
+                        _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() - 2);
+                    }
+            }
+            if ((_pet[0].getYLoc() < (_pet1loc - 2)) && (_pet[1].getYLoc() < (_pet2loc - 4)) && (_pet[2].getYLoc() < (_pet3loc - 6))
+            && (_pet[3].getYLoc() < (_pet4loc - 8))){
+                _direction = !_direction;
+            }
+
+            if ((_pet[0].getYLoc() > (_pet1loc + 2)) && (_pet[1].getYLoc() > (_pet2loc + 3)) && (_pet[2].getYLoc() > (_pet3loc + 4))
+                    && (_pet[3].getYLoc() > (_pet4loc + 5))){
+                _direction = !_direction;
             }
         }
     }

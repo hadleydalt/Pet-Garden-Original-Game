@@ -142,6 +142,59 @@ public class Tiger extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _leftSideStripe1.setX(x-59);
+        _leftSideStripe1.setY(y-13);
+        _leftSideStripe2.setX(x-60);
+        _leftSideStripe2.setY(y-3);
+        _rightSideStripe1.setX(x+44);
+        _rightSideStripe1.setY(y-13);
+        _rightSideStripe2.setX(x+45);
+        _rightSideStripe2.setY(y-3);
+
+        _leftSideStripe3.setX(x-59); //241
+        _leftSideStripe3.setY(y+7); //287
+        _rightSideStripe3.setX(x+44); //344
+        _rightSideStripe3.setY(y+7); //287
+
+        _topStripe1.setX(x-10);
+        _topStripe1.setY(y-58);
+        _topStripe2.setX(x);
+        _topStripe2.setY(y-60);
+        _topStripe3.setX(x+10);
+        _topStripe3.setY(y-58);
+
+        _mouth.setCenterX(x);
+        _mouth.setCenterY(y-4);
+        _nose.setCenterX(x);
+        _nose.setCenterY(y-7);
+
+        _muzzle1.relocate(x-7, y-9);
+        _muzzle2.relocate(x+5, y-8);
+
+        _ear11.setCenterX(x-35);
+        _ear11.setCenterY(y-43);
+        _ear12.setCenterX(x+35);
+        _ear12.setCenterY(y-43);
+
+        _tail.setCenterX(x+47);
+        _tail.setCenterY(y+48);
+
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+35);
+    }
+
+    @Override
     public String getType(){
         return "tiger";
     }

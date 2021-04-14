@@ -108,6 +108,36 @@ public class Dog extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _spot1.setCenterX(x-17);
+        _spot1.setCenterY(y-10);
+        _spot2.setCenterX(x+35);
+        _spot2.setCenterY(y+22);
+        _nose.setCenterX(x);
+        _nose.setCenterY(y-7);
+        _muzzle1.relocate(x-7, y-9);
+        _muzzle2.relocate(x+5, y-8);
+        _ear11.setCenterX(x-35);
+        _ear11.setCenterY(y-63);
+        _ear12.setCenterX(x+35);
+        _ear12.setCenterY(y-63);
+        _ear21.setCenterX(x-50);
+        _ear21.setCenterY(y-63);
+        _ear22.setCenterX(x+50);
+        _ear22.setCenterY(y-63);
+    }
+
+    @Override
     public String getType(){
         return "dog";
     }

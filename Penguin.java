@@ -73,6 +73,28 @@ public class Penguin extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+22);
+        _eyeback1.setCenterX(x-20);
+        _eyeback1.setCenterY(y-15);
+        _eyeback2.setCenterX(x+20);
+        _eyeback2.setCenterY(y-15);
+        _beak.setCenterX(x);
+        _beak.setCenterY(y-7);
+    }
+
+    @Override
     public String getType(){
         return "penguin";
     }

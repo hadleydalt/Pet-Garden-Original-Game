@@ -138,6 +138,41 @@ public class Owl extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _wing1.setCenterX(x-38);
+        _wing1.setCenterY(y+5);
+        _wing2.setCenterX(x+38);
+        _wing2.setCenterY(y+5);
+        _beak.setX(x-8);
+        _beak.setY(y-14);
+        _bigeye1.setCenterX(x-15);
+        _bigeye1.setCenterY(y-20);
+        _bigeye2.setCenterX(x+15);
+        _bigeye2.setCenterY(y-20);
+        _ear11.setCenterX(x-35);
+        _ear11.setCenterY(y-60);
+        _ear12.setCenterX(x+35);
+        _ear12.setCenterY(y-60);
+        _fluff1.relocate(x-8, y+7);
+        _fluff2.relocate(x+8, y+8);
+        _fluff3.relocate(x-18, y+20);
+        _fluff4.relocate(x-2, y+20);
+        _fluff5.relocate(x+14, y+20);
+        _fluff6.relocate(x-8, y+32);
+        _fluff7.relocate(x+8, y+32);
+    }
+
+    @Override
     public String getType(){
         return "owl";
     }

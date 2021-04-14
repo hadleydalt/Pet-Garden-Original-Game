@@ -108,6 +108,36 @@ public class Fox extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+22);
+        _eyeback1.setCenterX(x-20);
+        _eyeback1.setCenterY(y-15);
+        _eyeback2.setCenterX(x+20);
+        _eyeback2.setCenterY(y-15);
+        _nose.setCenterX(x);
+        _nose.setCenterY(y-9);
+        _muzzle1.relocate(x-7, y-11);
+        _muzzle2.relocate(x+5, y-10);
+        _ear1.setX(x-40);
+        _ear1.setY(y-63);
+        _ear2.setX(x+20);
+        _ear2.setY(y-60);
+        _tail.setCenterX(x+47);
+        _tail.setCenterY(y+48);
+    }
+
+    @Override
     public String getType(){
         return "fox";
     }

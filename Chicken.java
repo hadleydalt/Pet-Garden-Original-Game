@@ -90,6 +90,34 @@ public class Chicken extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _beak.setCenterX(x);
+        _beak.setCenterY(y-3);
+        _wing1.setCenterX(x-38);
+        _wing1.setCenterY(y+5);
+        _wing2.setCenterX(x+38);
+        _wing2.setCenterY(y+5);
+        _waddle.setCenterX(x);
+        _waddle.setCenterY(y+10);
+        _top1.setCenterX(x-10);
+        _top1.setCenterY(y-55);
+        _top2.setCenterX(x);
+        _top2.setCenterY(y-62);
+        _top3.setCenterX(x+10);
+        _top3.setCenterY(y-55);
+    }
+
+    @Override
     public String getType(){
         return "chicken";
     }

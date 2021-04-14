@@ -117,6 +117,42 @@ public class Cow extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _mouth.setCenterX(x);
+        _mouth.setCenterY(y-4);
+        _muzzle1.relocate(x-7, y-9);
+        _muzzle2.relocate(x+5, y-8);
+        _nostril1.setCenterX(x-7);
+        _nostril1.setCenterY(y-6);
+        _nostril2.setCenterX(x+7);
+        _nostril2.setCenterY(y-6);
+        _spot1.setCenterX(x-40);
+        _spot1.setCenterY(y+14);
+        _spot2.setCenterX(x+36);
+        _spot2.setCenterY(y+18);
+        _spot3.setCenterX(x+9);
+        _spot3.setCenterY(y-43);
+        _ear1.setCenterX(x-45);
+        _ear1.setCenterY(y-55);
+        _ear2.setCenterX(x+45);
+        _ear2.setCenterY(y-55);
+        _ear1int.setCenterX(x-43);
+        _ear1int.setCenterY(y-52);
+        _ear2int.setCenterX(x+43);
+        _ear2int.setCenterY(y-52);
+    }
+
+    @Override
     public String getType(){
         return "cow";
     }

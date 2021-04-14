@@ -133,6 +133,54 @@ public class Walrus extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _mouth.setCenterX(x);
+        _mouth.setCenterY(y-4);
+        _nose.setCenterX(x);
+        _nose.setCenterY(y-17);
+        _nosedivide.setX(x);
+        _nosedivide.setY(y-13);
+        _spot1.setCenterX(x-12);
+        _spot1.setCenterY(y-7);
+        _spot2.setCenterX(x-6);
+        _spot2.setCenterY(y-4);
+        _spot3.setCenterX(x-9);
+        _spot3.setCenterY(y+1);
+
+        _spot4.setCenterX(x+12);
+        _spot4.setCenterY(y-7);
+        _spot5.setCenterX(x+6);
+        _spot5.setCenterY(y-4);
+        _spot6.setCenterX(x+9);
+        _spot6.setCenterY(y+1);
+
+        _tusk1.setX(x-11);
+        _tusk1.setY(y+5);
+        _tusk2.setX(x+9);
+        _tusk2.setY(y+5);
+
+        _flipper1.setCenterX(x-40);
+        _flipper1.setCenterY(y+15);
+        _flipper2.setCenterX(x+40);
+        _flipper2.setCenterY(y+15);
+
+        _tail1.setCenterX(x+47);
+        _tail1.setCenterY(y+38);
+        _tail2.setCenterX(x+47);
+        _tail2.setCenterY(y+48);
+    }
+
+    @Override
     public String getType(){
         return "walrus";
     }

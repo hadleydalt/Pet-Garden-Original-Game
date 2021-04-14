@@ -15,8 +15,9 @@ public class Pet {
     }
 
     public void setLoc(double x, double y){
-        // if the desired location is null on the array, else if call the method again with one more, else call the method
-        // again with one less
+    }
+
+    public void setBounceLoc(double x, double y){
     }
 
     public double getXLoc(){

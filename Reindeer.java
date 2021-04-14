@@ -120,6 +120,40 @@ public class Reindeer extends Pet{
     }
 
     @Override
+    public void setBounceLoc(double x, double y){
+        this.getBody().setCenterX(x);
+        this.getBody().setCenterY(y);
+        _eye1.setCenterX(x-15);
+        _eye1.setCenterY(y-20);
+        _eye2.setCenterX(x+15);
+        _eye2.setCenterY(y-20);
+        _pupil1.setCenterX(x-13);
+        _pupil1.setCenterY(y-21);
+        _pupil2.setCenterX(x+17);
+        _pupil2.setCenterY(y-21);
+        _mouth.setCenterX(x);
+        _mouth.setCenterY(y-4);
+        _nose.setCenterX(x);
+        _nose.setCenterY(y-9);
+        _muzzle1.relocate(x-7, y-11);
+        _muzzle2.relocate(x+5, y-10);
+        _ear11.setCenterX(x-35);
+        _ear11.setCenterY(y-53);
+        _ear12.setCenterX(x+35);
+        _ear12.setCenterY(y-53);
+        _thing1.setX(x-19);
+        _thing1.setY(y-73);
+        _thing2.setX(x+17);
+        _thing2.setY(y-73);
+        _thing3.setX(x-14);
+        _thing3.setY(y-78);
+        _thing4.setX(x+12);
+        _thing4.setY(y-78);
+        _stomach.setCenterX(x);
+        _stomach.setCenterY(y+35);
+    }
+
+    @Override
     public String getType(){
         return "reindeer";
     }
