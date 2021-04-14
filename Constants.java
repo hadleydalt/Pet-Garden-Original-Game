@@ -110,11 +110,11 @@ public class Constants {
     public static final int FRAMER_X = 30;
     public static final int FRAMER_Y = 300;
     public static final int FRAME_X = 540;
-    public static final int FRAME_Y = 690;
+    public static final int FRAME_Y = 705;
 
     //STORE
     public static final int STORE_BG_X = 550;
-    public static final int STORE_BG_Y = 700;
+    public static final int STORE_BG_Y = 715;
     public static final int TOPBG_X = 130;
     public static final int TOPBG_Y = 45;
     public static final int ACCENT_X = 90;

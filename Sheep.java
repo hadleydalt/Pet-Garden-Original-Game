@@ -210,7 +210,7 @@ public class Sheep extends Pet{
 
     public int petXLoc(){
         int loc = 0;
-        int rand_int = (int) (Math.random() * 3);
+        int rand_int = (int) (Math.random() * 4);
         switch (rand_int){
             case 0:
                 loc = 110;
@@ -230,7 +230,7 @@ public class Sheep extends Pet{
 
     public int petYLoc(){
         int loc = 0;
-        int rand_int = (int) (Math.random() * 3);
+        int rand_int = (int) (Math.random() * 4);
         switch (rand_int){
             case 0:
                 loc = 290;

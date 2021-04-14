@@ -85,7 +85,7 @@ public class Game {
         _titleYLoc = 270;
         this.setupCounter();
         buttonPane = new Pane();
-        buttonPane.relocate(30, 755);
+        buttonPane.relocate(30, 15);
         _verChanger = new Button("Static Version");
         _verChanger.setOnAction(new VersionChanger());
         _verChanger.setOpacity(0);
@@ -184,7 +184,7 @@ public class Game {
 
     public int petXLoc(){
         int loc = 0;
-        int rand_int = (int) (Math.random() * 3);
+        int rand_int = (int) (Math.random() * 4);
         switch (rand_int){
             case 0:
                 loc = 110;
@@ -204,7 +204,7 @@ public class Game {
 
     public int petYLoc(){
         int loc = 0;
-        int rand_int = (int) (Math.random() * 3);
+        int rand_int = (int) (Math.random() * 4);
         switch (rand_int){
             case 0:
                 loc = 290;

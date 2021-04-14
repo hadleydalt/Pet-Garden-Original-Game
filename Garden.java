@@ -24,7 +24,7 @@ public class Garden {
     private Rectangle _frame;
 
     public Garden(Pane root){
-        _grass = new Rectangle(550, 550);
+        _grass = new Rectangle(550, 565);
         Stop[] stops = new Stop[] { new Stop(0, Color.YELLOWGREEN), new Stop(1, Color.GREEN)};
         LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
         _grass.setFill(lg1);
@@ -91,7 +91,7 @@ public class Garden {
         _framer2.setX(580);
         _framer2.setY(500);
         _framer3.setX(300);
-        _framer3.setY(750);
+        _framer3.setY(765);
         _frame.setX(35);
         _frame.setY(55);
 
