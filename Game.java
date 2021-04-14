@@ -114,7 +114,7 @@ public class Game {
 
     public Pet generatePet(){
         Pet pet = null;
-        int rand_int = (int) (Math.random() * 12);
+        int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
                 pet = new Cat(petPane, _pets);
