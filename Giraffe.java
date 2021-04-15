@@ -91,6 +91,32 @@ public class Giraffe extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _mouth.setOpacity(x);
+        _nostril1.setOpacity(x);
+        _nostril2.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _spot1.setOpacity(x);
+        _spot2.setOpacity(x);
+        _spot3.setOpacity(x);
+        _spot4.setOpacity(x);
+        _spot5.setOpacity(x);
+        _spot6.setOpacity(x);
+        _ear11.setOpacity(x);
+        _ear12.setOpacity(x);
+        _thing1.setOpacity(x);
+        _thing2.setOpacity(x);
+        _thing11.setOpacity(x);
+        _thing22.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.GOLD;
     }

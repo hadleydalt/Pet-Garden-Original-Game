@@ -71,6 +71,27 @@ public class Cow extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _mouth.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _nostril1.setOpacity(x);
+        _nostril2.setOpacity(x);
+        _spot1.setOpacity(x);
+        _spot2.setOpacity(x);
+        _spot3.setOpacity(x);
+        _ear1.setOpacity(x);
+        _ear2.setOpacity(x);
+        _ear1int.setOpacity(x);
+        _ear2int.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.WHITE;
     }

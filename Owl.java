@@ -93,6 +93,29 @@ public class Owl extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _bigeye1.setOpacity(x);
+        _bigeye2.setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _wing1.setOpacity(x);
+        _wing2.setOpacity(x);
+        _beak.setOpacity(x);
+        _ear11.setOpacity(x);
+        _ear12.setOpacity(x);
+        _fluff1.setOpacity(x);
+        _fluff2.setOpacity(x);
+        _fluff3.setOpacity(x);
+        _fluff4.setOpacity(x);
+        _fluff5.setOpacity(x);
+        _fluff6.setOpacity(x);
+        _fluff7.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.PERU;
     }

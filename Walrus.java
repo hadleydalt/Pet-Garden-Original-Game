@@ -74,6 +74,31 @@ public class Walrus extends Pet{
         root.getChildren().addAll(_tusk1, _tusk2, _eye1, _eye2, _pupil1, _pupil2, _mouth, _nose, _nosedivide, _spot1, _spot2, _spot3,
                 _spot4, _spot5, _spot6, _flipper1, _flipper2, _tail1, _tail2);
     }
+
+    @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _tusk1.setOpacity(x);
+        _tusk2.setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _mouth.setOpacity(x);
+        _nose.setOpacity(x);
+        _nosedivide.setOpacity(x);
+        _spot1.setOpacity(x);
+        _spot2.setOpacity(x);
+        _spot3.setOpacity(x);
+        _spot4.setOpacity(x);
+        _spot5.setOpacity(x);
+        _spot6.setOpacity(x);
+        _flipper1.setOpacity(x);
+        _flipper2.setOpacity(x);
+        _tail1.setOpacity(x);
+        _tail2.setOpacity(x);
+    }
+
     @Override
     public Color getPetColor(){
         return Color.LIGHTSKYBLUE;

@@ -64,4 +64,7 @@ public class Pet{
     public String getType(){
         return null;
     }
+
+    public void setOpacity(double x){
+    }
 }

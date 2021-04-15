@@ -41,6 +41,19 @@ public class Penguin extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eyeback1.setOpacity(x);
+        _eyeback2.setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _stomach.setOpacity(x);
+        _beak.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.BLACK;
     }

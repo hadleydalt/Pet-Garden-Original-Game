@@ -88,6 +88,32 @@ public class Sheep extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _face.setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _fluff1.setOpacity(x);
+        _fluff2.setOpacity(x);
+        _fluff3.setOpacity(x);
+        _fluff4.setOpacity(x);
+        _fluff5.setOpacity(x);
+        _fluff6.setOpacity(x);
+        _fluff7.setOpacity(x);
+        _fluff8.setOpacity(x);
+        _fluff9.setOpacity(x);
+        _fluff10.setOpacity(x);
+        _mouth.setOpacity(x);
+        _nose.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _ear1.setOpacity(x);
+        _ear2.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.rgb(240, 229, 216);
     }

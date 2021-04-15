@@ -68,6 +68,24 @@ public class Dog extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _spot1.setOpacity(x);
+        _spot2.setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _nose.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _ear11.setOpacity(x);
+        _ear12.setOpacity(x);
+        _ear21.setOpacity(x);
+        _ear22.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.WHEAT;
     }

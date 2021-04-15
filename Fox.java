@@ -68,6 +68,24 @@ public class Fox extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _ear1.setOpacity(x);
+        _ear2.setOpacity(x);
+        _eyeback1.setOpacity(x);
+        _eyeback2.setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _stomach.setOpacity(x);
+        _nose.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _tail.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.CORAL;
     }

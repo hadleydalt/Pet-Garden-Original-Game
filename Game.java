@@ -15,19 +15,19 @@ import javafx.util.Duration;
 import java.util.LinkedList;
 
 public class Game {
-    private Pane petPane;
     private Pane gardenPane;
     private Pane buttonPane;
     private Garden _garden;
     private Pane storePane;
     private Store _store;
-    private Pane titlePane;
+    private Pane titleAndPetPane;
     private Title _title;
     private boolean _titleNotCompressed;
     private int _intPercent;
     private int _counter;
     private int _titleXLoc;
     private int _titleYLoc;
+    private int _titlePaneXLoc;
     private Pet[][] _pets;
     private Pet[] _pet;
     private double _pet1XLoc;
@@ -47,10 +47,6 @@ public class Game {
         this.setupInitialPets();
     }
 
-    public Pane getPetPane(){
-        return petPane;
-    }
-
     public Pane getGardenPane(){
         return gardenPane;
     }
@@ -59,36 +55,34 @@ public class Game {
         return storePane;
     }
 
-    public Pane getTitlePane(){
-        return titlePane;
+    public Pane getTitleAndPetPane(){
+        return titleAndPetPane;
     }
 
     public Pane getButtonPane() {return buttonPane;}
 
     public void setupGame(){
-        petPane = new Pane();
         gardenPane = new Pane();
         storePane = new Pane();
-        titlePane = new Pane();
+        titleAndPetPane = new Pane();
         _garden = new Garden(gardenPane);
         _garden.setLoc(30, 200);
         _store = new Store(storePane);
         _store.setLoc(620, 50);
-        _title = new Title(titlePane);
+        _title = new Title(titleAndPetPane);
         _title.setLoc(0, 0);
         _titleNotCompressed = true;
-        titlePane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
-        //SHRINK THE TITLE PANE AND IT WILL WORK (IT'S COVERING EVERYTHING)
+        titleAndPetPane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
         // if that doesn't work, just make the pets part of titlePane
         // use addEventHandlers for each pet separately? can do _pet[i].getBody().addEventHandler?
         // would be good for later when it needs to happen for all pets in array
-        _title.getBG().addEventHandler(MouseEvent.MOUSE_CLICKED, new SpecsGetter());
-        titlePane.setFocusTraversable(true);
+        titleAndPetPane.setFocusTraversable(true);
         this.setupLoadingBarTimeline();
         _intPercent = _title.getPercent();
         _counter = 0;
         _titleXLoc = 318;
         _titleYLoc = 270;
+        _titlePaneXLoc = 0;
         this.setupCounter();
         buttonPane = new Pane();
         buttonPane.relocate(30, 15);
@@ -124,43 +118,43 @@ public class Game {
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Cat(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Chicken(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 2:
-                pet = new Cow(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Cow(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 3:
-                pet = new Dog(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Dog(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 4:
-                pet = new Fox(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Fox(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Giraffe(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 6:
-                pet = new Owl(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Owl(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Penguin(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 8:
-                pet = new Pig(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Pig(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Reindeer(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Sheep(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Tiger(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
             default:
-                pet = new Walrus(petPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Walrus(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
                 break;
         }
         return pet;
@@ -182,9 +176,15 @@ public class Game {
         _pet = new Pet[4];
         for (int i = 0; i < 4; i++){
             _pet[i] = this.generatePet();
+            _pet[i].setOpacity(0);
             _pet[i].setLoc(this.petXLoc(), this.petYLoc());
-            _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
             _myPets.add(i, _pet[i]);
+            _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
+            for (int j = 0; j < 4; j++){
+                if (_pets[i][j] != null) {
+                    _pets[i][j].getBody().addEventHandler(MouseEvent.MOUSE_ENTERED, new SpecsGetter());
+                }
+            }
         }
         this.getOriginalLocs();
         this.setupPetMover();
@@ -287,13 +287,28 @@ public class Game {
         }
     }
 
+    // MOVING TITLE PANE
+    /*private class TitleMover implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            _title.getBG().setWidth(_title.getBG().getWidth() +11);
+            _title.setBGXLoc(_title.getBGXLoc()-11);
+            _title.getTitle().setRotate(_title.getTitle().getRotate()+9);
+            titlePane.setPrefWidth(titlePane.getPrefWidth()-120);
+            _titlePaneXLoc+=120;
+            titlePane.relocate(_titlePaneXLoc+120, 0);
+            _titleXLoc -=70;
+            _titleYLoc += 3;
+            _title.setTitleLoc(_titleXLoc - 70, _titleYLoc + 3);
+        }
+    } */
+
     private class TitleMover implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             _title.getBG().setWidth(_title.getBG().getWidth() - 120);
-            _title.setBGXLoc(_title.getBGXLoc()+120);
+            _title.setBGXLoc(_title.getBGXLoc() + 120);
             _title.getTitle().setRotate(_title.getTitle().getRotate()+9);
-            _titleXLoc += 49.5;
-            _titleYLoc += 3;
+            _titleXLoc +=49.5;
+            _titleYLoc +=3;
             _title.setTitleLoc(_titleXLoc + 49.5, _titleYLoc + 3);
         }
     }
@@ -307,6 +322,12 @@ public class Game {
     }
 
     private class SpecsGetter implements EventHandler<MouseEvent> {
+        public void handle(MouseEvent event) {
+            _store.getMyName().setText("Hi");
+        }
+    }
+
+    private class SpecsDisappear implements EventHandler<MouseEvent> {
         public void handle(MouseEvent event) {
             _store.getMyName().setText("Hi");
         }
@@ -327,6 +348,9 @@ public class Game {
                     _title.getPressSpace().setOpacity(0);
                     _titleNotCompressed = false;
                     _verChanger.setOpacity(1);
+                    for (int i = 0; i < 4; i++){
+                        _pet[i].setOpacity(1);
+                    }
                 }
             }
         }

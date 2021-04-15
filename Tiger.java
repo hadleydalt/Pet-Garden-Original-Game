@@ -79,6 +79,32 @@ public class Tiger extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _leftSideStripe1.setOpacity(x);
+        _leftSideStripe2.setOpacity(x);
+        _rightSideStripe1.setOpacity(x);
+        _rightSideStripe2.setOpacity(x);
+        _leftSideStripe3.setOpacity(x);
+        _rightSideStripe3.setOpacity(x);
+        _topStripe1.setOpacity(x);
+        _topStripe2.setOpacity(x);
+        _topStripe3.setOpacity(x);
+        _mouth.setOpacity(x);
+        _nose.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _ear11.setOpacity(x);
+        _ear12.setOpacity(x);
+        _tail.setOpacity(x);
+        _stomach.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.ORANGE;
     }

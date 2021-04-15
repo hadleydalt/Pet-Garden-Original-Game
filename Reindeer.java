@@ -76,6 +76,26 @@ public class Reindeer extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _mouth.setOpacity(x);
+        _nose.setOpacity(x);
+        _muzzle1.setOpacity(x);
+        _muzzle2.setOpacity(x);
+        _ear11.setOpacity(x);
+        _ear12.setOpacity(x);
+        _thing1.setOpacity(x);
+        _thing2.setOpacity(x);
+        _thing3.setOpacity(x);
+        _thing4.setOpacity(x);
+        _stomach.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.TAN;
     }

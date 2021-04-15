@@ -52,6 +52,22 @@ public class Chicken extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _waddle.setOpacity(x);
+        _beak.setOpacity(x);
+        _wing1.setOpacity(x);
+        _wing2.setOpacity(x);
+        _top1.setOpacity(x);
+        _top2.setOpacity(x);
+        _top3.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.rgb(245, 234, 120);
     }

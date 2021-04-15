@@ -43,6 +43,20 @@ public class Pig extends Pet{
     }
 
     @Override
+    public void setOpacity(double x){
+        this.getBody().setOpacity(x);
+        _eye1.setOpacity(x);
+        _eye2.setOpacity(x);
+        _pupil1.setOpacity(x);
+        _pupil2.setOpacity(x);
+        _mouth.setOpacity(x);
+        _nostril1.setOpacity(x);
+        _nostril2.setOpacity(x);
+        _ear1.setOpacity(x);
+        _ear2.setOpacity(x);
+    }
+
+    @Override
     public Color getPetColor(){
         return Color.PINK;
     }
