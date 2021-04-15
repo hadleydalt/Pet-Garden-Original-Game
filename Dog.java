@@ -21,8 +21,9 @@ public class Dog extends Pet{
     private Ellipse _ear12;
     private Ellipse _ear22;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Dog(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Dog(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -62,9 +63,16 @@ public class Dog extends Pet{
         _ear22 = new Ellipse(Constants.EAR_1_X, Constants.EAR_1_Y);
         _ear22.setFill(Color.WHEAT);
         _ear22.setRotate(-50);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
         root.getChildren().addAll(_spot1, _spot2, _eye1, _eye2, _pupil1, _pupil2, _nose, _muzzle1, _muzzle2, _ear11, _ear12,
-                _ear21, _ear22);
+                _ear21, _ear22, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -119,6 +127,8 @@ public class Dog extends Pet{
             _ear21.setCenterY(y-63);
             _ear22.setCenterX(x+50);
             _ear22.setCenterY(y-63);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -153,6 +163,8 @@ public class Dog extends Pet{
         _ear21.setCenterY(y-63);
         _ear22.setCenterX(x+50);
         _ear22.setCenterY(y-63);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

@@ -26,8 +26,9 @@ public class Walrus extends Pet{
     private Ellipse _tail1;
     private Ellipse _tail2;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Walrus(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Walrus(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -70,9 +71,16 @@ public class Walrus extends Pet{
         _tail2 = new Ellipse(Constants.TAIL_X, Constants.TAIL_Y);
         _tail2.setFill(Color.LIGHTSKYBLUE);
         _tail2.setRotate(80);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
         root.getChildren().addAll(_tusk1, _tusk2, _eye1, _eye2, _pupil1, _pupil2, _mouth, _nose, _nosedivide, _spot1, _spot2, _spot3,
-                _spot4, _spot5, _spot6, _flipper1, _flipper2, _tail1, _tail2);
+                _spot4, _spot5, _spot6, _flipper1, _flipper2, _tail1, _tail2, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -151,6 +159,9 @@ public class Walrus extends Pet{
             _tail1.setCenterY(y+38);
             _tail2.setCenterX(x+47);
             _tail2.setCenterY(y+48);
+
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -203,6 +214,9 @@ public class Walrus extends Pet{
         _tail1.setCenterY(y+38);
         _tail2.setCenterX(x+47);
         _tail2.setCenterY(y+48);
+
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

@@ -139,4 +139,16 @@ public class Store {
     public Label getMyName(){
         return _myName;
     }
+
+    public Label getMyAge(){
+        return _myAge;
+    }
+
+    public Label getMyBirthMonth(){
+        return _myBirthMonth;
+    }
+
+    public Label getMyFavFood(){
+        return _myFavFood;
+    }
 }

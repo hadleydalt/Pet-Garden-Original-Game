@@ -24,8 +24,9 @@ public class Reindeer extends Pet{
     private Rectangle _thing4;
     private Ellipse _stomach;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Reindeer(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Reindeer(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -69,10 +70,17 @@ public class Reindeer extends Pet{
         _thing4.setRotate(-40);
         _stomach = new Ellipse(Constants.REINDEER_STOMACH_X, Constants.REINDEER_STOMACH_Y);
         _stomach.setFill(Color.WHEAT);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
 
         root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _mouth, _nose, _muzzle1, _muzzle2, _ear11, _ear12,
-                _thing1, _thing2, _thing3, _thing4, _stomach);
+                _thing1, _thing2, _thing3, _thing4, _stomach, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -133,6 +141,8 @@ public class Reindeer extends Pet{
             _thing4.setY(y-78);
             _stomach.setCenterX(x);
             _stomach.setCenterY(y+35);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -171,6 +181,8 @@ public class Reindeer extends Pet{
         _thing4.setY(y-78);
         _stomach.setCenterX(x);
         _stomach.setCenterY(y+35);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

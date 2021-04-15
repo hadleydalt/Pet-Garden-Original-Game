@@ -30,8 +30,9 @@ public class Tiger extends Pet{
     private Ellipse _tail;
     private Ellipse _stomach;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Tiger(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Tiger(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -72,10 +73,17 @@ public class Tiger extends Pet{
         _tail.setRotate(75);
         _stomach = new Ellipse(Constants.REINDEER_STOMACH_X, Constants.REINDEER_STOMACH_Y);
         _stomach.setFill(Color.rgb(255, 203, 107));
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
         root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _leftSideStripe1, _leftSideStripe2, _rightSideStripe1, _rightSideStripe2,
                 _leftSideStripe3, _rightSideStripe3, _topStripe1, _topStripe2, _topStripe3, _mouth, _nose, _muzzle1, _muzzle2,
-                _ear11, _ear12, _tail, _stomach);
+                _ear11, _ear12, _tail, _stomach, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -161,6 +169,9 @@ public class Tiger extends Pet{
 
             _stomach.setCenterX(x);
             _stomach.setCenterY(y+35);
+
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -218,6 +229,9 @@ public class Tiger extends Pet{
 
         _stomach.setCenterX(x);
         _stomach.setCenterY(y+35);
+
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

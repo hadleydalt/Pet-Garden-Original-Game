@@ -27,8 +27,9 @@ public class Owl extends Pet{
     private Label _fluff6;
     private Label _fluff7;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Owl(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Owl(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -87,9 +88,16 @@ public class Owl extends Pet{
         _fluff7.setRotate(90);
         _fluff7.setTextFill(Color.WHEAT);
         _fluff7.setFont(font);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
         root.getChildren().addAll(_bigeye1, _bigeye2, _eye1, _eye2, _pupil1, _pupil2, _wing1, _wing2, _beak, _ear11, _ear12,
-                _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6, _fluff7);
+                _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6, _fluff7, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -154,6 +162,8 @@ public class Owl extends Pet{
             _fluff5.relocate(x+14, y+20);
             _fluff6.relocate(x-8, y+32);
             _fluff7.relocate(x+8, y+32);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -193,6 +203,8 @@ public class Owl extends Pet{
         _fluff5.relocate(x+14, y+20);
         _fluff6.relocate(x-8, y+32);
         _fluff7.relocate(x+8, y+32);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

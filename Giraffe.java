@@ -30,8 +30,9 @@ public class Giraffe extends Pet{
     private Ellipse _thing11;
     private Ellipse _thing22;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Giraffe(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Giraffe(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -85,9 +86,17 @@ public class Giraffe extends Pet{
         _thing22 = new Ellipse(Constants.THING_1_X, Constants.THING_1_Y);
         _thing22.setFill(Color.PERU);
         _thing22.setRotate(20);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
+
 
         root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _mouth, _nostril1, _nostril2, _muzzle1, _muzzle2,
-                _spot1, _spot2, _spot3, _spot4, _spot5, _spot6, _ear11, _ear12, _thing1, _thing2, _thing11, _thing22);
+                _spot1, _spot2, _spot3, _spot4, _spot5, _spot6, _ear11, _ear12, _thing1, _thing2, _thing11, _thing22, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -166,6 +175,8 @@ public class Giraffe extends Pet{
             _thing11.setCenterY(y-75);
             _thing22.setCenterX(x+20);
             _thing22.setCenterY(y-75);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -216,6 +227,8 @@ public class Giraffe extends Pet{
         _thing11.setCenterY(y-75);
         _thing22.setCenterX(x+20);
         _thing22.setCenterY(y-75);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

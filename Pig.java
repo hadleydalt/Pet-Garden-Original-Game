@@ -16,8 +16,9 @@ public class Pig extends Pet{
     private Rectangle _ear1;
     private Rectangle _ear2;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Pig(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Pig(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -38,8 +39,16 @@ public class Pig extends Pet{
         _ear2 = new Rectangle(Constants.EAR_LENGTH, Constants.EAR_LENGTH);
         _ear2.setFill(Color.PINK);
         _ear2.setRotate(77);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
-        root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _mouth, _nostril1, _nostril2, _ear1, _ear2);
+
+        root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _mouth, _nostril1, _nostril2, _ear1, _ear2, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -84,6 +93,8 @@ public class Pig extends Pet{
             _ear1.setY(y-63);
             _ear2.setX(x+20);
             _ear2.setY(y-60);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -112,6 +123,8 @@ public class Pig extends Pet{
         _ear1.setY(y-63);
         _ear2.setX(x+20);
         _ear2.setY(y-60);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

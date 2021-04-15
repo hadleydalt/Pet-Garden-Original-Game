@@ -17,8 +17,9 @@ public class Chicken extends Pet{
     private Ellipse _top2;
     private Ellipse _top3;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Chicken(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Chicken(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -47,8 +48,15 @@ public class Chicken extends Pet{
         _top3 = new Ellipse(Constants.SMALL_TOP_X, Constants.SMALL_TOP_Y);
         _top3.setFill(Color.TOMATO);
         _top3.setRotate(30);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
-        root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _waddle, _beak, _wing1, _wing2, _top1, _top2, _top3);
+        root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _waddle, _beak, _wing1, _wing2, _top1, _top2, _top3, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -99,6 +107,8 @@ public class Chicken extends Pet{
             _top2.setCenterY(y-62);
             _top3.setCenterX(x+10);
             _top3.setCenterY(y-55);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -131,6 +141,8 @@ public class Chicken extends Pet{
         _top2.setCenterY(y-62);
         _top3.setCenterX(x+10);
         _top3.setCenterY(y-55);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

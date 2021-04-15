@@ -14,8 +14,9 @@ public class Penguin extends Pet{
     private Ellipse _eyeback2;
     private Ellipse _beak;
     private Pet[][] _pets;
+    private Ellipse _coverNode;
 
-    public Penguin(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Penguin(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -36,8 +37,15 @@ public class Penguin extends Pet{
         _eyeback2.setRotate(20);
         _beak = new Ellipse(Constants.BEAK_X, Constants.BEAK_Y);
         _beak.setFill(Color.ORANGE);
+        _coverNode = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
+        _coverNode.setFill(Color.TRANSPARENT);
 
-        root.getChildren().addAll(_eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2, _stomach, _beak);
+        root.getChildren().addAll(_eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2, _stomach, _beak, _coverNode);
+    }
+
+    @Override
+    public Ellipse getNode(){
+        return _coverNode;
     }
 
     @Override
@@ -79,6 +87,8 @@ public class Penguin extends Pet{
             _eyeback2.setCenterY(y-15);
             _beak.setCenterX(x);
             _beak.setCenterY(y-7);
+            _coverNode.setCenterX(x);
+            _coverNode.setCenterY(y);
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -105,6 +115,8 @@ public class Penguin extends Pet{
         _eyeback2.setCenterY(y-15);
         _beak.setCenterX(x);
         _beak.setCenterY(y-7);
+        _coverNode.setCenterX(x);
+        _coverNode.setCenterY(y);
     }
 
     @Override

@@ -8,11 +8,11 @@ public class Pet{
     private Ellipse _body;
     private Pet[][] _pets;
     private String _petName;
-    private int _age;
+    private String _age;
     private String _birthMonth;
     private String _favFood;
 
-    public Pet(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+    public Pet(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         _pets = pets;
         _body = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
         _body.setFill(this.getPetColor());
@@ -27,15 +27,15 @@ public class Pet{
         return _petName;
     }
 
-    public int getAge(){
+    public String getPetAge(){
         return _age;
     }
 
-    public String getBirthMonth(){
+    public String getPetBirthMonth(){
         return _birthMonth;
     }
 
-    public String getFavFood(){
+    public String getPetFavFood(){
         return _favFood;
     }
 
@@ -66,5 +66,9 @@ public class Pet{
     }
 
     public void setOpacity(double x){
+    }
+
+    public Ellipse getNode(){
+        return null;
     }
 }

@@ -41,6 +41,7 @@ public class Game {
     private Button _verChanger;
     private Timeline _timeline;
     private LinkedList<Pet> _myPets;
+    private Pet thisPet;
 
     public Game(){
         this.setupGame();
@@ -114,47 +115,48 @@ public class Game {
     }
 
     public Pet generatePet(){
+        SpecsHelper sh = new SpecsHelper();
         Pet pet = null;
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Cat(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Chicken(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 2:
-                pet = new Cow(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Cow(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 3:
-                pet = new Dog(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Dog(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 4:
-                pet = new Fox(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Fox(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Giraffe(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 6:
-                pet = new Owl(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Owl(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Penguin(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 8:
-                pet = new Pig(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Pig(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Reindeer(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Sheep(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Tiger(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             default:
-                pet = new Walrus(titleAndPetPane, _pets, "Unnamed", this.getAge(), this.getBirthMonth(), this.getFavFood());
+                pet = new Walrus(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
         }
         return pet;
@@ -180,14 +182,18 @@ public class Game {
             _pet[i].setLoc(this.petXLoc(), this.petYLoc());
             _myPets.add(i, _pet[i]);
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
-            for (int j = 0; j < 4; j++){
-                if (_pets[i][j] != null) {
-                    _pets[i][j].getBody().addEventHandler(MouseEvent.MOUSE_ENTERED, new SpecsGetter());
-                }
-            }
         }
         this.getOriginalLocs();
         this.setupPetMover();
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                    if (_pets[i][j] != null) {
+                        thisPet = _pets[i][j];
+                        thisPet.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, new SpecsGetter());
+                        thisPet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
+                    }
+            }
+        }
     }
 
     public int petXLoc(){
@@ -323,13 +329,23 @@ public class Game {
 
     private class SpecsGetter implements EventHandler<MouseEvent> {
         public void handle(MouseEvent event) {
-            _store.getMyName().setText("Hi");
+            _store.getMyName().setText(thisPet.getPetName());
+            _store.getMyAge().setText(thisPet.getPetAge());
+            _store.getMyBirthMonth().setText(thisPet.getPetBirthMonth());
+            _store.getMyFavFood().setText(thisPet.getPetFavFood());
+            _store.getMyName().setOpacity(1);
+            _store.getMyAge().setOpacity(1);
+            _store.getMyBirthMonth().setOpacity(1);
+            _store.getMyFavFood().setOpacity(1);
         }
     }
 
     private class SpecsDisappear implements EventHandler<MouseEvent> {
         public void handle(MouseEvent event) {
-            _store.getMyName().setText("Hi");
+            _store.getMyName().setOpacity(0);
+            _store.getMyAge().setOpacity(0);
+            _store.getMyBirthMonth().setOpacity(0);
+            _store.getMyFavFood().setOpacity(0);
         }
     }
 
@@ -356,139 +372,141 @@ public class Game {
         }
     }
 
-    public int getAge(){
-        int age = 0;
-        int rand_int = (int) (Math.random() * 13);
-        switch (rand_int){
-            case 0:
-                age = 1;
-                break;
-            case 1:
-                age = 2;
-                break;
-            case 2:
-                age = 3;
-                break;
-            case 3:
-                age = 4;
-                break;
-            case 4:
-                age = 5;
-                break;
-            case 5:
-                age = 6;
-                break;
-            case 6:
-                age = 7;
-                break;
-            case 7:
-                age = 8;
-                break;
-            case 8:
-                age = 9;
-                break;
-            case 9:
-                age = 10;
-                break;
-            case 10:
-                age = 11;
-                break;
-            case 11:
-                age = 12;
-                break;
-            default:
-                age = 13;
-                break;
+    public class SpecsHelper {
+        public String getAge() {
+            String age = null;
+            int rand_int = (int) (Math.random() * 13);
+            switch (rand_int) {
+                case 0:
+                    age = "1";
+                    break;
+                case 1:
+                    age = "2";
+                    break;
+                case 2:
+                    age = "3";
+                    break;
+                case 3:
+                    age = "4";
+                    break;
+                case 4:
+                    age = "5";
+                    break;
+                case 5:
+                    age = "6";
+                    break;
+                case 6:
+                    age = "7";
+                    break;
+                case 7:
+                    age = "8";
+                    break;
+                case 8:
+                    age = "9";
+                    break;
+                case 9:
+                    age = "10";
+                    break;
+                case 10:
+                    age = "11";
+                    break;
+                case 11:
+                    age = "12";
+                    break;
+                default:
+                    age = "13";
+                    break;
+            }
+            return age;
         }
-        return age;
-    }
 
-    public String getBirthMonth(){
-        String month = null;
-        int rand_int = (int) (Math.random() * 12);
-        switch (rand_int){
-            case 0:
-                month = "January";
-                break;
-            case 1:
-                month = "February";
-                break;
-            case 2:
-                month = "March";
-                break;
-            case 3:
-                month = "April";
-                break;
-            case 4:
-                month = "May";
-                break;
-            case 5:
-                month = "June";
-                break;
-            case 6:
-                month = "July";
-                break;
-            case 7:
-                month = "August";
-                break;
-            case 8:
-                month = "September";
-                break;
-            case 9:
-                month = "October";
-                break;
-            case 10:
-                month = "November";
-                break;
-            default:
-                month = "December";
-                break;
+        public String getBirthMonth() {
+            String month = null;
+            int rand_int = (int) (Math.random() * 12);
+            switch (rand_int) {
+                case 0:
+                    month = "January";
+                    break;
+                case 1:
+                    month = "February";
+                    break;
+                case 2:
+                    month = "March";
+                    break;
+                case 3:
+                    month = "April";
+                    break;
+                case 4:
+                    month = "May";
+                    break;
+                case 5:
+                    month = "June";
+                    break;
+                case 6:
+                    month = "July";
+                    break;
+                case 7:
+                    month = "August";
+                    break;
+                case 8:
+                    month = "September";
+                    break;
+                case 9:
+                    month = "October";
+                    break;
+                case 10:
+                    month = "November";
+                    break;
+                default:
+                    month = "December";
+                    break;
+            }
+            return month;
         }
-        return month;
-    }
 
-    public String getFavFood(){
-        String food = null;
-        int rand_int = (int) (Math.random() * 12);
-        switch (rand_int){
-            case 0:
-                food = "Pasta";
-                break;
-            case 1:
-                food = "Acai Bowl";
-                break;
-            case 2:
-                food = "Dumplings";
-                break;
-            case 3:
-                food = "Ramen";
-                break;
-            case 4:
-                food = "Vegan Ice Cream";
-                break;
-            case 5:
-                food = "Tofu";
-                break;
-            case 6:
-                food = "Tomato Soup";
-                break;
-            case 7:
-                food = "Veggie Burger";
-                break;
-            case 8:
-                food = "Sushi";
-                break;
-            case 9:
-                food = "Mashed Potatoes";
-                break;
-            case 10:
-                food = "Fruit Salad";
-                break;
-            default:
-                food = "Channa Masala";
-                break;
+        public String getFavFood() {
+            String food = null;
+            int rand_int = (int) (Math.random() * 12);
+            switch (rand_int) {
+                case 0:
+                    food = "Pasta";
+                    break;
+                case 1:
+                    food = "Acai Bowl";
+                    break;
+                case 2:
+                    food = "Dumplings";
+                    break;
+                case 3:
+                    food = "Ramen";
+                    break;
+                case 4:
+                    food = "Vegan Ice Cream";
+                    break;
+                case 5:
+                    food = "Tofu";
+                    break;
+                case 6:
+                    food = "Tomato Soup";
+                    break;
+                case 7:
+                    food = "Veggie Burger";
+                    break;
+                case 8:
+                    food = "Sushi";
+                    break;
+                case 9:
+                    food = "Mashed Potatoes";
+                    break;
+                case 10:
+                    food = "Fruit Salad";
+                    break;
+                default:
+                    food = "Channa Masala";
+                    break;
+            }
+            return food;
         }
-        return food;
     }
 
 }
