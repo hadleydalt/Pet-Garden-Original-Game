@@ -15,8 +15,8 @@ public class Penguin extends Pet{
     private Ellipse _beak;
     private Pet[][] _pets;
 
-    public Penguin(Pane root, Pet[][] pets){
-        super(root, pets);
+    public Penguin(Pane root, Pet[][] pets, String petName, int age, String birthMonth, String favFood){
+        super(root, pets, petName, age, birthMonth, favFood);
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);

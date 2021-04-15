@@ -20,6 +20,7 @@ public class App extends Application {
         stage.show();
         Scene scene = new Scene(organizer.getRoot(), 1440, 800);
         stage.setScene(scene);
+        stage.setResizable(false);
     }
 
     public static void main(String[] args) {

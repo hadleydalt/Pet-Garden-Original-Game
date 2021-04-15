@@ -96,4 +96,8 @@ public class Garden {
         _frame.setY(55);
 
     }
+
+    public Rectangle getGrass(){
+        return _grass;
+    }
 }
