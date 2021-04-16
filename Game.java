@@ -188,9 +188,10 @@ public class Game {
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                     if (_pets[i][j] != null) {
-                        thisPet = _pets[i][j];
-                        thisPet.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, new SpecsGetter());
-                        thisPet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
+                        SpecsGetter sg = new SpecsGetter(_pets[i][j]);
+                        SpecsDisappear sd = new SpecsDisappear();
+                        _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, sg);
+                        _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_EXITED, sd);
                     }
             }
         }
@@ -327,17 +328,28 @@ public class Game {
         }
     }
 
+
     private class SpecsGetter implements EventHandler<MouseEvent> {
-        public void handle(MouseEvent event) {
-            _store.getMyName().setText(thisPet.getPetName());
-            _store.getMyAge().setText(thisPet.getPetAge());
-            _store.getMyBirthMonth().setText(thisPet.getPetBirthMonth());
-            _store.getMyFavFood().setText(thisPet.getPetFavFood());
-            _store.getMyName().setOpacity(1);
-            _store.getMyAge().setOpacity(1);
-            _store.getMyBirthMonth().setOpacity(1);
-            _store.getMyFavFood().setOpacity(1);
+        private Pet _pet;
+        private SpecsGetter(Pet pet) {
+            _pet = pet;
         }
+            public void handle (MouseEvent event){
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (_pets[i][j] != null) {
+                            _store.getMyName().setText(_pet.getPetName());
+                            _store.getMyAge().setText(_pet.getPetAge());
+                            _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
+                            _store.getMyFavFood().setText(_pet.getPetFavFood());
+                        }
+                    }
+                }
+                _store.getMyName().setOpacity(1);
+                _store.getMyAge().setOpacity(1);
+                _store.getMyBirthMonth().setOpacity(1);
+                _store.getMyFavFood().setOpacity(1);
+            }
     }
 
     private class SpecsDisappear implements EventHandler<MouseEvent> {

@@ -15,6 +15,10 @@ public class Penguin extends Pet{
     private Ellipse _beak;
     private Pet[][] _pets;
     private Ellipse _coverNode;
+    private String _petName;
+    private String _age;
+    private String _birthMonth;
+    private String _favFood;
 
     public Penguin(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
