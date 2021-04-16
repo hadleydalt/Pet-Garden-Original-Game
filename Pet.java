@@ -27,6 +27,11 @@ public class Pet{
         return _petName;
     }
 
+    public void setPetName(String x){
+        _petName = null;
+        _petName = x;
+    }
+
     public String getPetAge(){
         return _age;
     }

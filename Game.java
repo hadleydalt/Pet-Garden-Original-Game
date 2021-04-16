@@ -41,7 +41,8 @@ public class Game {
     private Button _verChanger;
     private Timeline _timeline;
     private LinkedList<Pet> _myPets;
-    private Pet thisPet;
+    private String newName;
+    private Pet x;
 
     public Game(){
         this.setupGame();
@@ -73,7 +74,7 @@ public class Game {
         _title = new Title(titleAndPetPane);
         _title.setLoc(0, 0);
         _titleNotCompressed = true;
-        titleAndPetPane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
+        titleAndPetPane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey(x));
         // if that doesn't work, just make the pets part of titlePane
         // use addEventHandlers for each pet separately? can do _pet[i].getBody().addEventHandler?
         // would be good for later when it needs to happen for all pets in array
@@ -92,6 +93,7 @@ public class Game {
         _verChanger.setOpacity(0);
         buttonPane.getChildren().add(_verChanger);
         _myPets = new LinkedList<Pet>();
+        newName = ("");
     }
 
     private class VersionChanger implements EventHandler<ActionEvent> {
@@ -120,43 +122,43 @@ public class Game {
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cat(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Chicken(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 2:
-                pet = new Cow(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cow(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 3:
-                pet = new Dog(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Dog(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 4:
-                pet = new Fox(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Fox(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Giraffe(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 6:
-                pet = new Owl(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Owl(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Penguin(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 8:
-                pet = new Pig(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Pig(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Reindeer(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Sheep(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Tiger(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             default:
-                pet = new Walrus(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Walrus(titleAndPetPane, _pets, "Type+ENTER to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
         }
         return pet;
@@ -343,6 +345,7 @@ public class Game {
                             _store.getMyAge().setText(_pet.getPetAge());
                             _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
                             _store.getMyFavFood().setText(_pet.getPetFavFood());
+                            _pet.getNode().addEventHandler(KeyEvent.KEY_TYPED, new TitleMoverOnKey(_pet));
 
                             if (_pet.getType().equals("cat")){
                                 _store.getCat().setOpacity(1);
@@ -409,6 +412,10 @@ public class Game {
     }
 
     private class TitleMoverOnKey implements EventHandler<KeyEvent> {
+        private Pet __pet;
+        private TitleMoverOnKey(Pet pet){
+            __pet = pet;
+        }
         public void setupTitleBGTimeline() {
             KeyFrame kf1 = new KeyFrame(Duration.millis(25), new TitleMover());
             Timeline timeline = new Timeline(kf1);
@@ -426,6 +433,14 @@ public class Game {
                     for (int i = 0; i < 4; i++){
                         _pet[i].setOpacity(1);
                     }
+                }
+            }
+                newName = newName + event.getText();
+                _store.getMyName().setText(newName);
+
+            if ((event.getCode() == KeyCode.BACK_SPACE) || (event.getCode() == KeyCode.DELETE)) {
+                if (newName != null && newName.length() > 0) {
+                    newName = newName.substring(0, newName.length() - 1);
                 }
             }
         }

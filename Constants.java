@@ -119,14 +119,12 @@ public class Constants {
     public static final int TOPBG_Y = 45;
     public static final int ACCENT_X = 90;
     public static final int ACCENT_Y = 8;
-    public static final int PET_POPUP_X = 350;
+    public static final int PET_POPUP_X = 370;
     public static final int PET_POPUP_Y = 250;
-    public static final int PET_TITLE_X = 330;
+    public static final int PET_TITLE_X = 350;
     public static final int PET_TITLE_Y = 40;
     public static final int PET_FRAME_X = 180;
     public static final int PET_FRAME_Y = 180;
-    public static final int NAME_ME_X = 69;
-    public static final int NAME_ME_Y = 20;
 
     //TITLE
     public static final int TITLE_BG_X= 1440;

@@ -130,7 +130,7 @@ public class Store {
         _specs.getChildren().addAll(_petPopup, _petTitle, _name, _age, _birthMonth, _favFood, _whoAmI, _myName, _myAge,
                 _myBirthMonth, _myFavFood, _petFrame);
 
-        _specs.setOpacity(0);
+        _specs.setOpacity(1);
         _cat = new Cat(_specs, x, "x", "x", "x", "x");
         _cat.setOpacity(0);
         _chicken = new Chicken(_specs, x, "x", "x", "x", "x");
