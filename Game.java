@@ -120,43 +120,43 @@ public class Game {
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cat(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Chicken(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 2:
-                pet = new Cow(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cow(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 3:
-                pet = new Dog(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Dog(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 4:
-                pet = new Fox(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Fox(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Giraffe(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 6:
-                pet = new Owl(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Owl(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Penguin(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 8:
-                pet = new Pig(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Pig(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Reindeer(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Sheep(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Tiger(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             default:
-                pet = new Walrus(titleAndPetPane, _pets, "Unnamed", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Walrus(titleAndPetPane, _pets, "Press N to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
         }
         return pet;

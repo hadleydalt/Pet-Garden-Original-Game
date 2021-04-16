@@ -110,7 +110,7 @@ public class Store {
         _petFrame = new Rectangle(Constants.PET_FRAME_X, Constants.PET_FRAME_Y);
         _petFrame.setFill(Color.rgb(223, 243, 245));
 
-        _myName = new Label("Name");
+        _myName = new Label("Unnamed");
         _myName.setFont(font2);
         _myName.setTextFill(Color.rgb(163, 163, 163));
         _myName.relocate(200, 80);
@@ -126,6 +126,7 @@ public class Store {
         _myFavFood.setFont(font2);
         _myFavFood.setTextFill(Color.rgb(163, 163, 163));
         _myFavFood.relocate(200, 215);
+
         _specs.getChildren().addAll(_petPopup, _petTitle, _name, _age, _birthMonth, _favFood, _whoAmI, _myName, _myAge,
                 _myBirthMonth, _myFavFood, _petFrame);
 

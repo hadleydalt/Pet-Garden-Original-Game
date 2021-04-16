@@ -125,6 +125,8 @@ public class Constants {
     public static final int PET_TITLE_Y = 40;
     public static final int PET_FRAME_X = 180;
     public static final int PET_FRAME_Y = 180;
+    public static final int NAME_ME_X = 69;
+    public static final int NAME_ME_Y = 20;
 
     //TITLE
     public static final int TITLE_BG_X= 1440;
