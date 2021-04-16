@@ -32,6 +32,21 @@ public class Store {
     private Label _myAge;
     private Label _myBirthMonth;
     private Label _myFavFood;
+    private Cat _cat;
+    private Chicken _chicken;
+    private Cow _cow;
+    private Dog _dog;
+    private Fox _fox;
+    private Giraffe _giraffe;
+    private Owl _owl;
+    private Penguin _penguin;
+    private Pig _pig;
+    private Reindeer _reindeer;
+    private Sheep _sheep;
+    private Tiger _tiger;
+    private Walrus _walrus;
+    private Pet[][] x;
+    private Rectangle _petFrame;
 
     public Store(Pane root){
         _storebg = new Rectangle(Constants.STORE_BG_X, Constants.STORE_BG_Y);
@@ -92,6 +107,8 @@ public class Store {
         _whoAmI.setFont(font3);
         _whoAmI.setTextFill(Color.WHITE);
         _whoAmI.relocate(105, 14);
+        _petFrame = new Rectangle(Constants.PET_FRAME_X, Constants.PET_FRAME_Y);
+        _petFrame.setFill(Color.rgb(223, 243, 245));
 
         _myName = new Label("Name");
         _myName.setFont(font2);
@@ -110,7 +127,35 @@ public class Store {
         _myFavFood.setTextFill(Color.rgb(163, 163, 163));
         _myFavFood.relocate(200, 215);
         _specs.getChildren().addAll(_petPopup, _petTitle, _name, _age, _birthMonth, _favFood, _whoAmI, _myName, _myAge,
-                _myBirthMonth, _myFavFood);
+                _myBirthMonth, _myFavFood, _petFrame);
+
+        _specs.setOpacity(0);
+        _cat = new Cat(_specs, x, "x", "x", "x", "x");
+        _cat.setOpacity(0);
+        _chicken = new Chicken(_specs, x, "x", "x", "x", "x");
+        _chicken.setOpacity(0);
+        _cow = new Cow(_specs, x, "x", "x", "x", "x");
+        _cow.setOpacity(0);
+        _dog = new Dog(_specs, x, "x", "x", "x", "x");
+        _dog.setOpacity(0);
+        _fox = new Fox(_specs, x, "x", "x", "x", "x");
+        _fox.setOpacity(0);
+        _giraffe = new Giraffe(_specs, x, "x", "x", "x", "x");
+        _giraffe.setOpacity(0);
+        _owl = new Owl(_specs, x, "x", "x", "x", "x");
+        _owl.setOpacity(0);
+        _penguin = new Penguin(_specs, x, "x", "x", "x", "x");
+        _penguin.setOpacity(0);
+        _pig = new Pig(_specs, x, "x", "x", "x", "x");
+        _pig.setOpacity(0);
+        _reindeer = new Reindeer(_specs, x, "x", "x", "x", "x");
+        _reindeer.setOpacity(0);
+        _sheep = new Sheep(_specs, x, "x", "x", "x", "x");
+        _sheep.setOpacity(0);
+        _tiger = new Tiger(_specs, x, "x", "x", "x", "x");
+        _tiger.setOpacity(0);
+        _walrus = new Walrus(_specs, x, "x", "x", "x", "x");
+        _walrus.setOpacity(0);
 
         root.getChildren().addAll(_storebg, _whitebg, _whitebg2, _topbg, _topbgint, _accent1, _accent2, _shop, _shop2,
                 _specs);
@@ -134,10 +179,31 @@ public class Store {
         _shop.relocate(x+201, y+27);
         _shop2.relocate(x+203.5, y+25.5);
         _specs.relocate(x+100, y+150);
+        _petFrame.setX(10);
+        _petFrame.setY(60);
+
+        _cat.setBounceLoc(95, 153);
+        _chicken.setBounceLoc(95, 153);
+        _cow.setBounceLoc(95, 153);
+        _dog.setBounceLoc(95, 153);
+        _fox.setBounceLoc(95, 153);
+        _giraffe.setBounceLoc(95, 153);
+        _owl.setBounceLoc(95, 153);
+        _penguin.setBounceLoc(95, 153);
+        _pig.setBounceLoc(95, 153);
+        _reindeer.setBounceLoc(95, 153);
+        _sheep.setBounceLoc(95, 153);
+        _tiger.setBounceLoc(95, 153);
+        _walrus.setBounceLoc(95, 153);
+
     }
 
     public Label getMyName(){
         return _myName;
+    }
+
+    public Pane getSpecsPane(){
+        return _specs;
     }
 
     public Label getMyAge(){
@@ -150,5 +216,57 @@ public class Store {
 
     public Label getMyFavFood(){
         return _myFavFood;
+    }
+
+    public Cat getCat(){
+        return _cat;
+    }
+
+    public Chicken getChicken(){
+        return _chicken;
+    }
+
+    public Cow getCow(){
+        return _cow;
+    }
+
+    public Dog getDog(){
+        return _dog;
+    }
+
+    public Fox getFox(){
+        return _fox;
+    }
+
+    public Giraffe getGiraffe(){
+        return _giraffe;
+    }
+
+    public Owl getOwl(){
+        return _owl;
+    }
+
+    public Penguin getPenguin(){
+        return _penguin;
+    }
+
+    public Pig getPig(){
+        return _pig;
+    }
+
+    public Reindeer getReindeer(){
+        return _reindeer;
+    }
+
+    public Sheep getSheep(){
+        return _sheep;
+    }
+
+    public Tiger getTiger(){
+        return _tiger;
+    }
+
+    public Walrus getWalrus(){
+        return _walrus;
     }
 }

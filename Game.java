@@ -338,26 +338,73 @@ public class Game {
                 for (int i = 0; i < 4; i++) {
                     for (int j = 0; j < 4; j++) {
                         if (_pets[i][j] != null) {
+                            _store.getSpecsPane().setOpacity(1);
                             _store.getMyName().setText(_pet.getPetName());
                             _store.getMyAge().setText(_pet.getPetAge());
                             _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
                             _store.getMyFavFood().setText(_pet.getPetFavFood());
+
+                            if (_pet.getType().equals("cat")){
+                                _store.getCat().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("chicken")){
+                                _store.getChicken().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("cow")){
+                                _store.getCow().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("dog")){
+                                _store.getDog().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("fox")){
+                                _store.getFox().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("giraffe")){
+                                _store.getGiraffe().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("owl")){
+                                _store.getOwl().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("penguin")){
+                                _store.getPenguin().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("pig")){
+                                _store.getPig().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("reindeer")){
+                                _store.getReindeer().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("sheep")){
+                                _store.getSheep().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("tiger")){
+                                _store.getTiger().setOpacity(1);
+                            }
+                            if (_pet.getType().equals("walrus")){
+                                _store.getWalrus().setOpacity(1);
+                            }
                         }
                     }
                 }
-                _store.getMyName().setOpacity(1);
-                _store.getMyAge().setOpacity(1);
-                _store.getMyBirthMonth().setOpacity(1);
-                _store.getMyFavFood().setOpacity(1);
             }
     }
 
     private class SpecsDisappear implements EventHandler<MouseEvent> {
         public void handle(MouseEvent event) {
-            _store.getMyName().setOpacity(0);
-            _store.getMyAge().setOpacity(0);
-            _store.getMyBirthMonth().setOpacity(0);
-            _store.getMyFavFood().setOpacity(0);
+            _store.getSpecsPane().setOpacity(0);
+            _store.getCat().setOpacity(0);
+            _store.getChicken().setOpacity(0);
+            _store.getCow().setOpacity(0);
+            _store.getDog().setOpacity(0);
+            _store.getFox().setOpacity(0);
+            _store.getGiraffe().setOpacity(0);
+            _store.getOwl().setOpacity(0);
+            _store.getPenguin().setOpacity(0);
+            _store.getPig().setOpacity(0);
+            _store.getReindeer().setOpacity(0);
+            _store.getSheep().setOpacity(0);
+            _store.getTiger().setOpacity(0);
+            _store.getWalrus().setOpacity(0);
         }
     }
 

@@ -123,6 +123,8 @@ public class Constants {
     public static final int PET_POPUP_Y = 250;
     public static final int PET_TITLE_X = 330;
     public static final int PET_TITLE_Y = 40;
+    public static final int PET_FRAME_X = 180;
+    public static final int PET_FRAME_Y = 180;
 
     //TITLE
     public static final int TITLE_BG_X= 1440;
