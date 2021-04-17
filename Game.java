@@ -20,7 +20,8 @@ public class Game {
     private Garden _garden;
     private Pane storePane;
     private Store _store;
-    private Pane titleAndPetPane;
+    private StoreInterface _si;
+    private Pane interactPane;
     private Title _title;
     private boolean _titleNotCompressed;
     private int _intPercent;
@@ -57,8 +58,8 @@ public class Game {
         return storePane;
     }
 
-    public Pane getTitleAndPetPane(){
-        return titleAndPetPane;
+    public Pane getInteractPane(){
+        return interactPane;
     }
 
     public Pane getButtonPane() {return buttonPane;}
@@ -66,19 +67,18 @@ public class Game {
     public void setupGame(){
         gardenPane = new Pane();
         storePane = new Pane();
-        titleAndPetPane = new Pane();
+        interactPane = new Pane();
         _garden = new Garden(gardenPane);
         _garden.setLoc(30, 200);
         _store = new Store(storePane);
         _store.setLoc(620, 50);
-        _title = new Title(titleAndPetPane);
+        _title = new Title(interactPane);
         _title.setLoc(0, 0);
+        _si = new StoreInterface(interactPane);
+        _si.setLoc(620,50);
         _titleNotCompressed = true;
-        titleAndPetPane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
-        // if that doesn't work, just make the pets part of titlePane
-        // use addEventHandlers for each pet separately? can do _pet[i].getBody().addEventHandler?
-        // would be good for later when it needs to happen for all pets in array
-        titleAndPetPane.setFocusTraversable(true);
+        interactPane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
+        interactPane.setFocusTraversable(true);
         this.setupLoadingBarTimeline();
         _intPercent = _title.getPercent();
         _counter = 0;
@@ -123,43 +123,43 @@ public class Game {
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 2:
-                pet = new Cow(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 3:
-                pet = new Dog(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 4:
-                pet = new Fox(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 6:
-                pet = new Owl(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 8:
-                pet = new Pig(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             default:
-                pet = new Walrus(titleAndPetPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
                 break;
         }
         return pet;
@@ -188,15 +188,19 @@ public class Game {
         }
         this.getOriginalLocs();
         this.setupPetMover();
+        this.setupHandlers();
+    }
+
+    public void setupHandlers(){
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
-                    if (_pets[i][j] != null) {
-                        SpecsGetter sg = new SpecsGetter(_pets[i][j]);
-                        SpecsDisappear sd = new SpecsDisappear();
-                        _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, sg);
-                        _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, sg);
-                        _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_EXITED, sd);
-                    }
+                if (_pets[i][j] != null) {
+                    SpecsGetter sg = new SpecsGetter(_pets[i][j]);
+                    SpecsDisappear sd = new SpecsDisappear();
+                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, sg);
+                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, sg);
+                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_EXITED, sd);
+                }
             }
         }
     }
@@ -428,6 +432,7 @@ public class Game {
                     for (int i = 0; i < 4; i++){
                         _pet[i].setOpacity(1);
                     }
+                    _si.setOpacity(1);
                 }
             }
                 newName = newName + event.getText();
@@ -494,40 +499,40 @@ public class Game {
             int rand_int = (int) (Math.random() * 12);
             switch (rand_int) {
                 case 0:
-                    month = "January";
+                    month = "January (Capricorn)";
                     break;
                 case 1:
-                    month = "February";
+                    month = "February (Aquarius)";
                     break;
                 case 2:
-                    month = "March";
+                    month = "March (Pisces)";
                     break;
                 case 3:
-                    month = "April";
+                    month = "April (Aries)";
                     break;
                 case 4:
-                    month = "May";
+                    month = "May (Taurus)";
                     break;
                 case 5:
-                    month = "June";
+                    month = "June (Gemini)";
                     break;
                 case 6:
-                    month = "July";
+                    month = "July (Cancer)";
                     break;
                 case 7:
-                    month = "August";
+                    month = "August (Leo)";
                     break;
                 case 8:
-                    month = "September";
+                    month = "September (Virgo)";
                     break;
                 case 9:
-                    month = "October";
+                    month = "October (Libra)";
                     break;
                 case 10:
-                    month = "November";
+                    month = "November (Scorpio)";
                     break;
                 default:
-                    month = "December";
+                    month = "December (Sagittarius)";
                     break;
             }
             return month;

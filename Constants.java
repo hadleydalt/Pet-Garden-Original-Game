@@ -125,6 +125,14 @@ public class Constants {
     public static final int PET_TITLE_Y = 40;
     public static final int PET_FRAME_X = 180;
     public static final int PET_FRAME_Y = 180;
+    public static final int INTERFACE_BUTTON_X = 200;
+    public static final int INTERFACE_BUTTON_Y = 30;
+    public static final int DIVIDER_1_X = 450;
+    public static final int DIVIDER_1_Y = 1;
+    public static final int DIVIDER_2_X = 1;
+    public static final int DIVIDER_2_Y = 137;
+    public static final int COIN_RAD = 43;
+    public static final int COIN_BORDER_RAD = 48;
 
     //TITLE
     public static final int TITLE_BG_X= 1440;
