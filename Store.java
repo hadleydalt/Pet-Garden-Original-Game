@@ -129,12 +129,12 @@ public class Store {
         _myFavFood.setTextFill(Color.rgb(163, 163, 163));
         _myFavFood.relocate(200, 215);
         _petNamed = new Label("PET NAMED!");
-        Font font4 = new Font("Gill Sans", 11);
+        Font font4 = new Font("Gill Sans", 12);
         _petNamed.setFont(font4);
         _petNamed.relocate(290, 105);
         _petNamed.setTextFill(Color.POWDERBLUE);
         _petNamed.setOpacity(0);
-        _instructions = new Label("NOTE: After typing in your pet's name, you MUST click on the pet to confirm the name!");
+        _instructions = new Label("NOTE: After typing in your pet's name, you MUST CLICK on the pet to confirm the name!");
         _instructions.setTextFill(Color.rgb(163, 163, 163));
         _instructions.setMaxWidth(350);
         _instructions.setWrapText(true);
