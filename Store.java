@@ -135,7 +135,7 @@ public class Store {
         _petNamed.setTextFill(Color.POWDERBLUE);
         _petNamed.setOpacity(0);
         _instructions = new Label("NOTE: After typing in your pet's name, you MUST click on the pet to confirm the name!");
-        _instructions.setTextFill(Color.POWDERBLUE);
+        _instructions.setTextFill(Color.rgb(163, 163, 163));
         _instructions.setMaxWidth(350);
         _instructions.setWrapText(true);
         _instructions.relocate(10, 250);
