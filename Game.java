@@ -298,21 +298,6 @@ public class Game {
         }
     }
 
-    // MOVING TITLE PANE
-    /*private class TitleMover implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            _title.getBG().setWidth(_title.getBG().getWidth() +11);
-            _title.setBGXLoc(_title.getBGXLoc()-11);
-            _title.getTitle().setRotate(_title.getTitle().getRotate()+9);
-            titlePane.setPrefWidth(titlePane.getPrefWidth()-120);
-            _titlePaneXLoc+=120;
-            titlePane.relocate(_titlePaneXLoc+120, 0);
-            _titleXLoc -=70;
-            _titleYLoc += 3;
-            _title.setTitleLoc(_titleXLoc - 70, _titleYLoc + 3);
-        }
-    } */
-
     private class TitleMover implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             _title.getBG().setWidth(_title.getBG().getWidth() - 120);
@@ -355,6 +340,7 @@ public class Game {
                                 newName = "";
                                 _pet.setPetName(newNewName);
                                 _store.getPetNamed().setOpacity(1);
+                                _pet.setIsNamed();
                             }
 
                             if (_pet.getType().equals("cat")){

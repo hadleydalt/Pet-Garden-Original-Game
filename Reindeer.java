@@ -111,6 +111,7 @@ public class Reindeer extends Pet{
     @Override
     public void setLoc(double x, double y){
         if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            super.setLoc(x, y);
             this.getBody().setCenterX(x);
             this.getBody().setCenterY(y);
             _eye1.setCenterX(x-15);
@@ -151,6 +152,7 @@ public class Reindeer extends Pet{
 
     @Override
     public void setBounceLoc(double x, double y){
+        super.setBounceLoc(x, y);
         this.getBody().setCenterX(x);
         this.getBody().setCenterY(y);
         _eye1.setCenterX(x-15);

@@ -129,6 +129,7 @@ public class Sheep extends Pet{
     @Override
     public void setLoc(double x, double y){
         if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            super.setLoc(x, y);
             this.getBody().setCenterX(x);
             this.getBody().setCenterY(y);
             _eye1.setCenterX(x-15);
@@ -189,6 +190,7 @@ public class Sheep extends Pet{
 
     @Override
     public void setBounceLoc(double x, double y){
+        super.setBounceLoc(x, y);
         this.getBody().setCenterX(x);
         this.getBody().setCenterY(y);
         _eye1.setCenterX(x-15);
@@ -210,7 +212,7 @@ public class Sheep extends Pet{
         _fluff4.setCenterY(y-20);
         _fluff5.setCenterX(x+60);
         _fluff5.setCenterY(y+23);
-        _fluff6.setCenterX(x+43);
+        _fluff6.setCenterX(x+39);
         _fluff6.setCenterY(y-35);
 
         _fluff7.setCenterX(x-55);

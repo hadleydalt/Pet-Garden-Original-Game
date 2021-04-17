@@ -1,8 +1,10 @@
 package indy;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.text.Font;
 
 public class Pet{
     private Ellipse _body;
@@ -11,6 +13,8 @@ public class Pet{
     private String _age;
     private String _birthMonth;
     private String _favFood;
+    private Boolean isNamed;
+    private Label _gardenName;
 
     public Pet(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         _pets = pets;
@@ -20,11 +24,21 @@ public class Pet{
         _age = age;
         _birthMonth = birthMonth;
         _favFood = favFood;
-        root.getChildren().addAll(_body);
+        isNamed = false;
+        _gardenName = new Label();
+        Font font = new Font("Gill Sans", 14);
+        _gardenName.setFont(font);
+        _gardenName.setTextFill(Color.WHITE);
+        root.getChildren().addAll(_body, _gardenName);
     }
 
     public String getPetName(){
         return _petName;
+    }
+
+    public void setIsNamed(){
+        isNamed = true;
+        _gardenName.setText(_petName);
     }
 
     public void setPetName(String x){
@@ -48,6 +62,7 @@ public class Pet{
     }
 
     public void setBounceLoc(double x, double y){
+        _gardenName.relocate(x+50, y-50);
     }
 
     public double getXLoc(){
