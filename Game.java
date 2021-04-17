@@ -102,7 +102,7 @@ public class Game {
         searchQuery = "";
         newSearchQuery = "";
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
-        _si.getXCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
+            _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
     }
 
     private class VersionChanger implements EventHandler<ActionEvent> {
@@ -332,6 +332,7 @@ public class Game {
         public void handle (MouseEvent event){
             _si.setSearchOpacity(1);
             _si.getTypeToSearch().setText("Type to search");
+            searchQuery = "";
             _searchClicked = true;
         }
     }
@@ -434,6 +435,19 @@ public class Game {
         }
     }
 
+    private class SpecsClose implements EventHandler<MouseEvent>{
+        private Pet _pet;
+        private SpecsClose(Pet pet){
+            _pet = pet;
+        }
+        public void handle(MouseEvent event){
+                _store.getSpecsPane().setOpacity(0);
+                _si.setCloseOpacity(0);
+                _cannotChangeName = false;
+                _pet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
+        }
+    }
+
     private class AllKeyEventsHandler implements EventHandler<KeyEvent> {
         public void setupTitleBGTimeline() {
             KeyFrame kf1 = new KeyFrame(Duration.millis(25), new TitleMover());
@@ -470,11 +484,6 @@ public class Game {
                     searchQuery = searchQuery + event.getText();
                     _si.getTypeToSearch().setText(searchQuery);
 
-                    if ((event.getCode() == KeyCode.BACK_SPACE) || (event.getCode() == KeyCode.DELETE)) {
-                        if (searchQuery != null && searchQuery.length() > 0) {
-                            searchQuery = searchQuery.substring(0, searchQuery.length() - 1);
-                        }
-                    }
                     if (searchQuery != null && searchQuery.length() > 1 && !searchQuery.equals("Type+CLICK to name")) {
                         for (int i = 0; i < 4; i++) {
                             for (int j = 0; j < 4; j++) {
@@ -489,8 +498,11 @@ public class Game {
                                         _store.getMyBirthMonth().setText(_pets[i][j].getPetBirthMonth());
                                         _store.getMyFavFood().setText(_pets[i][j].getPetFavFood());
                                         _pets[i][j].getNode().removeEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
+                                        _si.setCloseOpacity(1);
+                                            _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SpecsClose(_pets[i][j]));
 
                                         //CLOSE BUTTON MUST SET CANNOT CHANGE NAME TO FALSE AND ADD THE SPECSDISAPPEAR EVENTHANDLER BACK
+                                        // ALSO SET ITS OWN OPACITY TO 0
                                     }
                                 }
                             }
@@ -502,12 +514,6 @@ public class Game {
 
                     newName = newName + event.getText();
                     _store.getMyName().setText(newName);
-
-                    if ((event.getCode() == KeyCode.BACK_SPACE) || (event.getCode() == KeyCode.DELETE)) {
-                        if (newName != null && newName.length() > 0) {
-                            newName = newName.substring(0, newName.length() - 1);
-                        }
-                    }
                 }
             }
         }

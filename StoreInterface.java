@@ -34,6 +34,10 @@ public class StoreInterface {
     private Label _x;
     private Circle _XCoverNode;
 
+    private Circle _closeOut1;
+    private Label _x1;
+    private Circle _XCoverNode1;
+
 
     public StoreInterface(Pane root){
         _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
@@ -123,12 +127,28 @@ public class StoreInterface {
         _XCoverNode.setCenterY(5);
         _XCoverNode.setFill(Color.TRANSPARENT);
 
+        _closeOut1 = new Circle(20);
+        _closeOut1.setFill(Color.WHITE);
+        _closeOut1.setStroke(Color.POWDERBLUE);
+        _closeOut1.setCenterX(1085);
+        _closeOut1.setCenterY(205);
+        _closeOut1.setOpacity(0);
+        _x1 = new Label("X");
+        _x1.relocate(1080, 197);
+        _x1.setFont(font5);
+        _x1.setTextFill(Color.POWDERBLUE);
+        _x1.setOpacity(0);
+        _XCoverNode1 = new Circle(20);
+        _XCoverNode1.setCenterX(1085);
+        _XCoverNode1.setCenterY(205);
+        _XCoverNode1.setFill(Color.TRANSPARENT);
+
         _specs.getChildren().addAll(_petPopup, _petTitle, _whoAmI, _searchLine, _typeToSearch, _closeOut, _x, _XCoverNode);
         _specs.setOpacity(0);
 
         root.getChildren().addAll(_viewAllPetsBG, _searchMyPetsBG, _enterHoursBG, _divider1, _divider2, _coin, _coinBorder,
                 _viewAllPets, _searchMyPets, _enterHours, _currentBalance, _dollar, _coverNode1, _coverNode2, _coverNode3,
-                _specs);
+                _specs, _closeOut1, _x1, _XCoverNode1);
     }
 
     public void setLoc(double x, double y){
@@ -173,6 +193,16 @@ public class StoreInterface {
         _enterHours.setOpacity(x);
         _currentBalance.setOpacity(x);
         _dollar.setOpacity(x);
+    }
+
+    public void setCloseOpacity(int x){
+        _closeOut1.setOpacity(x);
+        _x1.setOpacity(x);
+        _XCoverNode1.setOpacity(x);
+    }
+
+    public Circle getXCN1(){
+        return _XCoverNode1;
     }
 
     public void setSearchOpacity(double x){
