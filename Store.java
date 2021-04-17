@@ -47,6 +47,8 @@ public class Store {
     private Walrus _walrus;
     private Pet[][] x;
     private Rectangle _petFrame;
+    private Label _petNamed;
+    private Label _instructions;
 
     public Store(Pane root){
         _storebg = new Rectangle(Constants.STORE_BG_X, Constants.STORE_BG_Y);
@@ -126,11 +128,23 @@ public class Store {
         _myFavFood.setFont(font2);
         _myFavFood.setTextFill(Color.rgb(163, 163, 163));
         _myFavFood.relocate(200, 215);
+        _petNamed = new Label("PET NAMED!");
+        Font font4 = new Font("Gill Sans", 11);
+        _petNamed.setFont(font4);
+        _petNamed.relocate(290, 105);
+        _petNamed.setTextFill(Color.POWDERBLUE);
+        _petNamed.setOpacity(0);
+        _instructions = new Label("NOTE: After typing in your pet's name, you MUST click on the pet to confirm the name!");
+        _instructions.setTextFill(Color.POWDERBLUE);
+        _instructions.setMaxWidth(350);
+        _instructions.setWrapText(true);
+        _instructions.relocate(10, 250);
+        _instructions.setFont(font4);
 
         _specs.getChildren().addAll(_petPopup, _petTitle, _name, _age, _birthMonth, _favFood, _whoAmI, _myName, _myAge,
-                _myBirthMonth, _myFavFood, _petFrame);
+                _myBirthMonth, _myFavFood, _petFrame, _petNamed, _instructions);
 
-        _specs.setOpacity(1);
+        _specs.setOpacity(0);
         _cat = new Cat(_specs, x, "x", "x", "x", "x");
         _cat.setOpacity(0);
         _chicken = new Chicken(_specs, x, "x", "x", "x", "x");
@@ -269,5 +283,9 @@ public class Store {
 
     public Walrus getWalrus(){
         return _walrus;
+    }
+
+    public Label getPetNamed(){
+        return _petNamed;
     }
 }
