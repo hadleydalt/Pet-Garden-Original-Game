@@ -44,6 +44,10 @@ public class Game {
     private LinkedList<Pet> _myPets;
     private String newName;
     private String newNewName;
+    private String searchQuery;
+    private String newSearchQuery;
+    private Boolean _searchClicked = false;
+    private Boolean _cannotChangeName = false;
 
     public Game(){
         this.setupGame();
@@ -77,7 +81,7 @@ public class Game {
         _si = new StoreInterface(interactPane);
         _si.setLoc(620,50);
         _titleNotCompressed = true;
-        interactPane.addEventHandler(KeyEvent.KEY_PRESSED, new TitleMoverOnKey());
+        interactPane.addEventHandler(KeyEvent.KEY_PRESSED, new AllKeyEventsHandler());
         interactPane.setFocusTraversable(true);
         this.setupLoadingBarTimeline();
         _intPercent = _title.getPercent();
@@ -95,6 +99,10 @@ public class Game {
         _myPets = new LinkedList<Pet>();
         newName = "";
         newNewName = "";
+        searchQuery = "";
+        newSearchQuery = "";
+        _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
+        _si.getXCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
     }
 
     private class VersionChanger implements EventHandler<ActionEvent> {
@@ -196,10 +204,9 @@ public class Game {
             for (int j = 0; j < 4; j++){
                 if (_pets[i][j] != null) {
                     SpecsGetter sg = new SpecsGetter(_pets[i][j]);
-                    SpecsDisappear sd = new SpecsDisappear();
                     _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, sg);
                     _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, sg);
-                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_EXITED, sd);
+                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
                 }
             }
         }
@@ -321,6 +328,21 @@ public class Game {
         }
     }
 
+    private class SearchGetter implements EventHandler<MouseEvent>{
+        public void handle (MouseEvent event){
+            _si.setSearchOpacity(1);
+            _si.getTypeToSearch().setText("Type to search");
+            _searchClicked = true;
+        }
+    }
+
+    private class SearchDisappear implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            _si.setSearchOpacity(0);
+            _searchClicked = false;
+        }
+    }
+
 
     private class SpecsGetter implements EventHandler<MouseEvent> {
         private Pet _pet;
@@ -336,8 +358,8 @@ public class Game {
                             _store.getMyAge().setText(_pet.getPetAge());
                             _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
                             _store.getMyFavFood().setText(_pet.getPetFavFood());
-                            TitleMoverOnKey tmok = new TitleMoverOnKey();
-                            _pet.getNode().addEventHandler(KeyEvent.KEY_TYPED, tmok);
+                            AllKeyEventsHandler akeh = new AllKeyEventsHandler();
+                            _pet.getNode().addEventHandler(KeyEvent.KEY_TYPED, akeh);
 
                             if (newName.length() > 1) {
                                 newNewName = newName;
@@ -412,9 +434,7 @@ public class Game {
         }
     }
 
-    private class TitleMoverOnKey implements EventHandler<KeyEvent> {
-        private TitleMoverOnKey(){
-        }
+    private class AllKeyEventsHandler implements EventHandler<KeyEvent> {
         public void setupTitleBGTimeline() {
             KeyFrame kf1 = new KeyFrame(Duration.millis(25), new TitleMover());
             Timeline timeline = new Timeline(kf1);
@@ -435,12 +455,59 @@ public class Game {
                     _si.setOpacity(1);
                 }
             }
-                newName = newName + event.getText();
-                _store.getMyName().setText(newName);
 
-            if ((event.getCode() == KeyCode.BACK_SPACE) || (event.getCode() == KeyCode.DELETE)) {
-                if (newName != null && newName.length() > 0) {
-                    newName = newName.substring(0, newName.length() - 1);
+            if ((event.getCode() == KeyCode.A) || (event.getCode() == KeyCode.B) || (event.getCode() == KeyCode.C)
+                    || (event.getCode() == KeyCode.D) || (event.getCode() == KeyCode.E) || (event.getCode() == KeyCode.F)
+                    || (event.getCode() == KeyCode.G) || (event.getCode() == KeyCode.H) || (event.getCode() == KeyCode.I)
+                    || (event.getCode() == KeyCode.J) || (event.getCode() == KeyCode.K) || (event.getCode() == KeyCode.L)
+                    || (event.getCode() == KeyCode.M) || (event.getCode() == KeyCode.N) || (event.getCode() == KeyCode.O)
+                    || (event.getCode() == KeyCode.P) || (event.getCode() == KeyCode.Q || (event.getCode() == KeyCode.R)
+                    || (event.getCode() == KeyCode.S) || (event.getCode() == KeyCode.T) || (event.getCode() == KeyCode.U)
+                    || (event.getCode() == KeyCode.V) || (event.getCode() == KeyCode.W) || (event.getCode() == KeyCode.X)
+                    || (event.getCode() == KeyCode.Y) || (event.getCode() == KeyCode.Z))) {
+
+                if (_searchClicked) {
+                    searchQuery = searchQuery + event.getText();
+                    _si.getTypeToSearch().setText(searchQuery);
+
+                    if ((event.getCode() == KeyCode.BACK_SPACE) || (event.getCode() == KeyCode.DELETE)) {
+                        if (searchQuery != null && searchQuery.length() > 0) {
+                            searchQuery = searchQuery.substring(0, searchQuery.length() - 1);
+                        }
+                    }
+                    if (searchQuery != null && searchQuery.length() > 1 && !searchQuery.equals("Type+CLICK to name")) {
+                        for (int i = 0; i < 4; i++) {
+                            for (int j = 0; j < 4; j++) {
+                                if (_pets[i][j] != null) {
+                                    if (searchQuery.equals(_pets[i][j].getPetName())) {
+                                        _cannotChangeName = true;
+                                        _si.setSearchOpacity(0);
+                                        _searchClicked = false;
+                                        _store.getSpecsPane().setOpacity(1);
+                                        _store.getMyName().setText(_pets[i][j].getPetName());
+                                        _store.getMyAge().setText(_pets[i][j].getPetAge());
+                                        _store.getMyBirthMonth().setText(_pets[i][j].getPetBirthMonth());
+                                        _store.getMyFavFood().setText(_pets[i][j].getPetFavFood());
+                                        _pets[i][j].getNode().removeEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
+
+                                        //CLOSE BUTTON MUST SET CANNOT CHANGE NAME TO FALSE AND ADD THE SPECSDISAPPEAR EVENTHANDLER BACK
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!_searchClicked && !_cannotChangeName) {
+
+                    newName = newName + event.getText();
+                    _store.getMyName().setText(newName);
+
+                    if ((event.getCode() == KeyCode.BACK_SPACE) || (event.getCode() == KeyCode.DELETE)) {
+                        if (newName != null && newName.length() > 0) {
+                            newName = newName.substring(0, newName.length() - 1);
+                        }
+                    }
                 }
             }
         }

@@ -32,12 +32,14 @@ public class Garden {
         Stop[] stops1 = new Stop[] { new Stop(0, Color.MEDIUMTURQUOISE), new Stop(1, Color.ALICEBLUE)};
         LinearGradient lg2 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops1);
         _sky.setFill(lg2);
+        Stop[] stops4 = new Stop[] { new Stop(0, Color.WHITE), new Stop(1, Color.LIGHTCYAN)};
+        LinearGradient lg5 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops4);
         _cloud1 = new Ellipse(Constants.CLOUD_X, Constants.CLOUD_Y);
-        _cloud1.setFill(Color.WHITE);
+        _cloud1.setFill(lg5);
         _cloud2 = new Ellipse(Constants.CLOUD_X, Constants.CLOUD_Y);
-        _cloud2.setFill(Color.WHITE);
+        _cloud2.setFill(lg5);
         _cloud3 = new Ellipse(Constants.MED_CLOUD_X, Constants.MED_CLOUD_Y);
-        _cloud3.setFill(Color.WHITE);
+        _cloud3.setFill(lg5);
         _sun = new Ellipse(Constants.SUN_RAD, Constants.SUN_RAD);
         Stop[] stops2 = new Stop[] { new Stop(0, Color.YELLOW), new Stop(1, Color.GOLD)};
         LinearGradient lg3 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops2);
