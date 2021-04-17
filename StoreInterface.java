@@ -108,7 +108,7 @@ public class StoreInterface {
         _searchLine.setX(10);
         _searchLine.setY(100);
         _searchLine.setFill(Color.POWDERBLUE);
-        _typeToSearch = new Label("Type to search");
+        _typeToSearch = new Label();
         _typeToSearch.setTextFill(Color.LIGHTGRAY);
         Font font5 = new Font("Gill Sans", 16);
         _typeToSearch.relocate(10, 70);

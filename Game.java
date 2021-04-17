@@ -331,7 +331,21 @@ public class Game {
     private class SearchGetter implements EventHandler<MouseEvent>{
         public void handle (MouseEvent event){
             _si.setSearchOpacity(1);
-            _si.getTypeToSearch().setText("Type to search");
+            _store.getCat().setOpacity(0);
+            _store.getChicken().setOpacity(0);
+            _store.getCow().setOpacity(0);
+            _store.getDog().setOpacity(0);
+            _store.getFox().setOpacity(0);
+            _store.getGiraffe().setOpacity(0);
+            _store.getOwl().setOpacity(0);
+            _store.getPenguin().setOpacity(0);
+            _store.getPig().setOpacity(0);
+            _store.getReindeer().setOpacity(0);
+            _store.getSheep().setOpacity(0);
+            _store.getTiger().setOpacity(0);
+            _store.getWalrus().setOpacity(0);
+            _store.getPetNamed().setOpacity(0);
+            _si.getTypeToSearch().setText("Type a pet's name to search");
             searchQuery = "";
             _searchClicked = true;
         }
@@ -441,7 +455,21 @@ public class Game {
             _pet = pet;
         }
         public void handle(MouseEvent event){
-                _store.getSpecsPane().setOpacity(0);
+            _store.getSpecsPane().setOpacity(0);
+            _store.getCat().setOpacity(0);
+            _store.getChicken().setOpacity(0);
+            _store.getCow().setOpacity(0);
+            _store.getDog().setOpacity(0);
+            _store.getFox().setOpacity(0);
+            _store.getGiraffe().setOpacity(0);
+            _store.getOwl().setOpacity(0);
+            _store.getPenguin().setOpacity(0);
+            _store.getPig().setOpacity(0);
+            _store.getReindeer().setOpacity(0);
+            _store.getSheep().setOpacity(0);
+            _store.getTiger().setOpacity(0);
+            _store.getWalrus().setOpacity(0);
+            _store.getPetNamed().setOpacity(0);
                 _si.setCloseOpacity(0);
                 _cannotChangeName = false;
                 _pet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
@@ -497,12 +525,50 @@ public class Game {
                                         _store.getMyAge().setText(_pets[i][j].getPetAge());
                                         _store.getMyBirthMonth().setText(_pets[i][j].getPetBirthMonth());
                                         _store.getMyFavFood().setText(_pets[i][j].getPetFavFood());
+
+                                        if (_pets[i][j].getType().equals("cat")){
+                                            _store.getCat().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("chicken")){
+                                            _store.getChicken().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("cow")){
+                                            _store.getCow().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("dog")){
+                                            _store.getDog().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("fox")){
+                                            _store.getFox().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("giraffe")){
+                                            _store.getGiraffe().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("owl")){
+                                            _store.getOwl().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("penguin")){
+                                            _store.getPenguin().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("pig")){
+                                            _store.getPig().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("reindeer")){
+                                            _store.getReindeer().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("sheep")){
+                                            _store.getSheep().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("tiger")){
+                                            _store.getTiger().setOpacity(1);
+                                        }
+                                        if (_pets[i][j].getType().equals("walrus")){
+                                            _store.getWalrus().setOpacity(1);
+                                        }
+
                                         _pets[i][j].getNode().removeEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
                                         _si.setCloseOpacity(1);
                                             _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SpecsClose(_pets[i][j]));
-
-                                        //CLOSE BUTTON MUST SET CANNOT CHANGE NAME TO FALSE AND ADD THE SPECSDISAPPEAR EVENTHANDLER BACK
-                                        // ALSO SET ITS OWN OPACITY TO 0
                                     }
                                 }
                             }
