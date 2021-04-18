@@ -100,14 +100,74 @@ public class Game {
         newNewName = "";
         searchQuery = "";
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
-            _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
-
-            //_si.getNextCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new ShopSwitcher());
+        _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
+        _si.getFirstCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new FirstPage());
+        _si.getSecondCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SecondPage());
+        _si.getThirdCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new ThirdPage());
     }
 
-    private class ShopSwitcher implements EventHandler<MouseEvent>{
+    private class FirstPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            //must set prev button's opacity to 1
+
+                for (int i = 0; i < 3; i++){
+                    for (int j = 0; j < 2; j++){
+                        _si.getShop()[i][j].setOpacity(0);
+                        _si.getShop()[i][j] = null;
+                    }
+                }
+                _si.fillShop(_si.getCat(), _si.getChicken(), _si.getCow(), _si.getDog(), _si.getFox(), _si.getGiraffe());
+
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 2; j++){
+                    if (_si.getShop()[i][j] != null) {
+                        _si.getShop()[i][j].setOpacity(1);
+                    }
+                }
+            }
+        }
+    }
+
+    private class SecondPage implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 2; j++){
+                    if (_si.getShop()[i][j] != null) {
+                        _si.getShop()[i][j].setOpacity(0);
+                        _si.getShop()[i][j] = null;
+                    }
+                }
+            }
+            _si.fillShop(_si.getOwl(), _si.getPenguin(), _si.getPig(), _si.getReindeer(), _si.getSheep(), _si.getTiger());
+
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 2; j++){
+                    if (_si.getShop()[i][j] != null) {
+                        _si.getShop()[i][j].setOpacity(1);
+                    }
+                }
+            }
+        }
+    }
+
+    private class ThirdPage implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 2; j++){
+                    if (_si.getShop()[i][j] != null) {
+                        _si.getShop()[i][j].setOpacity(0);
+                        _si.getShop()[i][j] = null;
+                    }
+                }
+            }
+            _si.fillShop(_si.getWalrus(), null, null, null, null, null);
+
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 2; j++){
+                    if (_si.getShop()[i][j] != null) {
+                        _si.getShop()[i][j].setOpacity(1);
+                    }
+                }
+            }
         }
     }
 

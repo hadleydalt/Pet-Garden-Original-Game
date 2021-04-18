@@ -94,5 +94,9 @@ public class Pet implements Buyable {
         return null;
     }
 
+    @Override
     public void getPrice(){}
+
+    @Override
+    public void removeFromPane(){}
 }

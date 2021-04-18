@@ -17,9 +17,11 @@ public class Pig extends Pet{
     private Rectangle _ear2;
     private Pet[][] _pets;
     private Ellipse _coverNode;
+    private Pane _root;
 
     public Pig(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
+        _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -44,6 +46,11 @@ public class Pig extends Pet{
 
 
         root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _mouth, _nostril1, _nostril2, _ear1, _ear2, _coverNode);
+    }
+
+    @Override
+    public void removeFromPane(){
+        _root.getChildren().removeAll(this.getBody(), _eye1, _eye2, _pupil1, _pupil2, _mouth, _nostril1, _nostril2, _ear1, _ear2, _coverNode);
     }
 
     @Override

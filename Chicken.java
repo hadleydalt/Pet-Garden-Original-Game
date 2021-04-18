@@ -18,9 +18,11 @@ public class Chicken extends Pet{
     private Ellipse _top3;
     private Pet[][] _pets;
     private Ellipse _coverNode;
+    private Pane _root;
 
     public Chicken(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
+        _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -52,6 +54,11 @@ public class Chicken extends Pet{
         _coverNode.setFill(Color.TRANSPARENT);
 
         root.getChildren().addAll(_eye1, _eye2, _pupil1, _pupil2, _waddle, _beak, _wing1, _wing2, _top1, _top2, _top3, _coverNode);
+    }
+
+    @Override
+    public void removeFromPane(){
+        _root.getChildren().removeAll(this.getBody(), _eye1, _eye2, _pupil1, _pupil2, _waddle, _beak, _wing1, _wing2, _top1, _top2, _top3, _coverNode);
     }
 
     @Override

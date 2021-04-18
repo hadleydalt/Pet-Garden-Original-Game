@@ -30,9 +30,11 @@ public class Sheep extends Pet{
     private Ellipse _ear2;
     private Pet[][] _pets;
     private Ellipse _coverNode;
+    private Pane _root;
 
     public Sheep(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
         super(root, pets, petName, age, birthMonth, favFood);
+        _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
         _eye2 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -87,6 +89,12 @@ public class Sheep extends Pet{
         _coverNode.setFill(Color.TRANSPARENT);
 
         root.getChildren().addAll(_face, _eye1, _eye2, _pupil1, _pupil2, _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6,
+                _fluff7, _fluff8, _fluff9, _fluff10, _mouth, _nose, _muzzle1, _muzzle2, _ear1, _ear2, _coverNode);
+    }
+
+    @Override
+    public void removeFromPane(){
+        _root.getChildren().removeAll(this.getBody(), _face, _eye1, _eye2, _pupil1, _pupil2, _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6,
                 _fluff7, _fluff8, _fluff9, _fluff10, _mouth, _nose, _muzzle1, _muzzle2, _ear1, _ear2, _coverNode);
     }
 
