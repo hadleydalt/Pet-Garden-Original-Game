@@ -38,7 +38,6 @@ public class StoreInterface {
     private Label _x1;
     private Circle _XCoverNode1;
 
-
     public StoreInterface(Pane root){
         _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
         _viewAllPetsBG.setFill(Color.POWDERBLUE);
@@ -211,10 +210,6 @@ public class StoreInterface {
 
     public Label getTypeToSearch(){
         return _typeToSearch;
-    }
-
-    public Circle getXCN(){
-        return _XCoverNode;
     }
 
     public Rectangle getViewAllPetsCN(){

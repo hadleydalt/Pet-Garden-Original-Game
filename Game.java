@@ -28,7 +28,6 @@ public class Game {
     private int _counter;
     private int _titleXLoc;
     private int _titleYLoc;
-    private int _titlePaneXLoc;
     private Pet[][] _pets;
     private Pet[] _pet;
     private double _pet1XLoc;
@@ -45,11 +44,12 @@ public class Game {
     private String newName;
     private String newNewName;
     private String searchQuery;
-    private String newSearchQuery;
     private Boolean _searchClicked = false;
     private Boolean _cannotChangeName = false;
+    private Buyable[][] _shop;
 
     public Game(){
+        _shop = new Buyable[3][2];
         this.setupGame();
         this.setupInitialPets();
     }
@@ -88,7 +88,6 @@ public class Game {
         _counter = 0;
         _titleXLoc = 318;
         _titleYLoc = 270;
-        _titlePaneXLoc = 0;
         this.setupCounter();
         buttonPane = new Pane();
         buttonPane.relocate(30, 15);
@@ -100,7 +99,6 @@ public class Game {
         newName = "";
         newNewName = "";
         searchQuery = "";
-        newSearchQuery = "";
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
             _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
     }
@@ -493,6 +491,11 @@ public class Game {
                     _verChanger.setOpacity(1);
                     for (int i = 0; i < 4; i++){
                         _pet[i].setOpacity(1);
+                    }
+                    for (int i = 0; i < 3; i++){
+                        for (int j = 0; j < 2; j++){
+                            _store.getShop()[i][j].setOpacity(1);
+                        }
                     }
                     _si.setOpacity(1);
                 }

@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 
-public class Pet{
+public class Pet implements Buyable {
     private Ellipse _body;
     private Pet[][] _pets;
     private String _petName;
@@ -61,6 +61,7 @@ public class Pet{
     public void setLoc(double x, double y){
     }
 
+    @Override
     public void setBounceLoc(double x, double y){
         _gardenName.relocate(x+50, y-50);
     }
@@ -85,10 +86,13 @@ public class Pet{
         return null;
     }
 
+    @Override
     public void setOpacity(double x){
     }
 
     public Ellipse getNode(){
         return null;
     }
+
+    public void getPrice(){}
 }
