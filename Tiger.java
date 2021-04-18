@@ -33,8 +33,8 @@ public class Tiger extends Pet{
     private Ellipse _coverNode;
     private Pane _root;
 
-    public Tiger(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
-        super(root, pets, petName, age, birthMonth, favFood);
+    public Tiger(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+        super(root, pets, petName, personality, birthMonth, favFood);
         _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -86,6 +86,13 @@ public class Tiger extends Pet{
     @Override
     public void removeFromPane(){
         _root.getChildren().removeAll(this.getBody(), _eye1, _eye2, _pupil1, _pupil2, _leftSideStripe1, _leftSideStripe2, _rightSideStripe1, _rightSideStripe2,
+                _leftSideStripe3, _rightSideStripe3, _topStripe1, _topStripe2, _topStripe3, _mouth, _nose, _muzzle1, _muzzle2,
+                _ear11, _ear12, _tail, _stomach, _coverNode);
+    }
+
+    @Override
+    public void addToPane(){
+        _root.getChildren().addAll(this.getBody(), _eye1, _eye2, _pupil1, _pupil2, _leftSideStripe1, _leftSideStripe2, _rightSideStripe1, _rightSideStripe2,
                 _leftSideStripe3, _rightSideStripe3, _topStripe1, _topStripe2, _topStripe3, _mouth, _nose, _muzzle1, _muzzle2,
                 _ear11, _ear12, _tail, _stomach, _coverNode);
     }

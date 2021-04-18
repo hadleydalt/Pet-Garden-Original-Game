@@ -111,8 +111,10 @@ public class Game {
 
                 for (int i = 0; i < 3; i++){
                     for (int j = 0; j < 2; j++){
-                        _si.getShop()[i][j].setOpacity(0);
-                        _si.getShop()[i][j] = null;
+                        if (_si.getShop()[i][j] != null) {
+                            _si.getShop()[i][j].removeFromPane();
+                            _si.getShop()[i][j] = null;
+                        }
                     }
                 }
                 _si.fillShop(_si.getCat(), _si.getChicken(), _si.getCow(), _si.getDog(), _si.getFox(), _si.getGiraffe());
@@ -120,7 +122,8 @@ public class Game {
             for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 2; j++){
                     if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].setOpacity(1);
+                        _si.getShop()[i][j].removeFromPane();
+                        _si.getShop()[i][j].addToPane();
                     }
                 }
             }
@@ -132,7 +135,7 @@ public class Game {
             for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 2; j++){
                     if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].setOpacity(0);
+                        _si.getShop()[i][j].removeFromPane();
                         _si.getShop()[i][j] = null;
                     }
                 }
@@ -142,7 +145,8 @@ public class Game {
             for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 2; j++){
                     if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].setOpacity(1);
+                        _si.getShop()[i][j].removeFromPane();
+                        _si.getShop()[i][j].addToPane();
                     }
                 }
             }
@@ -154,7 +158,7 @@ public class Game {
             for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 2; j++){
                     if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].setOpacity(0);
+                        _si.getShop()[i][j].removeFromPane();
                         _si.getShop()[i][j] = null;
                     }
                 }
@@ -164,7 +168,8 @@ public class Game {
             for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 2; j++){
                     if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].setOpacity(1);
+                        _si.getShop()[i][j].removeFromPane();
+                        _si.getShop()[i][j].addToPane(); //ADD TO PANE SHOULD JUST BE PART OF FILLSHOP METHOD!!!!!!
                     }
                 }
             }
@@ -192,48 +197,47 @@ public class Game {
     }
 
     public Pet generatePet(){
-        SpecsHelper sh = new SpecsHelper();
         Pet pet = null;
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cat(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 2:
-                pet = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Cow(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 3:
-                pet = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Dog(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 4:
-                pet = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Fox(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 6:
-                pet = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Owl(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 8:
-                pet = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Pig(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
             default:
-                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getAge(), sh.getBirthMonth(), sh.getFavFood());
+                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
                 break;
         }
         return pet;
@@ -436,7 +440,7 @@ public class Game {
                         if (_pets[i][j] != null) {
                             _store.getSpecsPane().setOpacity(1);
                             _store.getMyName().setText(_pet.getPetName());
-                            _store.getMyAge().setText(_pet.getPetAge());
+                            _store.getMyPersonality().setText(_pet.getPetPersonality());
                             _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
                             _store.getMyFavFood().setText(_pet.getPetFavFood());
                             AllKeyEventsHandler akeh = new AllKeyEventsHandler();
@@ -593,7 +597,7 @@ public class Game {
                                         _searchClicked = false;
                                         _store.getSpecsPane().setOpacity(1);
                                         _store.getMyName().setText(_pets[i][j].getPetName());
-                                        _store.getMyAge().setText(_pets[i][j].getPetAge());
+                                        _store.getMyPersonality().setText(_pets[i][j].getPetPersonality());
                                         _store.getMyBirthMonth().setText(_pets[i][j].getPetBirthMonth());
                                         _store.getMyFavFood().setText(_pets[i][j].getPetFavFood());
 
@@ -655,53 +659,51 @@ public class Game {
             }
         }
     }
-
-    public class SpecsHelper {
-        public String getAge() {
-            String age = null;
+        public String getPersonality() {
+            String p = null;
             int rand_int = (int) (Math.random() * 13);
             switch (rand_int) {
                 case 0:
-                    age = "1";
+                    p = "Quiet and reserved";
                     break;
                 case 1:
-                    age = "2";
+                    p = "Egotistical";
                     break;
                 case 2:
-                    age = "3";
+                    p = "Grumpy and jaded";
                     break;
                 case 3:
-                    age = "4";
+                    p = "Bubbly and excitable";
                     break;
                 case 4:
-                    age = "5";
+                    p = "Rational and balanced";
                     break;
                 case 5:
-                    age = "6";
+                    p = "Smart and curious";
                     break;
                 case 6:
-                    age = "7";
+                    p = "Sweet and kind";
                     break;
                 case 7:
-                    age = "8";
+                    p = "Loud and sociable";
                     break;
                 case 8:
-                    age = "9";
+                    p = "Artistic and quirky";
                     break;
                 case 9:
-                    age = "10";
+                    p = "Educated and pedantic";
                     break;
                 case 10:
-                    age = "11";
+                    p = "Rash and mercuric";
                     break;
                 case 11:
-                    age = "12";
+                    p = "Impulsive and mischievous";
                     break;
                 default:
-                    age = "13";
+                    p = "Brave and assertive";
                     break;
             }
-            return age;
+            return p;
         }
 
         public String getBirthMonth() {
@@ -791,6 +793,5 @@ public class Game {
             }
             return food;
         }
-    }
 
 }

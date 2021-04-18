@@ -25,8 +25,8 @@ public class Fox extends Pet{
     private Ellipse _coverNode;
     private Pane _root;
 
-    public Fox(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
-        super(root, pets, petName, age, birthMonth, favFood);
+    public Fox(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+        super(root, pets, petName, personality, birthMonth, favFood);
         _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -74,8 +74,14 @@ public class Fox extends Pet{
 
     @Override
     public void removeFromPane(){
-        _root.getChildren().removeAll(this.getBody(), _ear1, _ear2, _eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2, _stomach, _nose, _muzzle1, _muzzle2,
-                _tail, _coverNode);
+        _root.getChildren().removeAll(this.getBody(), _ear1, _ear2, _eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2,
+                _stomach, _nose, _muzzle1, _muzzle2, _tail, _coverNode);
+    }
+
+    @Override
+    public void addToPane(){
+        _root.getChildren().addAll(this.getBody(), _ear1, _ear2, _eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2,
+                _stomach, _nose, _muzzle1, _muzzle2, _tail, _coverNode);
     }
 
     @Override

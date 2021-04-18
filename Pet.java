@@ -10,18 +10,18 @@ public class Pet implements Buyable {
     private Ellipse _body;
     private Pet[][] _pets;
     private String _petName;
-    private String _age;
+    private String _personality;
     private String _birthMonth;
     private String _favFood;
     private Boolean isNamed;
     private Label _gardenName;
 
-    public Pet(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
+    public Pet(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
         _pets = pets;
         _body = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
         _body.setFill(this.getPetColor());
         _petName = petName;
-        _age = age;
+        _personality = personality;
         _birthMonth = birthMonth;
         _favFood = favFood;
         isNamed = false;
@@ -46,8 +46,8 @@ public class Pet implements Buyable {
         _petName = x;
     }
 
-    public String getPetAge(){
-        return _age;
+    public String getPetPersonality(){
+        return _personality;
     }
 
     public String getPetBirthMonth(){
@@ -87,8 +87,7 @@ public class Pet implements Buyable {
     }
 
     @Override
-    public void setOpacity(double x){
-    }
+    public void setOpacity(double x){}
 
     public Ellipse getNode(){
         return null;
@@ -99,4 +98,7 @@ public class Pet implements Buyable {
 
     @Override
     public void removeFromPane(){}
+
+    @Override
+    public void addToPane(){}
 }

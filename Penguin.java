@@ -18,8 +18,8 @@ public class Penguin extends Pet{
     private Pane _root;
 
 
-    public Penguin(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
-        super(root, pets, petName, age, birthMonth, favFood);
+    public Penguin(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+        super(root, pets, petName, personality, birthMonth, favFood);
         _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -49,6 +49,11 @@ public class Penguin extends Pet{
     @Override
     public void removeFromPane(){
         _root.getChildren().removeAll(this.getBody(), _eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2, _stomach, _beak, _coverNode);
+    }
+
+    @Override
+    public void addToPane(){
+        _root.getChildren().addAll(this.getBody(), _eyeback1, _eyeback2, _eye1, _eye2, _pupil1, _pupil2, _stomach, _beak, _coverNode);
     }
 
     @Override

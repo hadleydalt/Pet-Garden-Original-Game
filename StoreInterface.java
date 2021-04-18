@@ -280,7 +280,7 @@ public class StoreInterface {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 190) + 240));
+                __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 160) + 240));
                 __shop[i][j].setOpacity(0);
             }
         }
@@ -296,7 +296,7 @@ public class StoreInterface {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 190) + 240));
+                __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 160) + 240));
             }
         }
     }

@@ -24,12 +24,12 @@ public class Store {
     private Rectangle _petPopup;
     private Rectangle _petTitle;
     private Label _name;
-    private Label _age;
+    private Label _personality;
     private Label _birthMonth;
     private Label _favFood;
     private Label _whoAmI;
     private Label _myName;
-    private Label _myAge;
+    private Label _myPersonality;
     private Label _myBirthMonth;
     private Label _myFavFood;
     private Cat _cat;
@@ -49,7 +49,6 @@ public class Store {
     private Rectangle _petFrame;
     private Label _petNamed;
     private Label _instructions;
-    //private Buyable[][] __shop;
     private Pane shopPane;
 
     public Store(Pane root){
@@ -98,10 +97,10 @@ public class Store {
         _name.setFont(font2);
         _name.setTextFill(Color.POWDERBLUE);
         _name.relocate(200, 60);
-        _age = new Label("AGE");
-        _age.setFont(font2);
-        _age.setTextFill(Color.POWDERBLUE);
-        _age.relocate(200, 105);
+        _personality = new Label("PERSONALITY");
+        _personality.setFont(font2);
+        _personality.setTextFill(Color.POWDERBLUE);
+        _personality.relocate(200, 105);
         _birthMonth = new Label("BIRTH MONTH");
         _birthMonth.setFont(font2);
         _birthMonth.setTextFill(Color.POWDERBLUE);
@@ -121,10 +120,10 @@ public class Store {
         _myName.setFont(font2);
         _myName.setTextFill(Color.rgb(163, 163, 163));
         _myName.relocate(200, 80);
-        _myAge = new Label("Age");
-        _myAge.setFont(font2);
-        _myAge.setTextFill(Color.rgb(163, 163, 163));
-        _myAge.relocate(200, 125);
+        _myPersonality = new Label("Personality");
+        _myPersonality.setFont(font2);
+        _myPersonality.setTextFill(Color.rgb(163, 163, 163));
+        _myPersonality.relocate(200, 125);
         _myBirthMonth = new Label("Birth month");
         _myBirthMonth.setFont(font2);
         _myBirthMonth.setTextFill(Color.rgb(163, 163, 163));
@@ -136,7 +135,7 @@ public class Store {
         _petNamed = new Label("PET NAMED!");
         Font font4 = new Font("Gill Sans", 12);
         _petNamed.setFont(font4);
-        _petNamed.relocate(290, 105);
+        _petNamed.relocate(290, 85);
         _petNamed.setTextFill(Color.POWDERBLUE);
         _petNamed.setOpacity(0);
         _instructions = new Label("NOTE: After typing in your pet's name, you MUST CLICK on the pet (in the garden) to confirm the name!");
@@ -146,7 +145,7 @@ public class Store {
         _instructions.relocate(10, 250);
         _instructions.setFont(font4);
 
-        _specs.getChildren().addAll(_petPopup, _petTitle, _name, _age, _birthMonth, _favFood, _whoAmI, _myName, _myAge,
+        _specs.getChildren().addAll(_petPopup, _petTitle, _name, _personality, _birthMonth, _favFood, _whoAmI, _myName, _myPersonality,
                 _myBirthMonth, _myFavFood, _petFrame, _petNamed, _instructions);
 
         _specs.setOpacity(0);
@@ -236,8 +235,8 @@ public class Store {
         return _specs;
     }
 
-    public Label getMyAge(){
-        return _myAge;
+    public Label getMyPersonality(){
+        return _myPersonality;
     }
 
     public Label getMyBirthMonth(){

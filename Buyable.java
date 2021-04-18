@@ -5,4 +5,5 @@ public interface Buyable {
     public void setBounceLoc(double x, double y);
     public void setOpacity(double x);
     public void removeFromPane();
+    public void addToPane();
 }

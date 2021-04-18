@@ -30,8 +30,8 @@ public class Owl extends Pet{
     private Ellipse _coverNode;
     private Pane _root;
 
-    public Owl(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
-        super(root, pets, petName, age, birthMonth, favFood);
+    public Owl(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+        super(root, pets, petName, personality, birthMonth, favFood);
         _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -100,6 +100,12 @@ public class Owl extends Pet{
     @Override
     public void removeFromPane(){
         _root.getChildren().removeAll(this.getBody(), _bigeye1, _bigeye2, _eye1, _eye2, _pupil1, _pupil2, _wing1, _wing2, _beak, _ear11, _ear12,
+                _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6, _fluff7, _coverNode);
+    }
+
+    @Override
+    public void addToPane(){
+        _root.getChildren().addAll(this.getBody(), _bigeye1, _bigeye2, _eye1, _eye2, _pupil1, _pupil2, _wing1, _wing2, _beak, _ear11, _ear12,
                 _fluff1, _fluff2, _fluff3, _fluff4, _fluff5, _fluff6, _fluff7, _coverNode);
     }
 

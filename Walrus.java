@@ -29,8 +29,8 @@ public class Walrus extends Pet{
     private Ellipse _coverNode;
     private Pane _root;
 
-    public Walrus(Pane root, Pet[][] pets, String petName, String age, String birthMonth, String favFood){
-        super(root, pets, petName, age, birthMonth, favFood);
+    public Walrus(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+        super(root, pets, petName, personality, birthMonth, favFood);
         _root = root;
         _pets = pets;
         _eye1 = new Ellipse(Constants.EYE_RAD, Constants.EYE_RAD);
@@ -83,6 +83,12 @@ public class Walrus extends Pet{
     @Override
     public void removeFromPane(){
         _root.getChildren().removeAll(this.getBody(), _tusk1, _tusk2, _eye1, _eye2, _pupil1, _pupil2, _mouth, _nose, _nosedivide, _spot1, _spot2, _spot3,
+                _spot4, _spot5, _spot6, _flipper1, _flipper2, _tail1, _tail2, _coverNode);
+    }
+
+    @Override
+    public void addToPane(){
+        _root.getChildren().addAll(this.getBody(), _tusk1, _tusk2, _eye1, _eye2, _pupil1, _pupil2, _mouth, _nose, _nosedivide, _spot1, _spot2, _spot3,
                 _spot4, _spot5, _spot6, _flipper1, _flipper2, _tail1, _tail2, _coverNode);
     }
 
