@@ -49,7 +49,7 @@ public class Store {
     private Rectangle _petFrame;
     private Label _petNamed;
     private Label _instructions;
-    private Buyable[][] __shop;
+    //private Buyable[][] __shop;
     private Pane shopPane;
 
     public Store(Pane root){
@@ -83,8 +83,6 @@ public class Store {
         _shop2.setFont(font);
 
         shopPane = new Pane();
-        __shop = new Buyable[3][2];
-        this.fillShop();
 
         _specs = new Pane();
         _petPopup = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y);
@@ -183,7 +181,7 @@ public class Store {
                 shopPane, _specs);
     }
 
-    public void fillShop(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
+    /*public void fillShop(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
                 __shop[i][j] = new Walrus(shopPane, x, "x", "x", "x", "x");
@@ -191,7 +189,7 @@ public class Store {
                 __shop[i][j].setOpacity(0);
             }
         }
-    }
+    } */
 
     public void setLoc(double x, double y){
         _storebg.setX(x);
@@ -306,7 +304,7 @@ public class Store {
         return _petNamed;
     }
 
-    public Buyable[][] getShop(){
-        return __shop;
+    public Pane getShopPane(){
+        return shopPane;
     }
 }

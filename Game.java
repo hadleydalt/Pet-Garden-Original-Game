@@ -78,7 +78,7 @@ public class Game {
         _store.setLoc(620, 50);
         _title = new Title(interactPane);
         _title.setLoc(0, 0);
-        _si = new StoreInterface(interactPane);
+        _si = new StoreInterface(interactPane, _store.getShopPane());
         _si.setLoc(620,50);
         _titleNotCompressed = true;
         interactPane.addEventHandler(KeyEvent.KEY_PRESSED, new AllKeyEventsHandler());
@@ -101,6 +101,14 @@ public class Game {
         searchQuery = "";
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
             _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
+
+            //_si.getNextCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new ShopSwitcher());
+    }
+
+    private class ShopSwitcher implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            //must set prev button's opacity to 1
+        }
     }
 
     private class VersionChanger implements EventHandler<ActionEvent> {
@@ -494,7 +502,7 @@ public class Game {
                     }
                     for (int i = 0; i < 3; i++){
                         for (int j = 0; j < 2; j++){
-                            _store.getShop()[i][j].setOpacity(1);
+                            _si.getShop()[i][j].setOpacity(1);
                         }
                     }
                     _si.setOpacity(1);

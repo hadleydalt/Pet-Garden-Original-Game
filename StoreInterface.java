@@ -23,6 +23,7 @@ public class StoreInterface {
     private Rectangle _coverNode1;
     private Rectangle _coverNode2;
     private Rectangle _coverNode3;
+    private Pet[][] x;
 
     private Pane _specs;
     private Rectangle _petPopup;
@@ -37,8 +38,17 @@ public class StoreInterface {
     private Circle _closeOut1;
     private Label _x1;
     private Circle _XCoverNode1;
+    private Buyable[][] __shop;
+    private Pane _shopPane;
+    private Rectangle _nextBG;
+    private Label _next;
+    private Rectangle _nextCN;
+    private Rectangle _prevBG;
+    private Label _prev;
+    private Rectangle _prevCN;
 
-    public StoreInterface(Pane root){
+    public StoreInterface(Pane root, Pane shopPane){
+        _shopPane = shopPane;
         _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
         _viewAllPetsBG.setFill(Color.POWDERBLUE);
         _viewAllPetsBG.setOpacity(0);
@@ -89,6 +99,13 @@ public class StoreInterface {
         _dollar.setFont(font3);
         _dollar.setTextFill(Color.rgb(219, 186, 0));
         _dollar.setOpacity(0);
+        __shop = new Buyable[3][2];
+        this.fillShop(new Cat(_shopPane, x, "x", "x", "x", "x"),
+                new Chicken(_shopPane, x, "x", "x", "x", "x"),
+                new Cow(_shopPane, x, "x", "x", "x", "x"),
+                new Dog(_shopPane, x, "x", "x", "x", "x"),
+                new Fox(_shopPane, x, "x", "x", "x", "x"),
+                new Giraffe(_shopPane, x, "x", "x", "x", "x"));
 
         _specs = new Pane();
         _petPopup = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y);
@@ -142,12 +159,32 @@ public class StoreInterface {
         _XCoverNode1.setCenterY(205);
         _XCoverNode1.setFill(Color.TRANSPARENT);
 
+        _nextBG = new Rectangle(Constants.INTERFACE_BUTTON_X-115, Constants.INTERFACE_BUTTON_Y);
+        _nextBG.setFill(Color.POWDERBLUE);
+        _nextBG.setOpacity(0);
+        _next = new Label("NEXT >");
+        _next.setFont(font2);
+        _next.setTextFill(Color.WHITE);
+        _next.setOpacity(0);
+        _nextCN = new Rectangle(Constants.INTERFACE_BUTTON_X-115, Constants.INTERFACE_BUTTON_Y);
+        _nextCN.setFill(Color.TRANSPARENT);
+
+        _prevBG = new Rectangle(Constants.INTERFACE_BUTTON_X-115, Constants.INTERFACE_BUTTON_Y);
+        _prevBG.setFill(Color.POWDERBLUE);
+        _prevBG.setOpacity(0);
+        _prev = new Label("< PREV");
+        _prev.setFont(font2);
+        _prev.setTextFill(Color.WHITE);
+        _prev.setOpacity(0);
+        _prevCN = new Rectangle(Constants.INTERFACE_BUTTON_X-115, Constants.INTERFACE_BUTTON_Y);
+        _prevCN.setFill(Color.TRANSPARENT);
+
         _specs.getChildren().addAll(_petPopup, _petTitle, _whoAmI, _searchLine, _typeToSearch, _closeOut, _x, _XCoverNode);
         _specs.setOpacity(0);
 
-        root.getChildren().addAll(_viewAllPetsBG, _searchMyPetsBG, _enterHoursBG, _divider1, _divider2, _coin, _coinBorder,
-                _viewAllPets, _searchMyPets, _enterHours, _currentBalance, _dollar, _coverNode1, _coverNode2, _coverNode3,
-                _specs, _closeOut1, _x1, _XCoverNode1);
+        root.getChildren().addAll(_viewAllPetsBG, _searchMyPetsBG, _enterHoursBG, _nextBG, _next, _nextCN, _prevBG, _prev,
+                _prevCN, _divider1, _divider2, _coin, _coinBorder, _viewAllPets, _searchMyPets, _enterHours, _currentBalance,
+                _dollar, _coverNode1, _coverNode2, _coverNode3, _specs, _closeOut1, _x1, _XCoverNode1);
     }
 
     public void setLoc(double x, double y){
@@ -177,6 +214,38 @@ public class StoreInterface {
         _currentBalance.relocate(x+285, y+640);
         _dollar.relocate(x+312.5, y+540);
         _specs.relocate(x+100, y+150);
+        _nextBG.setX(x+440);
+        _nextBG.setY(y+470);
+        _nextCN.setX(x+440);
+        _nextCN.setY(y+470);
+        _next.relocate(x+447, y+474);
+
+        _prevBG.setX(x+30);
+        _prevBG.setY(y+470);
+        _prevCN.setX(x+30);
+        _prevCN.setY(y+470);
+        _prev.relocate(x+37, y+474);
+
+    }
+
+    public void fillShop(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
+        __shop[0][0] = pet1;
+        __shop[1][0] = pet2;
+        __shop[2][0] = pet3;
+        __shop[0][1] = pet4;
+        __shop[1][1] = pet5;
+        __shop[2][1] = pet6;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 190) + 240));
+                __shop[i][j].setOpacity(0);
+            }
+        }
+    }
+
+    public Buyable[][] getShop(){
+      return __shop;
     }
 
     public void setOpacity(double x){
@@ -192,6 +261,8 @@ public class StoreInterface {
         _enterHours.setOpacity(x);
         _currentBalance.setOpacity(x);
         _dollar.setOpacity(x);
+        _nextBG.setOpacity(x);
+        _next.setOpacity(x);
     }
 
     public void setCloseOpacity(int x){
@@ -222,5 +293,9 @@ public class StoreInterface {
 
     public Rectangle getEnterHoursCN(){
         return _coverNode3;
+    }
+
+    public Rectangle getNextCN(){
+        return _nextCN;
     }
 }
