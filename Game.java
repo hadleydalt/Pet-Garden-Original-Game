@@ -108,71 +108,19 @@ public class Game {
 
     private class FirstPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-
-                for (int i = 0; i < 3; i++){
-                    for (int j = 0; j < 2; j++){
-                        if (_si.getShop()[i][j] != null) {
-                            _si.getShop()[i][j].removeFromPane();
-                            _si.getShop()[i][j] = null;
-                        }
-                    }
-                }
                 _si.fillShop(_si.getCat(), _si.getChicken(), _si.getCow(), _si.getDog(), _si.getFox(), _si.getGiraffe());
-
-            for (int i = 0; i < 3; i++){
-                for (int j = 0; j < 2; j++){
-                    if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].removeFromPane();
-                        _si.getShop()[i][j].addToPane();
-                    }
-                }
-            }
         }
     }
 
     private class SecondPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            for (int i = 0; i < 3; i++){
-                for (int j = 0; j < 2; j++){
-                    if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].removeFromPane();
-                        _si.getShop()[i][j] = null;
-                    }
-                }
-            }
             _si.fillShop(_si.getOwl(), _si.getPenguin(), _si.getPig(), _si.getReindeer(), _si.getSheep(), _si.getTiger());
-
-            for (int i = 0; i < 3; i++){
-                for (int j = 0; j < 2; j++){
-                    if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].removeFromPane();
-                        _si.getShop()[i][j].addToPane();
-                    }
-                }
-            }
         }
     }
 
     private class ThirdPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            for (int i = 0; i < 3; i++){
-                for (int j = 0; j < 2; j++){
-                    if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].removeFromPane();
-                        _si.getShop()[i][j] = null;
-                    }
-                }
-            }
-            _si.fillShop(_si.getWalrus(), null, null, null, null, null);
-
-            for (int i = 0; i < 3; i++){
-                for (int j = 0; j < 2; j++){
-                    if (_si.getShop()[i][j] != null) {
-                        _si.getShop()[i][j].removeFromPane();
-                        _si.getShop()[i][j].addToPane(); //ADD TO PANE SHOULD JUST BE PART OF FILLSHOP METHOD!!!!!!
-                    }
-                }
-            }
+            _si.fillShop(_si.getWalrus(), _si.getGnome(), _si.getPlant(), _si.getHouse(), _si.getHat(), _si.getSunsetBG());
         }
     }
 

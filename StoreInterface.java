@@ -64,6 +64,12 @@ public class StoreInterface {
     private Tiger _tiger;
     private Walrus _walrus;
 
+    private Gnome _gnome;
+    private Plant _plant;
+    private Hat _hat;
+    private House _house;
+    private SunsetBG _sunsetBG;
+
     public StoreInterface(Pane root, Pane shopPane){
         _shopPane = shopPane;
         _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
@@ -202,18 +208,37 @@ public class StoreInterface {
         _specs.setOpacity(0);
 
         _cat = new Cat(_shopPane, x, "x", "x", "x", "x");
+        _cat.removeFromPane();
         _chicken = new Chicken(_shopPane, x, "x", "x", "x", "x");
+        _chicken.removeFromPane();
         _cow = new Cow(_shopPane, x, "x", "x", "x", "x");
+        _cow.removeFromPane();
         _dog = new Dog(_shopPane, x, "x", "x", "x", "x");
+        _dog.removeFromPane();
         _fox = new Fox(_shopPane, x, "x", "x", "x", "x");
+        _fox.removeFromPane();
         _giraffe = new Giraffe(_shopPane, x, "x", "x", "x", "x");
+        _giraffe.removeFromPane();
         _owl = new Owl(_shopPane, x, "x", "x", "x", "x");
+        _owl.removeFromPane();
         _penguin = new Penguin(_shopPane, x, "x", "x", "x", "x");
+        _penguin.removeFromPane();
         _pig = new Pig(_shopPane, x, "x", "x", "x", "x");
+        _pig.removeFromPane();
         _reindeer = new Reindeer(_shopPane, x, "x", "x", "x", "x");
+        _reindeer.removeFromPane();
         _sheep = new Sheep(_shopPane, x, "x", "x", "x", "x");
+        _sheep.removeFromPane();
         _tiger = new Tiger(_shopPane, x, "x", "x", "x", "x");
+        _tiger.removeFromPane();
         _walrus = new Walrus(_shopPane, x, "x", "x", "x", "x");
+        _walrus.removeFromPane();
+
+        _gnome = new Gnome(_shopPane);
+        _plant = new Plant(_shopPane);
+        _house = new House(_shopPane);
+        _hat = new Hat(_shopPane);
+        _sunsetBG = new SunsetBG(_shopPane);
 
         __shop = new Buyable[3][2];
         this.fillShopInitial(_cat, _chicken, _cow, _dog, _fox, _giraffe);
@@ -280,23 +305,35 @@ public class StoreInterface {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
+                __shop[i][j].addToPane();
                 __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 160) + 240));
                 __shop[i][j].setOpacity(0);
             }
         }
     }
 
-    public void fillShop(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
-        __shop[0][0] = pet1;
-        __shop[1][0] = pet2;
-        __shop[2][0] = pet3;
-        __shop[0][1] = pet4;
-        __shop[1][1] = pet5;
-        __shop[2][1] = pet6;
+    public void fillShop(Buyable b1, Buyable b2, Buyable b3, Buyable b4, Buyable b5, Buyable b6) {
+
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 2; j++){
+                if (__shop[i][j] != null) {
+                    __shop[i][j].removeFromPane();
+                    __shop[i][j] = null;
+                }
+            }
+        }
+        __shop[0][0] = b1;
+        __shop[1][0] = b2;
+        __shop[2][0] = b3;
+        __shop[0][1] = b4;
+        __shop[1][1] = b5;
+        __shop[2][1] = b6;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
                 __shop[i][j].setBounceLoc(((i * 130) + 760), ((j * 160) + 240));
+                __shop[i][j].removeFromPane();
+                __shop[i][j].addToPane();
             }
         }
     }
@@ -418,5 +455,25 @@ public class StoreInterface {
 
     public Walrus getWalrus(){
         return _walrus;
+    }
+
+    public Gnome getGnome(){
+        return _gnome;
+    }
+
+    public Plant getPlant(){
+        return _plant;
+    }
+
+    public House getHouse(){
+        return _house;
+    }
+
+    public Hat getHat(){
+        return _hat;
+    }
+
+    public SunsetBG getSunsetBG(){
+        return _sunsetBG;
     }
 }
