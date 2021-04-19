@@ -367,7 +367,7 @@ public class StoreInterface {
         _thirdCN.setY(y+470);
         _third.relocate(x+347, y+474);
 
-        _balance.relocate(1005, 600);
+        _balance.relocate(1010, 600);
 
     }
 

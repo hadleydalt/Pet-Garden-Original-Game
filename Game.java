@@ -1,5 +1,7 @@
 package indy;
 
+//CLICKABLE LABELS FOR SHOP ITEMS SHOULD BE IN INTERACTPANE
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -39,6 +41,7 @@ public class Game {
     private double _pet3YLoc;
     private double _pet4YLoc;
     private Button _verChanger;
+    private Button _quitter;
     private Timeline _timeline;
     private LinkedList<Pet> _myPets;
     private String newName;
@@ -98,7 +101,11 @@ public class Game {
         _verChanger = new Button("Static Version");
         _verChanger.setOnAction(new VersionChanger());
         _verChanger.setOpacity(0);
-        buttonPane.getChildren().add(_verChanger);
+        _quitter = new Button("Quit");
+        _quitter.setOnAction(new ProgramQuitter());
+        _quitter.setOpacity(0);
+        _quitter.relocate(100, 0);
+        buttonPane.getChildren().addAll(_verChanger, _quitter);
         _myPets = new LinkedList<Pet>();
         newName = "";
         newNewName = "";
@@ -153,6 +160,12 @@ public class Game {
                 isAnimated = true;
             }
         }
+    }
+
+    private class ProgramQuitter implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            System.exit(0);
+            }
     }
 
     public Pet generatePet(){
@@ -544,6 +557,7 @@ public class Game {
                     _title.getPressSpace().setOpacity(0);
                     _titleNotCompressed = false;
                     _verChanger.setOpacity(1);
+                    _quitter.setOpacity(1);
                     for (int i = 0; i < 4; i++){
                         _pet[i].setOpacity(1);
                     }
