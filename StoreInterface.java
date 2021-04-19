@@ -70,6 +70,22 @@ public class StoreInterface {
     private House _house;
     private SunsetBG _sunsetBG;
 
+    private Pane _enter;
+    private Rectangle _petPopup1;
+    private Rectangle _petTitle1;
+    private Label _whoAmI1;
+    private Rectangle _hourLine;
+    private Label _typeHours;
+    private Circle _closeOut2;
+    private Label _x2;
+    private Circle _XCoverNode2;
+
+    private Rectangle _enterBG;
+    private Label _confirm;
+    private Rectangle _confirmCN;
+
+    private Label _balance;
+
     public StoreInterface(Pane root, Pane shopPane){
         _shopPane = shopPane;
         _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
@@ -123,7 +139,7 @@ public class StoreInterface {
         _dollar.setTextFill(Color.rgb(219, 186, 0));
         _dollar.setOpacity(0);
         _specs = new Pane();
-        _petPopup = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y);
+        _petPopup = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y-160);
         _petPopup.setFill(Color.WHITE);
         _petPopup.setStroke(Color.POWDERBLUE);
         _petTitle = new Rectangle(Constants.PET_TITLE_X, Constants.PET_TITLE_Y);
@@ -207,6 +223,57 @@ public class StoreInterface {
         _specs.getChildren().addAll(_petPopup, _petTitle, _whoAmI, _searchLine, _typeToSearch, _closeOut, _x, _XCoverNode);
         _specs.setOpacity(0);
 
+        _enter = new Pane();
+        _petPopup1 = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y-130);
+        _petPopup1.setFill(Color.WHITE);
+        _petPopup1.setStroke(Color.POWDERBLUE);
+        _petTitle1 = new Rectangle(Constants.PET_TITLE_X, Constants.PET_TITLE_Y);
+        _petTitle1.setFill(Color.POWDERBLUE);
+        _petTitle1.setX(10);
+        _petTitle1.setY(10);
+        _whoAmI1 = new Label("ENTER HOURS");
+        _whoAmI1.setFont(font4);
+        _whoAmI1.setTextFill(Color.WHITE);
+        _whoAmI1.relocate(85, 14);
+        _hourLine = new Rectangle(Constants.PET_TITLE_X, 1);
+        _hourLine.setX(10);
+        _hourLine.setY(100);
+        _hourLine.setFill(Color.POWDERBLUE);
+        _typeHours = new Label();
+        _typeHours.setTextFill(Color.LIGHTGRAY);
+        _typeHours.relocate(10, 70);
+        _typeHours.setFont(font5);
+        _closeOut2 = new Circle(20);
+        _closeOut2.setFill(Color.WHITE);
+        _closeOut2.setStroke(Color.POWDERBLUE);
+        _closeOut2.setCenterX(365);
+        _closeOut2.setCenterY(5);
+        _x2 = new Label("X");
+        _x2.relocate(360, -3);
+        _x2.setFont(font5);
+        _x2.setTextFill(Color.POWDERBLUE);
+        _XCoverNode2 = new Circle(20);
+        _XCoverNode2.setCenterX(365);
+        _XCoverNode2.setCenterY(5);
+        _XCoverNode2.setFill(Color.TRANSPARENT);
+
+        _enterBG = new Rectangle(Constants.INTERFACE_BUTTON_X-120, Constants.INTERFACE_BUTTON_Y);
+        _enterBG.setFill(Color.POWDERBLUE);
+        _confirm = new Label("ENTER");
+        _confirm.setFont(font2);
+        _confirm.setTextFill(Color.WHITE);
+        _confirmCN = new Rectangle(Constants.INTERFACE_BUTTON_X-120, Constants.INTERFACE_BUTTON_Y);
+        _confirmCN.setFill(Color.TRANSPARENT);
+        _enterBG.setX(280);
+        _enterBG.setY(110);
+        _confirm.relocate(290.5, 113);
+        _confirmCN.setX(280);
+        _confirmCN.setY(110);
+
+        _enter.getChildren().addAll(_petPopup1, _petTitle1, _whoAmI1, _hourLine, _typeHours, _closeOut2, _x2, _XCoverNode2,
+                _enterBG, _confirm, _confirmCN);
+        _enter.setOpacity(0);
+
         _cat = new Cat(_shopPane, x, "x", "x", "x", "x");
         _cat.removeFromPane();
         _chicken = new Chicken(_shopPane, x, "x", "x", "x", "x");
@@ -240,12 +307,18 @@ public class StoreInterface {
         _hat = new Hat(_shopPane);
         _sunsetBG = new SunsetBG(_shopPane);
 
+        _balance = new Label("0");
+        Font font6 = new Font("Gill Sans", 50);
+        _balance.setTextFill(Color.POWDERBLUE);
+        _balance.setFont(font6);
+        _balance.setOpacity(0);
+
         __shop = new Buyable[3][2];
         this.fillShopInitial(_cat, _chicken, _cow, _dog, _fox, _giraffe);
 
         root.getChildren().addAll(_viewAllPetsBG, _searchMyPetsBG, _enterHoursBG, _secondBG, _second, _secondCN, _firstBG, _first,
                 _firstCN, _thirdBG, _third, _thirdCN, _divider1, _divider2, _coin, _coinBorder, _viewAllPets, _searchMyPets, _enterHours, _currentBalance,
-                _dollar, _coverNode1, _coverNode2, _coverNode3, _specs, _closeOut1, _x1, _XCoverNode1);
+                _dollar, _coverNode1, _coverNode2, _coverNode3, _specs, _enter, _closeOut1, _x1, _XCoverNode1, _balance);
     }
 
     public void setLoc(double x, double y){
@@ -275,6 +348,7 @@ public class StoreInterface {
         _currentBalance.relocate(x+285, y+640);
         _dollar.relocate(x+312.5, y+540);
         _specs.relocate(x+100, y+150);
+        _enter.relocate(x+100, y+185);
         _secondBG.setX(x+230);
         _secondBG.setY(y+470);
         _secondCN.setX(x+230);
@@ -292,6 +366,8 @@ public class StoreInterface {
         _thirdCN.setX(x+340);
         _thirdCN.setY(y+470);
         _third.relocate(x+347, y+474);
+
+        _balance.relocate(1005, 600);
 
     }
 
@@ -361,6 +437,7 @@ public class StoreInterface {
         _second.setOpacity(x);
         _thirdBG.setOpacity(x);
         _third.setOpacity(x);
+        _balance.setOpacity(x);
     }
 
     public Rectangle getSecondCN(){
@@ -385,12 +462,24 @@ public class StoreInterface {
         return _XCoverNode1;
     }
 
+    public Circle getXCN2() {
+        return _XCoverNode2;
+    }
+
     public void setSearchOpacity(double x){
         _specs.setOpacity(x);
     }
 
+    public void setEnterOpacity(double x){
+        _enter.setOpacity(x);
+    }
+
     public Label getTypeToSearch(){
         return _typeToSearch;
+    }
+
+    public Label getTypeHours(){
+        return _typeHours;
     }
 
     public Rectangle getViewAllPetsCN(){
@@ -475,5 +564,13 @@ public class StoreInterface {
 
     public SunsetBG getSunsetBG(){
         return _sunsetBG;
+    }
+
+    public Rectangle getConfirmCN(){
+        return _confirmCN;
+    }
+
+    public Label getBalance(){
+        return _balance;
     }
 }

@@ -45,8 +45,12 @@ public class Game {
     private String newNewName;
     private String searchQuery;
     private Boolean _searchClicked = false;
+    private String numHours;
+    private String newNumHours;
     private Boolean _cannotChangeName = false;
     private Buyable[][] _shop;
+    private int intNumHours;
+    private int intLabel;
 
     public Game(){
         _shop = new Buyable[3][2];
@@ -99,11 +103,18 @@ public class Game {
         newName = "";
         newNewName = "";
         searchQuery = "";
+        numHours = "";
+        newNumHours = "";
+        intNumHours = 0;
+        intLabel = 0;
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
         _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
+        _si.getEnterHoursCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterGetter());
+        _si.getXCN2().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterDisappear());
         _si.getFirstCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new FirstPage());
         _si.getSecondCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SecondPage());
         _si.getThirdCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new ThirdPage());
+        _si.getConfirmCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new HoursEnterer());
     }
 
     private class FirstPage implements EventHandler<MouseEvent>{
@@ -369,10 +380,34 @@ public class Game {
         }
     }
 
+    private class EnterGetter implements EventHandler<MouseEvent>{
+        public void handle (MouseEvent event){
+            _si.setEnterOpacity(1);
+            _si.getTypeHours().setText("Enter hours of productivity");
+            numHours = "";
+        }
+    }
+
     private class SearchDisappear implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             _si.setSearchOpacity(0);
             _searchClicked = false;
+        }
+    }
+
+    private class EnterDisappear implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            _si.setEnterOpacity(0);
+        }
+    }
+
+    private class HoursEnterer implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            newNumHours = numHours;
+            numHours = "";
+            intNumHours = (Integer.parseInt(newNumHours.trim())*10);
+            intLabel = intLabel + intNumHours;
+            _si.getBalance().setText(Integer.toString(intLabel));
         }
     }
 
@@ -605,6 +640,15 @@ public class Game {
                     _store.getMyName().setText(newName);
                 }
             }
+
+            if ((event.getCode() == KeyCode.DIGIT1) || (event.getCode() == KeyCode.DIGIT2) || (event.getCode() == KeyCode.DIGIT3) ||
+                    (event.getCode() == KeyCode.DIGIT4) || (event.getCode() == KeyCode.DIGIT5) || (event.getCode() == KeyCode.DIGIT6) ||
+                    (event.getCode() == KeyCode.DIGIT7) || (event.getCode() == KeyCode.DIGIT8) || (event.getCode() == KeyCode.DIGIT9) ||
+                    (event.getCode() == KeyCode.DIGIT0)) {
+
+                numHours = numHours + event.getText();
+                _si.getTypeHours().setText(numHours);
+            }
         }
     }
         public String getPersonality() {
@@ -645,7 +689,7 @@ public class Game {
                     p = "Rash and mercuric";
                     break;
                 case 11:
-                    p = "Impulsive and mischievous";
+                    p = "Impulsive + mischievous";
                     break;
                 default:
                     p = "Brave and assertive";
