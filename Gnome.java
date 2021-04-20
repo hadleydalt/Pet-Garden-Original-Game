@@ -25,7 +25,7 @@ public class Gnome implements Buyable{
     public Gnome(Pane root){
         _root = root;
         _head = new Circle(Constants.SPOT_3_Y);
-        _head.setFill(Color.WHEAT);
+        _head.setFill(Color.LAVENDER);
         _hat = new Rectangle(25, 25);
         _hat.setFill(Color.TOMATO);
         _hat.setRotate(45);

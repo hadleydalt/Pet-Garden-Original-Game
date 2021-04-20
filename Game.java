@@ -104,7 +104,7 @@ public class Game {
         _quitter = new Button("Quit");
         _quitter.setOnAction(new ProgramQuitter());
         _quitter.setOpacity(0);
-        _quitter.relocate(100, 0);
+        _quitter.relocate(505, 0);
         buttonPane.getChildren().addAll(_verChanger, _quitter);
         _myPets = new LinkedList<Pet>();
         newName = "";
