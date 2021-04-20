@@ -54,6 +54,11 @@ public class Game {
     private Buyable[][] _shop;
     private int intNumHours;
     private int intLabel;
+    private SpecsHelper sh;
+
+    private Boolean _onPage1;
+    private Boolean _onPage2;
+    private Boolean _onPage3;
 
     public Game(){
         _shop = new Buyable[3][2];
@@ -76,6 +81,11 @@ public class Game {
     public Pane getButtonPane() {return buttonPane;}
 
     public void setupGame(){
+        _onPage1 = true;
+        _onPage2 = false;
+        _onPage3 = false;
+
+        sh = new SpecsHelper();
         gardenPane = new Pane();
         storePane = new Pane();
         interactPane = new Pane();
@@ -115,29 +125,92 @@ public class Game {
         intNumHours = 0;
         intLabel = 0;
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
-        _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
+        _si.getXCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
         _si.getEnterHoursCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterGetter());
         _si.getXCN2().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterDisappear());
         _si.getFirstCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new FirstPage());
         _si.getSecondCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SecondPage());
         _si.getThirdCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new ThirdPage());
         _si.getConfirmCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new HoursEnterer());
+        _si.getShop1().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop1());
+        _si.getShop2().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop2());
+        _si.getShop3().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop3());
+        _si.getShop4().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop4());
+        _si.getShop5().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop5());
+        _si.getShop6().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop6());
+    }
+
+    private class BuyShop1 implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            Cat newCat = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+            newCat.setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((newCat.getXLoc()-110)/130)][(int) ((newCat.getYLoc()-290)/130)] = newCat;
+        }
+    }
+
+    private class BuyShop2 implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+            newChicken.setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((newChicken.getXLoc()-110)/130)][(int) ((newChicken.getYLoc()-290)/130)] = newChicken;
+        }
+    }
+
+    private class BuyShop3 implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            Cow newCow = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+            newCow.setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((newCow.getXLoc()-110)/130)][(int) ((newCow.getYLoc()-290)/130)] = newCow;
+        }
+    }
+
+    private class BuyShop4 implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            Dog newDog = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+            newDog.setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((newDog.getXLoc()-110)/130)][(int) ((newDog.getYLoc()-290)/130)] = newDog;
+        }
+    }
+
+    private class BuyShop5 implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            Fox newFox = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+            newFox.setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((newFox.getXLoc()-110)/130)][(int) ((newFox.getYLoc()-290)/130)] = newFox;
+        }
+    }
+
+    private class BuyShop6 implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            Giraffe newGiraffe = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+            newGiraffe.setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((newGiraffe.getXLoc()-110)/130)][(int) ((newGiraffe.getYLoc()-290)/130)] = newGiraffe;
+        }
     }
 
     private class FirstPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
+            _onPage1 = true;
+            _onPage2 = false;
+            _onPage3 = false;
                 _si.fillShop(_si.getCat(), _si.getChicken(), _si.getCow(), _si.getDog(), _si.getFox(), _si.getGiraffe());
         }
     }
 
     private class SecondPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
+            _onPage1 = false;
+            _onPage2 = true;
+            _onPage3 = false;
             _si.fillShop(_si.getOwl(), _si.getPenguin(), _si.getPig(), _si.getReindeer(), _si.getSheep(), _si.getTiger());
         }
     }
 
     private class ThirdPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
+            _onPage1 = false;
+            _onPage2 = false;
+            _onPage3 = true;
             _si.fillShop(_si.getWalrus(), _si.getGnome(), _si.getPlant(), _si.getHouse(), _si.getHat(), _si.getSunsetBG());
         }
     }
@@ -173,43 +246,43 @@ public class Game {
         int rand_int = (int) (Math.random() * 13);
         switch (rand_int) {
             case 0:
-                pet = new Cat(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 1:
-                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 2:
-                pet = new Cow(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 3:
-                pet = new Dog(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 4:
-                pet = new Fox(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 5:
-                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 6:
-                pet = new Owl(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 7:
-                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 8:
-                pet = new Pig(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 9:
-                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 10:
-                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             case 11:
-                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
             default:
-                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", this.getPersonality(), this.getBirthMonth(), this.getFavFood());
+                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
                 break;
         }
         return pet;
@@ -232,7 +305,7 @@ public class Game {
         for (int i = 0; i < 4; i++){
             _pet[i] = this.generatePet();
             _pet[i].setOpacity(0);
-            _pet[i].setLoc(this.petXLoc(), this.petYLoc());
+            _pet[i].setLoc(sh.petXLoc(), sh.petYLoc());
             _myPets.add(i, _pet[i]);
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
         }
@@ -252,46 +325,6 @@ public class Game {
                 }
             }
         }
-    }
-
-    public int petXLoc(){
-        int loc = 0;
-        int rand_int = (int) (Math.random() * 4);
-        switch (rand_int){
-            case 0:
-                loc = 110;
-                break;
-            case 1:
-                loc = 240;
-                break;
-            case 2:
-                loc = 370;
-                break;
-            default:
-                loc = 500;
-                break;
-        }
-        return loc;
-    }
-
-    public int petYLoc(){
-        int loc = 0;
-        int rand_int = (int) (Math.random() * 4);
-        switch (rand_int){
-            case 0:
-                loc = 290;
-                break;
-            case 1:
-                loc = 420;
-                break;
-            case 2:
-                loc = 550;
-                break;
-            default:
-                loc = 680;
-                break;
-        }
-        return loc;
     }
 
     public void setupLoadingBarTimeline() {
@@ -665,6 +698,49 @@ public class Game {
             }
         }
     }
+
+    public class SpecsHelper {
+
+        public int petXLoc(){
+            int loc = 0;
+            int rand_int = (int) (Math.random() * 4);
+            switch (rand_int){
+                case 0:
+                    loc = 110;
+                    break;
+                case 1:
+                    loc = 240;
+                    break;
+                case 2:
+                    loc = 370;
+                    break;
+                default:
+                    loc = 500;
+                    break;
+            }
+            return loc;
+        }
+
+        public int petYLoc(){
+            int loc = 0;
+            int rand_int = (int) (Math.random() * 4);
+            switch (rand_int){
+                case 0:
+                    loc = 290;
+                    break;
+                case 1:
+                    loc = 420;
+                    break;
+                case 2:
+                    loc = 550;
+                    break;
+                default:
+                    loc = 680;
+                    break;
+            }
+            return loc;
+        }
+
         public String getPersonality() {
             String p = null;
             int rand_int = (int) (Math.random() * 13);
@@ -799,5 +875,6 @@ public class Game {
             }
             return food;
         }
+    }
 
 }

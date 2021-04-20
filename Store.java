@@ -48,7 +48,6 @@ public class Store {
     private Pet[][] x;
     private Rectangle _petFrame;
     private Label _petNamed;
-    private Label _instructions;
     private Pane shopPane;
 
     public Store(Pane root){
@@ -84,7 +83,7 @@ public class Store {
         shopPane = new Pane();
 
         _specs = new Pane();
-        _petPopup = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y);
+        _petPopup = new Rectangle(Constants.PET_POPUP_X, Constants.PET_POPUP_Y-33);
         _petPopup.setFill(Color.WHITE);
         _petPopup.setStroke(Color.POWDERBLUE);
         _petTitle = new Rectangle(Constants.PET_TITLE_X, Constants.PET_TITLE_Y);
@@ -138,15 +137,9 @@ public class Store {
         _petNamed.relocate(290, 85);
         _petNamed.setTextFill(Color.POWDERBLUE);
         _petNamed.setOpacity(0);
-        _instructions = new Label("NOTE: After typing in your pet's name, you MUST CLICK on the pet (in the garden) to confirm the name!");
-        _instructions.setTextFill(Color.rgb(163, 163, 163));
-        _instructions.setMaxWidth(350);
-        _instructions.setWrapText(true);
-        _instructions.relocate(10, 250);
-        _instructions.setFont(font4);
 
         _specs.getChildren().addAll(_petPopup, _petTitle, _name, _personality, _birthMonth, _favFood, _whoAmI, _myName, _myPersonality,
-                _myBirthMonth, _myFavFood, _petFrame, _petNamed, _instructions);
+                _myBirthMonth, _myFavFood, _petFrame, _petNamed);
 
         _specs.setOpacity(0);
         _cat = new Cat(_specs, x, "x", "x", "x", "x");
@@ -207,7 +200,7 @@ public class Store {
         _accent2.setY(y+45);
         _shop.relocate(x+201, y+27);
         _shop2.relocate(x+203.5, y+25.5);
-        _specs.relocate(x+100, y+150);
+        _specs.relocate(x+80, y-30);
         _petFrame.setX(10);
         _petFrame.setY(60);
 

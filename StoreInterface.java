@@ -184,17 +184,17 @@ public class StoreInterface {
         _closeOut1 = new Circle(20);
         _closeOut1.setFill(Color.WHITE);
         _closeOut1.setStroke(Color.POWDERBLUE);
-        _closeOut1.setCenterX(1085);
-        _closeOut1.setCenterY(205);
+        _closeOut1.setCenterX(1065);
+        _closeOut1.setCenterY(25);
         _closeOut1.setOpacity(0);
         _x1 = new Label("X");
-        _x1.relocate(1080, 197);
+        _x1.relocate(1060, 17);
         _x1.setFont(font5);
         _x1.setTextFill(Color.POWDERBLUE);
         _x1.setOpacity(0);
         _XCoverNode1 = new Circle(20);
-        _XCoverNode1.setCenterX(1085);
-        _XCoverNode1.setCenterY(205);
+        _XCoverNode1.setCenterX(1065);
+        _XCoverNode1.setCenterY(25);
         _XCoverNode1.setFill(Color.TRANSPARENT);
 
         _secondBG = new Rectangle(Constants.INTERFACE_BUTTON_X-120, Constants.INTERFACE_BUTTON_Y);
@@ -357,6 +357,30 @@ public class StoreInterface {
                 _shop1, _shop2,_shop3, _shop4, _shop5, _shop6);
     }
 
+    public Label getShop1(){
+        return _shop1;
+    }
+
+    public Label getShop2(){
+        return _shop2;
+    }
+
+    public Label getShop3(){
+        return _shop3;
+    }
+
+    public Label getShop4(){
+        return _shop4;
+    }
+
+    public Label getShop5(){
+        return _shop5;
+    }
+
+    public Label getShop6(){
+        return _shop6;
+    }
+
     public void setLoc(double x, double y){
         _viewAllPetsBG.setX(x+50);
         _viewAllPetsBG.setY(y+533);
@@ -383,8 +407,8 @@ public class StoreInterface {
         _enterHours.relocate(x+83, y+636);
         _currentBalance.relocate(x+285, y+640);
         _dollar.relocate(x+312.5, y+540);
-        _specs.relocate(x+100, y+150);
-        _enter.relocate(x+100, y+185);
+        _specs.relocate(x+80, y+20);
+        _enter.relocate(x+80, y+90);
         _secondBG.setX(x+230);
         _secondBG.setY(y+470);
         _secondCN.setX(x+230);
@@ -509,7 +533,10 @@ public class StoreInterface {
     public void setCloseOpacity(int x){
         _closeOut1.setOpacity(x);
         _x1.setOpacity(x);
-        _XCoverNode1.setOpacity(x);
+    }
+
+    public Circle getXCN(){
+        return _XCoverNode;
     }
 
     public Circle getXCN1(){
