@@ -225,7 +225,12 @@ public class Owl extends Pet{
 
     @Override
     public String getType(){
-        return "owl";
+        return "Owl";
+    }
+
+    @Override
+    public int getPrice() {
+        return 30;
     }
 
     public int petXLoc(){

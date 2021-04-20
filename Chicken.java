@@ -163,7 +163,12 @@ public class Chicken extends Pet{
 
     @Override
     public String getType(){
-        return "chicken";
+        return "Chicken";
+    }
+
+    @Override
+    public int getPrice() {
+        return 20;
     }
 
     public int petXLoc(){

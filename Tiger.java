@@ -254,7 +254,12 @@ public class Tiger extends Pet{
 
     @Override
     public String getType(){
-        return "tiger";
+        return "Tiger";
+    }
+
+    @Override
+    public int getPrice() {
+        return 150;
     }
 
     public int petXLoc(){

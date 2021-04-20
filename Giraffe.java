@@ -249,7 +249,12 @@ public class Giraffe extends Pet{
 
     @Override
     public String getType(){
-        return "giraffe";
+        return "Giraffe";
+    }
+
+    @Override
+    public int getPrice() {
+        return 200;
     }
 
     public int petXLoc(){

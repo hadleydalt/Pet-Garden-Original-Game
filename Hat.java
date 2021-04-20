@@ -26,7 +26,14 @@ public class Hat implements Buyable{
         _feather.setFill(Color.GOLD);
         _feather.setRotate(36);
     }
-    public void getPrice(){}
+    public int getPrice(){
+        return 20;
+    }
+
+    public String getType(){
+        return "Hat";
+    }
+
     public void setBounceLoc(double x, double y){
         _top.setX(x-15);
         _top.setY(y);

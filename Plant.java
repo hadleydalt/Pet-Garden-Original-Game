@@ -67,7 +67,13 @@ public class Plant implements Buyable{
         _potTopShadow.setFill(Color.rgb(94, 45, 11));
 
     }
-    public void getPrice(){}
+    public int getPrice(){
+        return 80;
+    }
+
+    public String getType(){
+        return "Flower";
+    }
 
     public void setBounceLoc(double x, double y){
         _petal1.setCenterX(x);

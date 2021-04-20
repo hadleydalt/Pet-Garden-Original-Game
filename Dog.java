@@ -185,7 +185,12 @@ public class Dog extends Pet{
 
     @Override
     public String getType(){
-        return "dog";
+        return "Dog";
+    }
+
+    @Override
+    public int getPrice() {
+        return 80;
     }
 
     public int petXLoc(){

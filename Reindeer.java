@@ -203,7 +203,12 @@ public class Reindeer extends Pet{
 
     @Override
     public String getType(){
-        return "reindeer";
+        return "Reindeer";
+    }
+
+    @Override
+    public int getPrice() {
+        return 120;
     }
 
     public int petXLoc(){

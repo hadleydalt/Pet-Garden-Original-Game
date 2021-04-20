@@ -86,6 +86,13 @@ public class StoreInterface {
 
     private Label _balance;
 
+    private Label _shop1;
+    private Label _shop2;
+    private Label _shop3;
+    private Label _shop4;
+    private Label _shop5;
+    private Label _shop6;
+
     public StoreInterface(Pane root, Pane shopPane){
         _shopPane = shopPane;
         _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
@@ -313,12 +320,41 @@ public class StoreInterface {
         _balance.setFont(font6);
         _balance.setOpacity(0);
 
+        Font font7 = new Font("Gill Sans", 13);
+
+        _shop1 = new Label(_cat.getType() + " - $" + String.valueOf(_cat.getPrice()));
+        _shop1.setFont(font7);
+        _shop1.setTextFill(Color.DARKGRAY);
+        _shop1.relocate(730, 300);
+        _shop2 = new Label(_chicken.getType() + " - $" + String.valueOf(_chicken.getPrice()));
+        _shop2.setFont(font7);
+        _shop2.setTextFill(Color.DARKGRAY);
+        _shop2.relocate(860, 300);
+        _shop3 = new Label(_cow.getType() + " - $" + String.valueOf(_cow.getPrice()));
+        _shop3.setFont(font7);
+        _shop3.setTextFill(Color.DARKGRAY);
+        _shop3.relocate(990, 300);
+        _shop4 = new Label(_dog.getType() + " - $" + String.valueOf(_dog.getPrice()));
+        _shop4.setFont(font7);
+        _shop4.setTextFill(Color.DARKGRAY);
+        _shop4.relocate(730, 472);
+        _shop5 = new Label(_fox.getType() + " - $" + String.valueOf(_fox.getPrice()));
+        _shop5.setFont(font7);
+        _shop5.setTextFill(Color.DARKGRAY);
+        _shop5.relocate(860, 472);
+        _shop6 = new Label(_giraffe.getType() + " - $" + String.valueOf(_giraffe.getPrice()));
+        _shop6.setFont(font7);
+        _shop6.setTextFill(Color.DARKGRAY);
+        _shop6.relocate(990, 472);
+        this.setShopLabelO(0);
+
         __shop = new Buyable[3][2];
         this.fillShopInitial(_cat, _chicken, _cow, _dog, _fox, _giraffe);
 
         root.getChildren().addAll(_viewAllPetsBG, _searchMyPetsBG, _enterHoursBG, _secondBG, _second, _secondCN, _firstBG, _first,
                 _firstCN, _thirdBG, _third, _thirdCN, _divider1, _divider2, _coin, _coinBorder, _viewAllPets, _searchMyPets, _enterHours, _currentBalance,
-                _dollar, _coverNode1, _coverNode2, _coverNode3, _specs, _enter, _closeOut1, _x1, _XCoverNode1, _balance);
+                _dollar, _coverNode1, _coverNode2, _coverNode3, _specs, _enter, _closeOut1, _x1, _XCoverNode1, _balance,
+                _shop1, _shop2,_shop3, _shop4, _shop5, _shop6);
     }
 
     public void setLoc(double x, double y){
@@ -371,7 +407,17 @@ public class StoreInterface {
 
     }
 
+    public void setShopLabelO(double x){
+        _shop1.setOpacity(x);
+        _shop2.setOpacity(x);
+        _shop3.setOpacity(x);
+        _shop4.setOpacity(x);
+        _shop5.setOpacity(x);
+        _shop6.setOpacity(x);
+    }
+
     public void fillShopInitial(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
+
         __shop[0][0] = pet1;
         __shop[1][0] = pet2;
         __shop[2][0] = pet3;
@@ -389,6 +435,13 @@ public class StoreInterface {
     }
 
     public void fillShop(Buyable b1, Buyable b2, Buyable b3, Buyable b4, Buyable b5, Buyable b6) {
+
+        _shop1.setText(b1.getType() + " - $" + String.valueOf(b1.getPrice()));
+        _shop2.setText(b2.getType() + " - $" + String.valueOf(b2.getPrice()));
+        _shop3.setText(b3.getType() + " - $" + String.valueOf(b3.getPrice()));
+        _shop4.setText(b4.getType() + " - $" + String.valueOf(b4.getPrice()));
+        _shop5.setText(b5.getType() + " - $" + String.valueOf(b5.getPrice()));
+        _shop6.setText(b6.getType() + " - $" + String.valueOf(b6.getPrice()));
 
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 2; j++){
@@ -438,6 +491,7 @@ public class StoreInterface {
         _thirdBG.setOpacity(x);
         _third.setOpacity(x);
         _balance.setOpacity(x);
+        this.setShopLabelO(1);
     }
 
     public Rectangle getSecondCN(){

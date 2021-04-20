@@ -450,43 +450,43 @@ public class Game {
                                 _pet.setIsNamed();
                             }
 
-                            if (_pet.getType().equals("cat")){
+                            if (_pet.getType().equals("Cat")){
                                 _store.getCat().setOpacity(1);
                             }
-                            if (_pet.getType().equals("chicken")){
+                            if (_pet.getType().equals("Chicken")){
                                 _store.getChicken().setOpacity(1);
                             }
-                            if (_pet.getType().equals("cow")){
+                            if (_pet.getType().equals("Cow")){
                                 _store.getCow().setOpacity(1);
                             }
-                            if (_pet.getType().equals("dog")){
+                            if (_pet.getType().equals("Dog")){
                                 _store.getDog().setOpacity(1);
                             }
-                            if (_pet.getType().equals("fox")){
+                            if (_pet.getType().equals("Fox")){
                                 _store.getFox().setOpacity(1);
                             }
-                            if (_pet.getType().equals("giraffe")){
+                            if (_pet.getType().equals("Giraffe")){
                                 _store.getGiraffe().setOpacity(1);
                             }
-                            if (_pet.getType().equals("owl")){
+                            if (_pet.getType().equals("Owl")){
                                 _store.getOwl().setOpacity(1);
                             }
-                            if (_pet.getType().equals("penguin")){
+                            if (_pet.getType().equals("Penguin")){
                                 _store.getPenguin().setOpacity(1);
                             }
-                            if (_pet.getType().equals("pig")){
+                            if (_pet.getType().equals("Pig")){
                                 _store.getPig().setOpacity(1);
                             }
-                            if (_pet.getType().equals("reindeer")){
+                            if (_pet.getType().equals("Reindeer")){
                                 _store.getReindeer().setOpacity(1);
                             }
-                            if (_pet.getType().equals("sheep")){
+                            if (_pet.getType().equals("Sheep")){
                                 _store.getSheep().setOpacity(1);
                             }
-                            if (_pet.getType().equals("tiger")){
+                            if (_pet.getType().equals("Tiger")){
                                 _store.getTiger().setOpacity(1);
                             }
-                            if (_pet.getType().equals("walrus")){
+                            if (_pet.getType().equals("Walrus")){
                                 _store.getWalrus().setOpacity(1);
                             }
                         }
@@ -598,43 +598,43 @@ public class Game {
                                         _store.getMyBirthMonth().setText(_pets[i][j].getPetBirthMonth());
                                         _store.getMyFavFood().setText(_pets[i][j].getPetFavFood());
 
-                                        if (_pets[i][j].getType().equals("cat")){
+                                        if (_pets[i][j].getType().equals("Cat")){
                                             _store.getCat().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("chicken")){
+                                        if (_pets[i][j].getType().equals("Chicken")){
                                             _store.getChicken().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("cow")){
+                                        if (_pets[i][j].getType().equals("Cow")){
                                             _store.getCow().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("dog")){
+                                        if (_pets[i][j].getType().equals("Dog")){
                                             _store.getDog().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("fox")){
+                                        if (_pets[i][j].getType().equals("Fox")){
                                             _store.getFox().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("giraffe")){
+                                        if (_pets[i][j].getType().equals("Giraffe")){
                                             _store.getGiraffe().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("owl")){
+                                        if (_pets[i][j].getType().equals("Owl")){
                                             _store.getOwl().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("penguin")){
+                                        if (_pets[i][j].getType().equals("Penguin")){
                                             _store.getPenguin().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("pig")){
+                                        if (_pets[i][j].getType().equals("Pig")){
                                             _store.getPig().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("reindeer")){
+                                        if (_pets[i][j].getType().equals("Reindeer")){
                                             _store.getReindeer().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("sheep")){
+                                        if (_pets[i][j].getType().equals("Sheep")){
                                             _store.getSheep().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("tiger")){
+                                        if (_pets[i][j].getType().equals("Tiger")){
                                             _store.getTiger().setOpacity(1);
                                         }
-                                        if (_pets[i][j].getType().equals("walrus")){
+                                        if (_pets[i][j].getType().equals("Walrus")){
                                             _store.getWalrus().setOpacity(1);
                                         }
 

@@ -18,7 +18,15 @@ public class SunsetBG implements Buyable{
         LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
         _sunset.setFill(lg1);
     }
-    public void getPrice(){}
+
+    public int getPrice(){
+        return 100;
+    }
+
+    public String getType(){
+        return "Sunset Background";
+    }
+
     public void setBounceLoc(double x, double y){
         _sunset.setX(x-30);
         _sunset.setY(y-30);

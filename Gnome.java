@@ -58,7 +58,13 @@ public class Gnome implements Buyable{
         _root.getChildren().addAll(_hat, _shirt, _head, _beard, _mouth, _pants, _belt, _foot1, _foot2, _eye1, _eye2, _pupil1, _pupil2);
     }
 
-    public void getPrice(){}
+    public int getPrice(){
+        return 50;
+    }
+
+    public String getType(){
+        return "Garden Gnome";
+    }
 
     public void setBounceLoc(double x, double y){
         _hat.setX(x);

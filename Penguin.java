@@ -136,7 +136,12 @@ public class Penguin extends Pet{
 
     @Override
     public String getType(){
-        return "penguin";
+        return "Penguin";
+    }
+
+    @Override
+    public int getPrice() {
+        return 60;
     }
 
     public int petXLoc(){

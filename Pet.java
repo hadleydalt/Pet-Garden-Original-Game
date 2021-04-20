@@ -61,7 +61,6 @@ public class Pet implements Buyable {
     public void setLoc(double x, double y){
     }
 
-    @Override
     public void setBounceLoc(double x, double y){
         _gardenName.relocate(x+50, y-50);
     }
@@ -86,19 +85,17 @@ public class Pet implements Buyable {
         return null;
     }
 
-    @Override
     public void setOpacity(double x){}
 
     public Ellipse getNode(){
         return null;
     }
 
-    @Override
-    public void getPrice(){}
+    public int getPrice(){
+        return 0;
+    }
 
-    @Override
     public void removeFromPane(){}
 
-    @Override
     public void addToPane(){}
 }

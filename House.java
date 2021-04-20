@@ -39,7 +39,14 @@ public class House implements Buyable{
         _window2int = new Rectangle(10, 15);
         _window2int.setFill(Color.GOLD);
     }
-    public void getPrice(){}
+    public int getPrice(){
+        return 70;
+    }
+
+    public String getType(){
+        return "House";
+    }
+
     public void setBounceLoc(double x, double y){
         _roof.setX(x-30);
         _roof.setY(y-60);

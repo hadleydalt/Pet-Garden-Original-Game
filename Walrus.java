@@ -237,7 +237,12 @@ public class Walrus extends Pet{
 
     @Override
     public String getType(){
-        return "walrus";
+        return "Walrus";
+    }
+
+    @Override
+    public int getPrice() {
+        return 40;
     }
 
     public int petXLoc(){
