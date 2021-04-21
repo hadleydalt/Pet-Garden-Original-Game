@@ -28,6 +28,7 @@ public class Game {
     private boolean _titleNotCompressed;
     private int _intPercent;
     private int _counter;
+    private int _subcounter;
     private int _titleXLoc;
     private int _titleYLoc;
     private Pet[][] _pets;
@@ -103,9 +104,11 @@ public class Game {
         this.setupLoadingBarTimeline();
         _intPercent = _title.getPercent();
         _counter = 0;
+        _subcounter = 1;
         _titleXLoc = 318;
         _titleYLoc = 270;
         this.setupCounter();
+        this.setupSubCounter();
         buttonPane = new Pane();
         buttonPane.relocate(30, 15);
         _verChanger = new Button("Static Version");
@@ -299,6 +302,8 @@ public class Game {
         _pet4YLoc = _pet[3].getYLoc();
     }
 
+
+
     public void setupInitialPets(){
         _pets = new Pet[4][4];
         _pet = new Pet[4];
@@ -337,8 +342,15 @@ public class Game {
     public void setupCounter() {
         KeyFrame kf2 = new KeyFrame(Duration.millis(1), new Counter());
         Timeline timeline = new Timeline(kf2);
-        timeline.setCycleCount(2500);
+        timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+    }
+
+    public void setupSubCounter() {
+        KeyFrame kf10 = new KeyFrame(Duration.millis(180), new SubCounter());
+        Timeline timeline5 = new Timeline(kf10);
+        timeline5.setCycleCount(Animation.INDEFINITE);
+        timeline5.play();
     }
 
     public void setupPetMover(){
@@ -352,12 +364,21 @@ public class Game {
     private class Counter implements EventHandler<ActionEvent>{
         public void handle(ActionEvent event){
             _counter ++;
-            if (_counter == 2500){
+            if (_counter >= 2500){
                 _title.getLoadingBar().setOpacity(0);
                 _title.getLoadingBG().setOpacity(0);
                 _title.getPercentLabel().setOpacity(0);
-                _title.getPressSpace().setOpacity(1);
+
+                if (_counter == 2500) {
+                    _title.getPressSpace().setOpacity(1);
+                }
             }
+        }
+    }
+
+    private class SubCounter implements EventHandler<ActionEvent>{
+        public void handle(ActionEvent event){
+            _subcounter ++;
         }
     }
 
@@ -372,6 +393,7 @@ public class Game {
                         _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() - 2);
                     }
             }
+
             if ((_pet[0].getYLoc() < (_pet1YLoc - 2)) && (_pet[1].getYLoc() < (_pet2YLoc - 4)) && (_pet[2].getYLoc() < (_pet3YLoc - 6))
             && (_pet[3].getYLoc() < (_pet4YLoc - 8))){
                 _direction = !_direction;
@@ -577,17 +599,17 @@ public class Game {
 
     private class AllKeyEventsHandler implements EventHandler<KeyEvent> {
         public void setupTitleBGTimeline() {
-            KeyFrame kf1 = new KeyFrame(Duration.millis(25), new TitleMover());
+            KeyFrame kf1 = new KeyFrame(Duration.millis(45), new TitleMover());
             Timeline timeline = new Timeline(kf1);
             timeline.setCycleCount(10);
             timeline.play();
         }
 
         public void handle (KeyEvent event){
-            if ((_titleNotCompressed) && (_counter == 2500)) {
                 if (event.getCode() == KeyCode.SPACE) {
-                    this.setupTitleBGTimeline();
                     _title.getPressSpace().setOpacity(0);
+                    if ((_titleNotCompressed) && (_counter >= 2500)) {
+                    this.setupTitleBGTimeline();
                     _titleNotCompressed = false;
                     _verChanger.setOpacity(1);
                     _quitter.setOpacity(1);
