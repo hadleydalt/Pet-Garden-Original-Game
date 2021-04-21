@@ -47,6 +47,7 @@ public class Game {
     private int intNumHours;
     private int intLabel;
     private SpecsHelper sh;
+    private PetMoverHelper pmh;
 
     private Boolean _onPage1;
     private Boolean _onPage2;
@@ -78,6 +79,7 @@ public class Game {
         _onPage3 = false;
 
         sh = new SpecsHelper();
+        pmh = new PetMoverHelper();
         gardenPane = new Pane();
         storePane = new Pane();
         interactPane = new Pane();
@@ -137,6 +139,7 @@ public class Game {
             Cat newCat = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
             newCat.setLoc(sh.petXLoc(), sh.petYLoc());
             _pets[(int) ((newCat.getXLoc()-110)/130)][(int) ((newCat.getYLoc()-290)/130)] = newCat;
+            pmh.setupPetMover(newCat);
         }
     }
 
@@ -145,6 +148,7 @@ public class Game {
             Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
             newChicken.setLoc(sh.petXLoc(), sh.petYLoc());
             _pets[(int) ((newChicken.getXLoc()-110)/130)][(int) ((newChicken.getYLoc()-290)/130)] = newChicken;
+            pmh.setupPetMover(newChicken);
         }
     }
 
@@ -153,6 +157,7 @@ public class Game {
             Cow newCow = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
             newCow.setLoc(sh.petXLoc(), sh.petYLoc());
             _pets[(int) ((newCow.getXLoc()-110)/130)][(int) ((newCow.getYLoc()-290)/130)] = newCow;
+            pmh.setupPetMover(newCow);
         }
     }
 
@@ -161,6 +166,7 @@ public class Game {
             Dog newDog = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
             newDog.setLoc(sh.petXLoc(), sh.petYLoc());
             _pets[(int) ((newDog.getXLoc()-110)/130)][(int) ((newDog.getYLoc()-290)/130)] = newDog;
+            pmh.setupPetMover(newDog);
         }
     }
 
@@ -169,6 +175,7 @@ public class Game {
             Fox newFox = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
             newFox.setLoc(sh.petXLoc(), sh.petYLoc());
             _pets[(int) ((newFox.getXLoc()-110)/130)][(int) ((newFox.getYLoc()-290)/130)] = newFox;
+            pmh.setupPetMover(newFox);
         }
     }
 
@@ -177,6 +184,7 @@ public class Game {
             Giraffe newGiraffe = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
             newGiraffe.setLoc(sh.petXLoc(), sh.petYLoc());
             _pets[(int) ((newGiraffe.getXLoc()-110)/130)][(int) ((newGiraffe.getYLoc()-290)/130)] = newGiraffe;
+            pmh.setupPetMover(newGiraffe);
         }
     }
 
@@ -211,16 +219,25 @@ public class Game {
         boolean isAnimated = true;
         public void handle(ActionEvent event) {
             if (isAnimated) {
-                _timeline.stop();
-                _pet[0].setBounceLoc(_pet[0].getXLoc(), _pet[0].getOYL());
-                _pet[1].setBounceLoc(_pet[1].getXLoc(), _pet[1].getOYL());
-                _pet[2].setBounceLoc(_pet[2].getXLoc(), _pet[2].getOYL());
-                _pet[3].setBounceLoc(_pet[3].getXLoc(), _pet[3].getOYL());
-                _verChanger.setText("Animated Version");
+                for (int i = 0; i < 4; i++){
+                    for (int j =0; j < 4; j++){
+                        if (_pets[i][j] != null) {
+                            _pets[i][j].getTimeline().stop();
+                            _pets[i][j].setBounceLoc(_pets[i][j].getXLoc(), _pets[i][j].getOYL());
+                        }
+                    }
+                }
                 isAnimated = false;
+                _verChanger.setText("Animated Version");
             }
             else {
-                _timeline.play();
+                for (int i = 0; i < 4; i++){
+                    for (int j =0; j < 4; j++){
+                        if (_pets[i][j] != null) {
+                            _pets[i][j].getTimeline().play();
+                        }
+                    }
+                }
                 _verChanger.setText("Static Version");
                 isAnimated = true;
             }
@@ -291,8 +308,8 @@ public class Game {
             _pet[i].setLoc(sh.petXLoc(), sh.petYLoc());
             _myPets.add(i, _pet[i]);
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
+            pmh.setupPetMover(_pet[i]);
         }
-        this.setupPetMover();
         this.setupHandlers();
     }
 
@@ -323,12 +340,14 @@ public class Game {
         timeline.play();
     }
 
-    public void setupPetMover(){
-        KeyFrame kf3 = new KeyFrame(Duration.millis(45), new PetMover());
-        Timeline timeline = new Timeline(kf3);
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-        _timeline = timeline;
+    public class PetMoverHelper {
+        public void setupPetMover(Pet pet) {
+            KeyFrame kf3 = new KeyFrame(Duration.millis(45), new PetMover(pet));
+            Timeline timeline = new Timeline(kf3);
+            pet.setTimeline(timeline);
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
+        }
     }
 
     private class Counter implements EventHandler<ActionEvent>{
@@ -347,10 +366,27 @@ public class Game {
     }
 
     private class PetMover implements EventHandler<ActionEvent>{
+        private Pet thisPet;
+        private PetMover(Pet pet){
+            thisPet = pet;
+        }
         boolean _direction = true;
 
         public void handle(ActionEvent event){
-            for (int i = 0; i < 4; i++){
+                if (_direction) {
+                    thisPet.setBounceLoc(thisPet.getXLoc(), thisPet.getYLoc() + 2);
+                } else {
+                    thisPet.setBounceLoc(thisPet.getXLoc(), thisPet.getYLoc() - 2);
+                }
+
+            if (thisPet.getYLoc() < thisPet.getOYL() - 4) {
+                _direction = !_direction;
+            }
+
+            if (thisPet.getYLoc() > thisPet.getOYL() + 4) {
+                _direction = !_direction;
+            }
+            /*for (int i = 0; i < 4; i++){
                     if (_direction) {
                         _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() + 2);
                     } else {
@@ -366,7 +402,7 @@ public class Game {
             if ((_pet[0].getYLoc() > (_pet[0].getOYL() + 2)) && (_pet[1].getYLoc() > (_pet[1].getOYL() + 3)) && (_pet[2].getYLoc() > (_pet[2].getOYL() + 4))
                     && (_pet[3].getYLoc() > (_pet[3].getOYL() + 5))){
                 _direction = !_direction;
-            }
+            }*/
         }
     }
 

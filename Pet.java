@@ -1,5 +1,6 @@
 package indy;
 
+import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,6 +16,7 @@ public class Pet implements Buyable {
     private String _favFood;
     private Boolean isNamed;
     private Label _gardenName;
+    private Timeline _timeline;
 
     public Pet(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
         _pets = pets;
@@ -44,6 +46,14 @@ public class Pet implements Buyable {
     public void setPetName(String x){
         _petName = null;
         _petName = x;
+    }
+
+    public void setTimeline(Timeline x){
+        _timeline = x;
+    }
+
+    public Timeline getTimeline(){
+        return _timeline;
     }
 
     public String getPetPersonality(){
