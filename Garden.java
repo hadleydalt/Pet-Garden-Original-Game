@@ -99,7 +99,7 @@ public class Garden {
 
     }
 
-    public Rectangle getGrass(){
-        return _grass;
+    public Rectangle getSky(){
+        return _sky;
     }
 }

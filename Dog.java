@@ -20,12 +20,12 @@ public class Dog extends Pet{
     private Ellipse _ear21;
     private Ellipse _ear12;
     private Ellipse _ear22;
-    private Pet[][] _pets;
+    private Buyable[][] _pets;
     private Ellipse _coverNode;
     private Pane _root;
     private double _originalYLoc;
 
-    public Dog(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+    public Dog(Pane root, Buyable[][] pets, String petName, String personality, String birthMonth, String favFood){
         super(root, pets, petName, personality, birthMonth, favFood);
         _root = root;
         _pets = pets;
@@ -198,45 +198,5 @@ public class Dog extends Pet{
     @Override
     public int getPrice() {
         return 80;
-    }
-
-    public int petXLoc(){
-        int loc = 0;
-        int rand_int = (int) (Math.random() * 4);
-        switch (rand_int){
-            case 0:
-                loc = 110;
-                break;
-            case 1:
-                loc = 240;
-                break;
-            case 2:
-                loc = 370;
-                break;
-            default:
-                loc = 500;
-                break;
-        }
-        return loc;
-    }
-
-    public int petYLoc(){
-        int loc = 0;
-        int rand_int = (int) (Math.random() * 4);
-        switch (rand_int){
-            case 0:
-                loc = 290;
-                break;
-            case 1:
-                loc = 420;
-                break;
-            case 2:
-                loc = 550;
-                break;
-            default:
-                loc = 680;
-                break;
-        }
-        return loc;
     }
 }

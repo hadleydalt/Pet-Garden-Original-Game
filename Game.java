@@ -12,6 +12,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.util.Duration;
 
 import java.util.LinkedList;
@@ -30,11 +34,10 @@ public class Game {
     private int _counter;
     private int _titleXLoc;
     private int _titleYLoc;
-    private Pet[][] _pets;
+    private Buyable[][] _pets;
     private Pet[] _pet;
     private Button _verChanger;
     private Button _quitter;
-    private Timeline _timeline;
     private LinkedList<Pet> _myPets;
     private String newName;
     private String newNewName;
@@ -48,6 +51,7 @@ public class Game {
     private int intLabel;
     private SpecsHelper sh;
     private PetMoverHelper pmh;
+    private Handlers h;
 
     private Boolean _onPage1;
     private Boolean _onPage2;
@@ -80,6 +84,7 @@ public class Game {
 
         sh = new SpecsHelper();
         pmh = new PetMoverHelper();
+        h = new Handlers();
         gardenPane = new Pane();
         storePane = new Pane();
         interactPane = new Pane();
@@ -136,55 +141,159 @@ public class Game {
 
     private class BuyShop1 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            Cat newCat = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-            newCat.setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((newCat.getXLoc()-110)/130)][(int) ((newCat.getYLoc()-290)/130)] = newCat;
-            pmh.setupPetMover(newCat);
+            if (_onPage1) {
+                Cat newCat = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newCat.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newCat.getXLoc() - 110) / 130)][(int) ((newCat.getYLoc() - 290) / 130)] = newCat;
+                pmh.setupPetMover(newCat);
+                h.setupHandlers(newCat);
+            }
+
+            if (_onPage2) {
+                Owl newOwl = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newOwl.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newOwl.getXLoc() - 110) / 130)][(int) ((newOwl.getYLoc() - 290) / 130)] = newOwl;
+                pmh.setupPetMover(newOwl);
+                h.setupHandlers(newOwl);
+            }
+
+            if (_onPage3) {
+                Walrus newWalrus = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newWalrus.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newWalrus.getXLoc() - 110) / 130)][(int) ((newWalrus.getYLoc() - 290) / 130)] = newWalrus;
+                pmh.setupPetMover(newWalrus);
+                h.setupHandlers(newWalrus);
+            }
         }
     }
 
     private class BuyShop2 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-            newChicken.setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((newChicken.getXLoc()-110)/130)][(int) ((newChicken.getYLoc()-290)/130)] = newChicken;
-            pmh.setupPetMover(newChicken);
+            if (_onPage1) {
+                Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newChicken.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newChicken.getXLoc() - 110) / 130)][(int) ((newChicken.getYLoc() - 290) / 130)] = newChicken;
+                pmh.setupPetMover(newChicken);
+                h.setupHandlers(newChicken);
+            }
+
+            if (_onPage2) {
+                Penguin newPenguin = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newPenguin.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newPenguin.getXLoc() - 110) / 130)][(int) ((newPenguin.getYLoc() - 290) / 130)] = newPenguin;
+                pmh.setupPetMover(newPenguin);
+                h.setupHandlers(newPenguin);
+            }
+
+            if (_onPage3) {
+                Gnome newGnome = new Gnome(interactPane, _pets);
+                newGnome.addToPane();
+                newGnome.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newGnome.getXLoc() - 110) / 130)][(int) ((newGnome.getYLoc() - 290) / 130)] = newGnome;
+            }
         }
     }
 
     private class BuyShop3 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            Cow newCow = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-            newCow.setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((newCow.getXLoc()-110)/130)][(int) ((newCow.getYLoc()-290)/130)] = newCow;
-            pmh.setupPetMover(newCow);
+            if (_onPage1) {
+                Cow newCow = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newCow.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newCow.getXLoc() - 110) / 130)][(int) ((newCow.getYLoc() - 290) / 130)] = newCow;
+                pmh.setupPetMover(newCow);
+                h.setupHandlers(newCow);
+            }
+
+            if (_onPage2) {
+                Pig newPig = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newPig.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newPig.getXLoc() - 110) / 130)][(int) ((newPig.getYLoc() - 290) / 130)] = newPig;
+                pmh.setupPetMover(newPig);
+                h.setupHandlers(newPig);
+            }
+
+            if (_onPage3) {
+                Plant newPlant = new Plant(interactPane, _pets);
+                newPlant.addToPane();
+                newPlant.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newPlant.getXLoc() - 110) / 130)][(int) ((newPlant.getYLoc() - 290) / 130)] = newPlant;
+            }
         }
     }
 
     private class BuyShop4 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            Dog newDog = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-            newDog.setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((newDog.getXLoc()-110)/130)][(int) ((newDog.getYLoc()-290)/130)] = newDog;
-            pmh.setupPetMover(newDog);
+            if (_onPage1) {
+                Dog newDog = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newDog.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newDog.getXLoc() - 110) / 130)][(int) ((newDog.getYLoc() - 290) / 130)] = newDog;
+                pmh.setupPetMover(newDog);
+                h.setupHandlers(newDog);
+            }
+
+            if (_onPage2) {
+                Reindeer newReindeer = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newReindeer.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newReindeer.getXLoc() - 110) / 130)][(int) ((newReindeer.getYLoc() - 290) / 130)] = newReindeer;
+                pmh.setupPetMover(newReindeer);
+                h.setupHandlers(newReindeer);
+            }
+
+            if (_onPage3) {
+                House newHouse = new House(interactPane, _pets);
+                newHouse.addToPane();
+                newHouse.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newHouse.getXLoc() - 110) / 130)][(int) ((newHouse.getYLoc() - 290) / 130)] = newHouse;
+            }
         }
     }
 
     private class BuyShop5 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            Fox newFox = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-            newFox.setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((newFox.getXLoc()-110)/130)][(int) ((newFox.getYLoc()-290)/130)] = newFox;
-            pmh.setupPetMover(newFox);
+            if (_onPage1) {
+                Fox newFox = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newFox.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newFox.getXLoc() - 110) / 130)][(int) ((newFox.getYLoc() - 290) / 130)] = newFox;
+                pmh.setupPetMover(newFox);
+                h.setupHandlers(newFox);
+            }
+            if (_onPage2) {
+                Sheep newSheep = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newSheep.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newSheep.getXLoc() - 110) / 130)][(int) ((newSheep.getYLoc() - 290) / 130)] = newSheep;
+                pmh.setupPetMover(newSheep);
+                h.setupHandlers(newSheep);
+            }
+
+            if (_onPage3) {
+                //HAT figure it out
+            }
         }
     }
 
     private class BuyShop6 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
-            Giraffe newGiraffe = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-            newGiraffe.setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((newGiraffe.getXLoc()-110)/130)][(int) ((newGiraffe.getYLoc()-290)/130)] = newGiraffe;
-            pmh.setupPetMover(newGiraffe);
+            if (_onPage1) {
+                Giraffe newGiraffe = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newGiraffe.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newGiraffe.getXLoc() - 110) / 130)][(int) ((newGiraffe.getYLoc() - 290) / 130)] = newGiraffe;
+                pmh.setupPetMover(newGiraffe);
+                h.setupHandlers(newGiraffe);
+            }
+            if (_onPage2) {
+                Tiger newTiger = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                newTiger.setLoc(sh.petXLoc(), sh.petYLoc());
+                _pets[(int) ((newTiger.getXLoc() - 110) / 130)][(int) ((newTiger.getYLoc() - 290) / 130)] = newTiger;
+                pmh.setupPetMover(newTiger);
+                h.setupHandlers(newTiger);
+            }
+
+            if (_onPage3) {
+                Stop[] stops = new Stop[] { new Stop(0, Color.DEEPSKYBLUE), new Stop(1, Color.PINK)};
+                LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
+
+                _garden.getSky().setFill(lg1);
+            }
         }
     }
 
@@ -300,7 +409,7 @@ public class Game {
 
 
     public void setupInitialPets(){
-        _pets = new Pet[4][4];
+        _pets = new Buyable[4][4];
         _pet = new Pet[4];
         for (int i = 0; i < 4; i++){
             _pet[i] = this.generatePet();
@@ -309,20 +418,16 @@ public class Game {
             _myPets.add(i, _pet[i]);
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
             pmh.setupPetMover(_pet[i]);
-        }
-        this.setupHandlers();
+            h.setupHandlers(_pet[i]);
+            }
     }
 
-    public void setupHandlers(){
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
-                if (_pets[i][j] != null) {
-                    SpecsGetter sg = new SpecsGetter(_pets[i][j]);
-                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, sg);
-                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, sg);
-                    _pets[i][j].getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
-                }
-            }
+    public class Handlers {
+        public void setupHandlers(Pet pet) {
+            SpecsGetter sg = new SpecsGetter(pet);
+            pet.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, sg);
+            pet.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, sg);
+            pet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
         }
     }
 
@@ -571,8 +676,8 @@ public class Game {
     }
 
     private class SpecsClose implements EventHandler<MouseEvent>{
-        private Pet _pet;
-        private SpecsClose(Pet pet){
+        private Buyable _pet;
+        private SpecsClose(Buyable pet){
             _pet = pet;
         }
         public void handle(MouseEvent event){

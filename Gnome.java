@@ -1,5 +1,6 @@
 package indy;
 
+import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -21,8 +22,10 @@ public class Gnome implements Buyable{
     private Circle _pupil1;
     private Circle _pupil2;
     private Pane _root;
+    private Buyable[][] _pets;
 
-    public Gnome(Pane root){
+    public Gnome(Pane root, Buyable[][] pets){
+        _pets = pets;
         _root = root;
         _head = new Circle(Constants.SPOT_3_Y);
         _head.setFill(Color.LAVENDER);
@@ -66,6 +69,80 @@ public class Gnome implements Buyable{
         return "Garden Gnome";
     }
 
+    public void setLoc(double x, double y){
+        if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            _hat.setX(x);
+            _hat.setY(y-50);
+            _head.setCenterX(x+12.5);
+            _head.setCenterY(y-27);
+            _shirt.setX(x-12);
+            _shirt.setY(y-13);
+            _beard.setCenterX(x+12);
+            _beard.setCenterY(y-10);
+            _mouth.setCenterX(x+12);
+            _mouth.setCenterY(y-18);
+            _pants.setX(x-7);
+            _pants.setY(y+22);
+            _belt.setX(x-7);
+            _belt.setY(y+22);
+            _foot1.setCenterX(x-2);
+            _foot1.setCenterY(y+50);
+            _foot2.setCenterX(x+31);
+            _foot2.setCenterY(y+50);
+            _eye1.setCenterX(x+5.5);
+            _eye1.setCenterY(y-30);
+            _eye2.setCenterX(x+18.5);
+            _eye2.setCenterY(y-30);
+            _pupil1.setCenterX(x+6);
+            _pupil1.setCenterY(y-31);
+            _pupil2.setCenterX(x+19);
+            _pupil2.setCenterY(y-31);
+        }
+        else{
+            this.setLoc(this.petXLoc(), this.petYLoc());
+        }
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
+    }
+
     public void setBounceLoc(double x, double y){
         _hat.setX(x);
         _hat.setY(y-50);
@@ -95,4 +172,35 @@ public class Gnome implements Buyable{
         _pupil2.setCenterY(y-31);
     }
     public void setOpacity(double x){}
+
+    public Timeline getTimeline(){
+        return null;
+    }
+
+    public double getXLoc(){
+        return _hat.getX();
+    }
+
+    public double getYLoc(){
+        return _hat.getY()+50;
+    }
+
+    public double getOYL(){
+        return 0;
+    }
+    public String getPetName(){
+        return null;
+    }
+    public String getPetBirthMonth(){
+        return null;
+    }
+    public String getPetPersonality(){
+        return null;
+    }
+    public String getPetFavFood(){
+        return null;
+    }
+    public Ellipse getNode(){
+        return null;
+    }
 }

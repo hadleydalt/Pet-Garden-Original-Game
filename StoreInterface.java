@@ -23,7 +23,7 @@ public class StoreInterface {
     private Rectangle _coverNode1;
     private Rectangle _coverNode2;
     private Rectangle _coverNode3;
-    private Pet[][] x;
+    private Buyable[][] x;
 
     private Pane _specs;
     private Rectangle _petPopup;
@@ -308,10 +308,10 @@ public class StoreInterface {
         _walrus = new Walrus(_shopPane, x, "x", "x", "x", "x");
         _walrus.removeFromPane();
 
-        _gnome = new Gnome(_shopPane);
-        _plant = new Plant(_shopPane);
-        _house = new House(_shopPane);
-        _hat = new Hat(_shopPane);
+        _gnome = new Gnome(_shopPane, x);
+        _plant = new Plant(_shopPane, x);
+        _house = new House(_shopPane, x);
+        _hat = new Hat(_shopPane, x);
         _sunsetBG = new SunsetBG(_shopPane);
 
         _balance = new Label("0");

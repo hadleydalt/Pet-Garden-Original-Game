@@ -45,7 +45,7 @@ public class Store {
     private Sheep _sheep;
     private Tiger _tiger;
     private Walrus _walrus;
-    private Pet[][] x;
+    private Buyable[][] x;
     private Rectangle _petFrame;
     private Label _petNamed;
     private Pane shopPane;

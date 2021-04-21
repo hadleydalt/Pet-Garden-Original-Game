@@ -1,5 +1,6 @@
 package indy;
 
+import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,8 +24,10 @@ public class Plant implements Buyable{
     private Ellipse _leaf1;
     private Rectangle _potTopShadow;
     private Pane _root;
+    private Buyable[][] _pets;
 
-    public Plant(Pane root){
+    public Plant(Pane root, Buyable[][] pets){
+        _pets = pets;
         _root = root;
         _petal1 = new Ellipse(12, 5);
         _petal1.setRotate(90);
@@ -73,6 +76,44 @@ public class Plant implements Buyable{
 
     public String getType(){
         return "Flower";
+    }
+
+    public void setLoc(double x, double y){
+        if (_pets[(int) ((x-110)/130)][(int) ((y-290)/130)] == null) {
+            _petal1.setCenterX(x);
+            _petal1.setCenterY(y-40);
+            _petal2.setCenterX(x+10);
+            _petal2.setCenterY(y-38);
+            _petal3.setCenterX(x+14);
+            _petal3.setCenterY(y-28);
+            _petal4.setCenterX(x+11);
+            _petal4.setCenterY(y-18);
+            _petal5.setCenterX(x+3);
+            _petal5.setCenterY(y-14);
+            _petal6.setCenterX(x-7);
+            _petal6.setCenterY(y-14);
+            _petal7.setCenterX(x-14);
+            _petal7.setCenterY(y-21);
+            _petal8.setCenterX(x-14);
+            _petal8.setCenterY(y-30);
+            _petal9.setCenterX(x-10);
+            _petal9.setCenterY(y-38);
+            _middle.setCenterX(x);
+            _middle.setCenterY(y-28);
+            _stem.setX(x-2);
+            _stem.setY(y-12);
+            _pot.setX(x-15);
+            _pot.setY(y+15);
+            _leaf1.setCenterX(x+9);
+            _leaf1.setCenterY(y+6);
+            _potTop.setX(x-20);
+            _potTop.setY(y+15);
+            _potTopShadow.setX(x-15);
+            _potTopShadow.setY(y+25);
+        }
+        else{
+            this.setLoc(this.petXLoc(), this.petYLoc());
+        }
     }
 
     public void setBounceLoc(double x, double y){
@@ -164,6 +205,46 @@ public class Plant implements Buyable{
         return col;
     }
 
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
+    }
+
     public void setOpacity(double x){}
 
     public void removeFromPane(){
@@ -174,5 +255,36 @@ public class Plant implements Buyable{
     public void addToPane(){
         _root.getChildren().addAll(_stem, _petal1, _petal2, _petal3, _petal4, _petal5, _petal6, _petal7, _petal8, _petal9, _middle,
                 _pot, _leaf1, _potTop, _potTopShadow);
+    }
+
+    public Timeline getTimeline(){
+        return null;
+    }
+
+    public double getXLoc(){
+        return _petal1.getCenterX();
+    }
+
+    public double getYLoc(){
+        return _petal1.getCenterY()+40;
+    }
+
+    public double getOYL(){
+        return 0;
+    }
+    public String getPetName(){
+        return null;
+    }
+    public String getPetBirthMonth(){
+        return null;
+    }
+    public String getPetPersonality(){
+        return null;
+    }
+    public String getPetFavFood(){
+        return null;
+    }
+    public Ellipse getNode(){
+        return null;
     }
 }

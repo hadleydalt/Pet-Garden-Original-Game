@@ -9,7 +9,7 @@ import javafx.scene.text.Font;
 
 public class Pet implements Buyable {
     private Ellipse _body;
-    private Pet[][] _pets;
+    private Buyable[][] _pets;
     private String _petName;
     private String _personality;
     private String _birthMonth;
@@ -18,7 +18,7 @@ public class Pet implements Buyable {
     private Label _gardenName;
     private Timeline _timeline;
 
-    public Pet(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
+    public Pet(Pane root, Buyable[][] pets, String petName, String personality, String birthMonth, String favFood){
         _pets = pets;
         _body = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
         _body.setFill(this.getPetColor());
@@ -111,5 +111,45 @@ public class Pet implements Buyable {
 
     public double getOYL(){
         return 0;
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
     }
 }
