@@ -142,27 +142,51 @@ public class Game {
     private class BuyShop1 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             if (_onPage1) {
-                Cat newCat = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newCat.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newCat.getXLoc() - 110) / 130)][(int) ((newCat.getYLoc() - 290) / 130)] = newCat;
-                pmh.setupPetMover(newCat);
-                h.setupHandlers(newCat);
+                if (intLabel >= _si.getCat().getPrice()) {
+                    Cat newCat = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newCat.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newCat.getXLoc() - 110) / 130)][(int) ((newCat.getYLoc() - 290) / 130)] = newCat;
+                    pmh.setupPetMover(newCat);
+                    h.setupHandlers(newCat);
+                    intLabel -= _si.getCat().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage2) {
-                Owl newOwl = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newOwl.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newOwl.getXLoc() - 110) / 130)][(int) ((newOwl.getYLoc() - 290) / 130)] = newOwl;
-                pmh.setupPetMover(newOwl);
-                h.setupHandlers(newOwl);
+                if (intLabel >= _si.getOwl().getPrice()) {
+                    Owl newOwl = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newOwl.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newOwl.getXLoc() - 110) / 130)][(int) ((newOwl.getYLoc() - 290) / 130)] = newOwl;
+                    pmh.setupPetMover(newOwl);
+                    h.setupHandlers(newOwl);
+                    intLabel -= _si.getOwl().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage3) {
-                Walrus newWalrus = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newWalrus.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newWalrus.getXLoc() - 110) / 130)][(int) ((newWalrus.getYLoc() - 290) / 130)] = newWalrus;
-                pmh.setupPetMover(newWalrus);
-                h.setupHandlers(newWalrus);
+                if (intLabel >= _si.getWalrus().getPrice()) {
+                    Walrus newWalrus = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newWalrus.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newWalrus.getXLoc() - 110) / 130)][(int) ((newWalrus.getYLoc() - 290) / 130)] = newWalrus;
+                    pmh.setupPetMover(newWalrus);
+                    h.setupHandlers(newWalrus);
+                    intLabel -= _si.getWalrus().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
         }
     }
@@ -170,26 +194,50 @@ public class Game {
     private class BuyShop2 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             if (_onPage1) {
-                Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newChicken.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newChicken.getXLoc() - 110) / 130)][(int) ((newChicken.getYLoc() - 290) / 130)] = newChicken;
-                pmh.setupPetMover(newChicken);
-                h.setupHandlers(newChicken);
+                if (intLabel >= _si.getChicken().getPrice()) {
+                    Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newChicken.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newChicken.getXLoc() - 110) / 130)][(int) ((newChicken.getYLoc() - 290) / 130)] = newChicken;
+                    pmh.setupPetMover(newChicken);
+                    h.setupHandlers(newChicken);
+                    intLabel -= _si.getChicken().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage2) {
-                Penguin newPenguin = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newPenguin.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newPenguin.getXLoc() - 110) / 130)][(int) ((newPenguin.getYLoc() - 290) / 130)] = newPenguin;
-                pmh.setupPetMover(newPenguin);
-                h.setupHandlers(newPenguin);
+                if (intLabel >= _si.getPenguin().getPrice()) {
+                    Penguin newPenguin = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newPenguin.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newPenguin.getXLoc() - 110) / 130)][(int) ((newPenguin.getYLoc() - 290) / 130)] = newPenguin;
+                    pmh.setupPetMover(newPenguin);
+                    h.setupHandlers(newPenguin);
+                    intLabel -= _si.getPenguin().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage3) {
-                Gnome newGnome = new Gnome(interactPane, _pets);
-                newGnome.addToPane();
-                newGnome.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newGnome.getXLoc() - 110) / 130)][(int) ((newGnome.getYLoc() - 290) / 130)] = newGnome;
+                if (intLabel >= _si.getGnome().getPrice()) {
+                    Gnome newGnome = new Gnome(interactPane, _pets);
+                    newGnome.addToPane();
+                    newGnome.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newGnome.getXLoc() - 110) / 130)][(int) ((newGnome.getYLoc() - 290) / 130)] = newGnome;
+                    intLabel -= _si.getGnome().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
         }
     }
@@ -197,26 +245,50 @@ public class Game {
     private class BuyShop3 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             if (_onPage1) {
-                Cow newCow = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newCow.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newCow.getXLoc() - 110) / 130)][(int) ((newCow.getYLoc() - 290) / 130)] = newCow;
-                pmh.setupPetMover(newCow);
-                h.setupHandlers(newCow);
+                if (intLabel >= _si.getCow().getPrice()) {
+                    Cow newCow = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newCow.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newCow.getXLoc() - 110) / 130)][(int) ((newCow.getYLoc() - 290) / 130)] = newCow;
+                    pmh.setupPetMover(newCow);
+                    h.setupHandlers(newCow);
+                    intLabel -= _si.getCow().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage2) {
-                Pig newPig = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newPig.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newPig.getXLoc() - 110) / 130)][(int) ((newPig.getYLoc() - 290) / 130)] = newPig;
-                pmh.setupPetMover(newPig);
-                h.setupHandlers(newPig);
+                if (intLabel >= _si.getPig().getPrice()) {
+                    Pig newPig = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newPig.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newPig.getXLoc() - 110) / 130)][(int) ((newPig.getYLoc() - 290) / 130)] = newPig;
+                    pmh.setupPetMover(newPig);
+                    h.setupHandlers(newPig);
+                    intLabel -= _si.getPig().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage3) {
-                Plant newPlant = new Plant(interactPane, _pets);
-                newPlant.addToPane();
-                newPlant.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newPlant.getXLoc() - 110) / 130)][(int) ((newPlant.getYLoc() - 290) / 130)] = newPlant;
+                if (intLabel >= _si.getPlant().getPrice()) {
+                    Plant newPlant = new Plant(interactPane, _pets);
+                    newPlant.addToPane();
+                    newPlant.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newPlant.getXLoc() - 110) / 130)][(int) ((newPlant.getYLoc() - 290) / 130)] = newPlant;
+                    intLabel -= _si.getPlant().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
         }
     }
@@ -224,26 +296,50 @@ public class Game {
     private class BuyShop4 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             if (_onPage1) {
-                Dog newDog = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newDog.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newDog.getXLoc() - 110) / 130)][(int) ((newDog.getYLoc() - 290) / 130)] = newDog;
-                pmh.setupPetMover(newDog);
-                h.setupHandlers(newDog);
+                if (intLabel >= _si.getDog().getPrice()) {
+                    Dog newDog = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newDog.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newDog.getXLoc() - 110) / 130)][(int) ((newDog.getYLoc() - 290) / 130)] = newDog;
+                    pmh.setupPetMover(newDog);
+                    h.setupHandlers(newDog);
+                    intLabel -= _si.getDog().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage2) {
-                Reindeer newReindeer = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newReindeer.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newReindeer.getXLoc() - 110) / 130)][(int) ((newReindeer.getYLoc() - 290) / 130)] = newReindeer;
-                pmh.setupPetMover(newReindeer);
-                h.setupHandlers(newReindeer);
+                if (intLabel >= _si.getReindeer().getPrice()) {
+                    Reindeer newReindeer = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newReindeer.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newReindeer.getXLoc() - 110) / 130)][(int) ((newReindeer.getYLoc() - 290) / 130)] = newReindeer;
+                    pmh.setupPetMover(newReindeer);
+                    h.setupHandlers(newReindeer);
+                    intLabel -= _si.getReindeer().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage3) {
-                House newHouse = new House(interactPane, _pets);
-                newHouse.addToPane();
-                newHouse.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newHouse.getXLoc() - 110) / 130)][(int) ((newHouse.getYLoc() - 290) / 130)] = newHouse;
+                if (intLabel >= _si.getHouse().getPrice()) {
+                    House newHouse = new House(interactPane, _pets);
+                    newHouse.addToPane();
+                    newHouse.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newHouse.getXLoc() - 110) / 130)][(int) ((newHouse.getYLoc() - 290) / 130)] = newHouse;
+                    intLabel -= _si.getHouse().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
         }
     }
@@ -251,22 +347,46 @@ public class Game {
     private class BuyShop5 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             if (_onPage1) {
-                Fox newFox = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newFox.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newFox.getXLoc() - 110) / 130)][(int) ((newFox.getYLoc() - 290) / 130)] = newFox;
-                pmh.setupPetMover(newFox);
-                h.setupHandlers(newFox);
+                if (intLabel >= _si.getFox().getPrice()) {
+                    Fox newFox = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newFox.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newFox.getXLoc() - 110) / 130)][(int) ((newFox.getYLoc() - 290) / 130)] = newFox;
+                    pmh.setupPetMover(newFox);
+                    h.setupHandlers(newFox);
+                    intLabel -= _si.getFox().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
             if (_onPage2) {
-                Sheep newSheep = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newSheep.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newSheep.getXLoc() - 110) / 130)][(int) ((newSheep.getYLoc() - 290) / 130)] = newSheep;
-                pmh.setupPetMover(newSheep);
-                h.setupHandlers(newSheep);
+                if (intLabel >= _si.getSheep().getPrice()) {
+                    Sheep newSheep = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newSheep.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newSheep.getXLoc() - 110) / 130)][(int) ((newSheep.getYLoc() - 290) / 130)] = newSheep;
+                    pmh.setupPetMover(newSheep);
+                    h.setupHandlers(newSheep);
+                    intLabel -= _si.getSheep().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage3) {
-                sh.addHat(sh.generateInt(), sh.generateInt());
+                if (intLabel >= _si.getHat().getPrice()) {
+                    sh.addHat(sh.generateInt(), sh.generateInt());
+                    intLabel -= _si.getHat().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
         }
     }
@@ -274,26 +394,56 @@ public class Game {
     private class BuyShop6 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
             if (_onPage1) {
-                Giraffe newGiraffe = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newGiraffe.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newGiraffe.getXLoc() - 110) / 130)][(int) ((newGiraffe.getYLoc() - 290) / 130)] = newGiraffe;
-                pmh.setupPetMover(newGiraffe);
-                h.setupHandlers(newGiraffe);
+                if (intLabel >= _si.getGiraffe().getPrice()) {
+                    Giraffe newGiraffe = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newGiraffe.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newGiraffe.getXLoc() - 110) / 130)][(int) ((newGiraffe.getYLoc() - 290) / 130)] = newGiraffe;
+                    pmh.setupPetMover(newGiraffe);
+                    h.setupHandlers(newGiraffe);
+                    intLabel -= _si.getGiraffe().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
             if (_onPage2) {
-                Tiger newTiger = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                newTiger.setLoc(sh.petXLoc(), sh.petYLoc());
-                _pets[(int) ((newTiger.getXLoc() - 110) / 130)][(int) ((newTiger.getYLoc() - 290) / 130)] = newTiger;
-                pmh.setupPetMover(newTiger);
-                h.setupHandlers(newTiger);
+                if (intLabel >= _si.getTiger().getPrice()) {
+                    Tiger newTiger = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                    newTiger.setLoc(sh.petXLoc(), sh.petYLoc());
+                    _pets[(int) ((newTiger.getXLoc() - 110) / 130)][(int) ((newTiger.getYLoc() - 290) / 130)] = newTiger;
+                    pmh.setupPetMover(newTiger);
+                    h.setupHandlers(newTiger);
+                    intLabel -= _si.getTiger().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
 
             if (_onPage3) {
-                Stop[] stops = new Stop[] { new Stop(0, Color.DEEPSKYBLUE), new Stop(1, Color.PINK)};
-                LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
+                if (intLabel >= _si.getSunsetBG().getPrice()) {
+                    Stop[] stops = new Stop[]{new Stop(0, Color.DEEPSKYBLUE), new Stop(1, Color.PINK)};
+                    LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
 
-                _garden.getSky().setFill(lg1);
+                    _garden.getSky().setFill(lg1);
+                    intLabel -= _si.getSunsetBG().getPrice();
+                    _si.getBalance().setText(Integer.toString(intLabel));
+                }
+                else {
+                    _si.getBalIns().setOpacity(1);
+                    sh.setupBalIns();
+                }
             }
+        }
+    }
+
+    private class BalIns implements EventHandler<ActionEvent>{
+        public void handle(ActionEvent event){
+                _si.getBalIns().setOpacity(0);
         }
     }
 
@@ -451,7 +601,7 @@ public class Game {
     public void setupCounter() {
         KeyFrame kf2 = new KeyFrame(Duration.millis(1), new Counter());
         Timeline timeline = new Timeline(kf2);
-        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.setCycleCount(2500);
         timeline.play();
     }
 
@@ -468,7 +618,7 @@ public class Game {
     private class Counter implements EventHandler<ActionEvent>{
         public void handle(ActionEvent event){
             _counter ++;
-            if (_counter >= 2500){
+            if (_counter == 2500){
                 _title.getLoadingBar().setOpacity(0);
                 _title.getLoadingBG().setOpacity(0);
                 _title.getPercentLabel().setOpacity(0);
@@ -706,7 +856,7 @@ public class Game {
         public void handle (KeyEvent event){
                 if (event.getCode() == KeyCode.SPACE) {
                     _title.getPressSpace().setOpacity(0);
-                    if ((_titleNotCompressed) && (_counter >= 2500)) {
+                    if ((_titleNotCompressed) && (_counter == 2500)) {
                     this.setupTitleBGTimeline();
                     _titleNotCompressed = false;
                     _verChanger.setOpacity(1);
@@ -1027,6 +1177,13 @@ public class Game {
                 } else {
                     this.addHat(this.generateInt(), this.generateInt());
                 }
+        }
+
+        public void setupBalIns(){
+            KeyFrame kf100 = new KeyFrame(Duration.seconds(1), new BalIns());
+            Timeline timeline = new Timeline(kf100);
+            timeline.setCycleCount(1);
+            timeline.play();
         }
     }
 }
