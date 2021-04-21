@@ -72,5 +72,6 @@ public class SunsetBG implements Buyable{
     }
 
     public void setLoc(double x, double y){}
+    public void addHat(double x, double y){}
 }
 

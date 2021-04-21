@@ -13,10 +13,12 @@ public interface Buyable {
     public void addToPane();
     public Timeline getTimeline();
     public double getXLoc();
+    public double getYLoc();
     public double getOYL();
     public String getPetName();
     public String getPetBirthMonth();
     public String getPetPersonality();
     public String getPetFavFood();
     public Ellipse getNode();
+    public void addHat(double x, double y);
 }

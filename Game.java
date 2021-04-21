@@ -266,7 +266,7 @@ public class Game {
             }
 
             if (_onPage3) {
-                //HAT figure it out
+                sh.addHat(sh.generateInt(), sh.generateInt());
             }
         }
     }
@@ -330,7 +330,12 @@ public class Game {
             if (isAnimated) {
                 for (int i = 0; i < 4; i++){
                     for (int j =0; j < 4; j++){
-                        if (_pets[i][j] != null) {
+                        if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
+                                (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
+                                (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
+                                (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
+                                (_pets[i][j].getType().equals("Reindeer")) || (_pets[i][j].getType().equals("Sheep")) ||
+                                (_pets[i][j].getType().equals("Tiger")) || (_pets[i][j].getType().equals("Walrus")))) {
                             _pets[i][j].getTimeline().stop();
                             _pets[i][j].setBounceLoc(_pets[i][j].getXLoc(), _pets[i][j].getOYL());
                         }
@@ -342,7 +347,12 @@ public class Game {
             else {
                 for (int i = 0; i < 4; i++){
                     for (int j =0; j < 4; j++){
-                        if (_pets[i][j] != null) {
+                        if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
+                                (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
+                                (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
+                                (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
+                                (_pets[i][j].getType().equals("Reindeer")) || (_pets[i][j].getType().equals("Sheep")) ||
+                                (_pets[i][j].getType().equals("Tiger")) || (_pets[i][j].getType().equals("Walrus")))) {
                             _pets[i][j].getTimeline().play();
                         }
                     }
@@ -491,23 +501,6 @@ public class Game {
             if (thisPet.getYLoc() > thisPet.getOYL() + 4) {
                 _direction = !_direction;
             }
-            /*for (int i = 0; i < 4; i++){
-                    if (_direction) {
-                        _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() + 2);
-                    } else {
-                        _pet[i].setBounceLoc(_pet[i].getXLoc(), _pet[i].getYLoc() - 2);
-                    }
-            }
-
-            if ((_pet[0].getYLoc() < (_pet[0].getOYL() - 2)) && (_pet[1].getYLoc() < (_pet[1].getOYL() - 4)) && (_pet[2].getYLoc() < (_pet[2].getOYL() - 6))
-                    && (_pet[3].getYLoc() < (_pet[3].getOYL() - 8))){
-                _direction = !_direction;
-            }
-
-            if ((_pet[0].getYLoc() > (_pet[0].getOYL() + 2)) && (_pet[1].getYLoc() > (_pet[1].getOYL() + 3)) && (_pet[2].getYLoc() > (_pet[2].getOYL() + 4))
-                    && (_pet[3].getYLoc() > (_pet[3].getOYL() + 5))){
-                _direction = !_direction;
-            }*/
         }
     }
 
@@ -1002,6 +995,38 @@ public class Game {
             }
             return food;
         }
-    }
 
+        public int generateInt(){
+            int i = 0;
+            int rand_int = (int) (Math.random() * 4);
+            switch (rand_int){
+                case 0:
+                    i = 0;
+                    break;
+                case 1:
+                    i = 1;
+                    break;
+                case 2:
+                    i = 2;
+                    break;
+                default:
+                    i = 3;
+                    break;
+            }
+            return i;
+        }
+
+        public void addHat(int i, int j) {
+                if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
+                        (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
+                        (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
+                        (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
+                        (_pets[i][j].getType().equals("Reindeer")) || (_pets[i][j].getType().equals("Sheep")) ||
+                        (_pets[i][j].getType().equals("Tiger")) || (_pets[i][j].getType().equals("Walrus")))) {
+                    _pets[i][j].addHat(_pets[i][j].getXLoc(), _pets[i][j].getYLoc());
+                } else {
+                    this.addHat(this.generateInt(), this.generateInt());
+                }
+        }
+    }
 }

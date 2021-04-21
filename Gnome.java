@@ -203,4 +203,5 @@ public class Gnome implements Buyable{
     public Ellipse getNode(){
         return null;
     }
+    public void addHat(double x, double y){}
 }

@@ -104,7 +104,16 @@ public class Hat implements Buyable{
         return col;
     }
 
-    public void setOpacity(double x){}
+    public void setOpacity(double x){
+        _top.setOpacity(x);
+        _top.setOpacity(x);
+        _base.setOpacity(x);
+        _base.setOpacity(x);
+        _band.setOpacity(x);
+        _band.setOpacity(x);
+        _feather.setOpacity(x);
+        _feather.setOpacity(x);
+    }
 
     public void removeFromPane(){
         _root.getChildren().removeAll(_feather, _base, _top, _band);
@@ -144,5 +153,48 @@ public class Hat implements Buyable{
         return null;
     }
 
-    public void setLoc(double x, double y){}
+    public void setLoc(double x, double y){
+    }
+
+    public int petXLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 110;
+                break;
+            case 1:
+                loc = 240;
+                break;
+            case 2:
+                loc = 370;
+                break;
+            default:
+                loc = 500;
+                break;
+        }
+        return loc;
+    }
+
+    public int petYLoc(){
+        int loc = 0;
+        int rand_int = (int) (Math.random() * 4);
+        switch (rand_int){
+            case 0:
+                loc = 290;
+                break;
+            case 1:
+                loc = 420;
+                break;
+            case 2:
+                loc = 550;
+                break;
+            default:
+                loc = 680;
+                break;
+        }
+        return loc;
+    }
+
+    public void addHat(double x, double y){}
 }

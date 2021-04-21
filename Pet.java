@@ -17,9 +17,11 @@ public class Pet implements Buyable {
     private Boolean isNamed;
     private Label _gardenName;
     private Timeline _timeline;
+    private Pane _root;
 
     public Pet(Pane root, Buyable[][] pets, String petName, String personality, String birthMonth, String favFood){
         _pets = pets;
+        _root = root;
         _body = new Ellipse(Constants.ANIMAL_BODY_X, Constants.ANIMAL_BODY_Y);
         _body.setFill(this.getPetColor());
         _petName = petName;
@@ -152,4 +154,11 @@ public class Pet implements Buyable {
         }
         return loc;
     }
+
+    public void addHat(double x, double y){
+        Hat hat = new Hat(_root, _pets);
+        hat.setBounceLoc(x-12, y-80);
+        hat.addToPane();
+    }
+
 }
