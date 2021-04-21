@@ -10,7 +10,7 @@ public class PaneOrganizer {
         Game game = new Game();
         _root.setStyle("-fx-background-color: aliceblue;");
         _root.getChildren().addAll(game.getGardenPane(), game.getStorePane(),
-                game.getInteractPane(), game.getButtonPane());
+                game.getInteractPane());
     }
 
     public BorderPane getRoot(){

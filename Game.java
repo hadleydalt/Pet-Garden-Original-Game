@@ -1,7 +1,5 @@
 package indy;
 
-//CLICKABLE LABELS FOR SHOP ITEMS SHOULD BE IN INTERACTPANE
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -75,8 +73,6 @@ public class Game {
         return interactPane;
     }
 
-    public Pane getButtonPane() {return buttonPane;}
-
     public void setupGame(){
         _onPage1 = true;
         _onPage2 = false;
@@ -115,6 +111,7 @@ public class Game {
         _quitter.setOpacity(0);
         _quitter.relocate(505, 0);
         buttonPane.getChildren().addAll(_verChanger, _quitter);
+        interactPane.getChildren().add(buttonPane);
         _myPets = new LinkedList<Pet>();
         newName = "";
         newNewName = "";
@@ -484,8 +481,9 @@ public class Game {
                                 (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
                                 (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
                                 (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
-                                (_pets[i][j].getType().equals("Reindeer")) || (_pets[i][j].getType().equals("Sheep")) ||
-                                (_pets[i][j].getType().equals("Tiger")) || (_pets[i][j].getType().equals("Walrus")))) {
+                                (_pets[i][j].getType().equals("Pig")) || (_pets[i][j].getType().equals("Reindeer")) ||
+                                (_pets[i][j].getType().equals("Sheep")) || (_pets[i][j].getType().equals("Tiger")) ||
+                                (_pets[i][j].getType().equals("Walrus")))) {
                             _pets[i][j].getTimeline().stop();
                             _pets[i][j].setBounceLoc(_pets[i][j].getXLoc(), _pets[i][j].getOYL());
                         }
@@ -501,8 +499,9 @@ public class Game {
                                 (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
                                 (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
                                 (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
-                                (_pets[i][j].getType().equals("Reindeer")) || (_pets[i][j].getType().equals("Sheep")) ||
-                                (_pets[i][j].getType().equals("Tiger")) || (_pets[i][j].getType().equals("Walrus")))) {
+                                (_pets[i][j].getType().equals("Pig")) || (_pets[i][j].getType().equals("Reindeer")) ||
+                                (_pets[i][j].getType().equals("Sheep")) || (_pets[i][j].getType().equals("Tiger")) ||
+                                (_pets[i][j].getType().equals("Walrus")))) {
                             _pets[i][j].getTimeline().play();
                         }
                     }

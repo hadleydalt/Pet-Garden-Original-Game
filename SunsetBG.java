@@ -26,7 +26,7 @@ public class SunsetBG implements Buyable{
     }
 
     public String getType(){
-        return "Sunset Background";
+        return "Sunset";
     }
 
     public void setBounceLoc(double x, double y){

@@ -66,7 +66,7 @@ public class Gnome implements Buyable{
     }
 
     public String getType(){
-        return "Garden Gnome";
+        return "Gnome";
     }
 
     public void setLoc(double x, double y){
