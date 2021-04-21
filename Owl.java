@@ -29,6 +29,7 @@ public class Owl extends Pet{
     private Pet[][] _pets;
     private Ellipse _coverNode;
     private Pane _root;
+    private double _originalYLoc;
 
     public Owl(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
         super(root, pets, petName, personality, birthMonth, favFood);
@@ -179,10 +180,16 @@ public class Owl extends Pet{
             _fluff7.relocate(x+8, y+32);
             _coverNode.setCenterX(x);
             _coverNode.setCenterY(y);
+            _originalYLoc = y;
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
         }
+    }
+
+    @Override
+    public double getOYL(){
+        return _originalYLoc;
     }
 
     @Override

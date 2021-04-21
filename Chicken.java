@@ -19,6 +19,7 @@ public class Chicken extends Pet{
     private Pet[][] _pets;
     private Ellipse _coverNode;
     private Pane _root;
+    private double _originalYLoc;
 
     public Chicken(Pane root, Pet[][] pets, String petName, String personality, String birthMonth, String favFood){
         super(root, pets, petName, personality, birthMonth, favFood);
@@ -124,6 +125,7 @@ public class Chicken extends Pet{
             _top3.setCenterY(y-55);
             _coverNode.setCenterX(x);
             _coverNode.setCenterY(y);
+            _originalYLoc = y;
         }
         else {
             this.setLoc(this.petXLoc(), this.petYLoc());
@@ -209,5 +211,10 @@ public class Chicken extends Pet{
                 break;
         }
         return loc;
+    }
+
+    @Override
+    public double getOYL(){
+        return _originalYLoc;
     }
 }

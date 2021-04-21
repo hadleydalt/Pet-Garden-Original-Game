@@ -28,19 +28,10 @@ public class Game {
     private boolean _titleNotCompressed;
     private int _intPercent;
     private int _counter;
-    private int _subcounter;
     private int _titleXLoc;
     private int _titleYLoc;
     private Pet[][] _pets;
     private Pet[] _pet;
-    private double _pet1XLoc;
-    private double _pet2XLoc;
-    private double _pet3XLoc;
-    private double _pet4XLoc;
-    private double _pet1YLoc;
-    private double _pet2YLoc;
-    private double _pet3YLoc;
-    private double _pet4YLoc;
     private Button _verChanger;
     private Button _quitter;
     private Timeline _timeline;
@@ -104,11 +95,9 @@ public class Game {
         this.setupLoadingBarTimeline();
         _intPercent = _title.getPercent();
         _counter = 0;
-        _subcounter = 1;
         _titleXLoc = 318;
         _titleYLoc = 270;
         this.setupCounter();
-        this.setupSubCounter();
         buttonPane = new Pane();
         buttonPane.relocate(30, 15);
         _verChanger = new Button("Static Version");
@@ -223,10 +212,10 @@ public class Game {
         public void handle(ActionEvent event) {
             if (isAnimated) {
                 _timeline.stop();
-                _pet[0].setBounceLoc(_pet1XLoc, _pet1YLoc);
-                _pet[1].setBounceLoc(_pet2XLoc, _pet2YLoc);
-                _pet[2].setBounceLoc(_pet3XLoc, _pet3YLoc);
-                _pet[3].setBounceLoc(_pet4XLoc, _pet4YLoc);
+                _pet[0].setBounceLoc(_pet[0].getXLoc(), _pet[0].getOYL());
+                _pet[1].setBounceLoc(_pet[1].getXLoc(), _pet[1].getOYL());
+                _pet[2].setBounceLoc(_pet[2].getXLoc(), _pet[2].getOYL());
+                _pet[3].setBounceLoc(_pet[3].getXLoc(), _pet[3].getOYL());
                 _verChanger.setText("Animated Version");
                 isAnimated = false;
             }
@@ -291,17 +280,6 @@ public class Game {
         return pet;
     }
 
-    public void getOriginalLocs(){
-        _pet1XLoc = _pet[0].getXLoc();
-        _pet2XLoc = _pet[1].getXLoc();
-        _pet3XLoc = _pet[2].getXLoc();
-        _pet4XLoc = _pet[3].getXLoc();
-        _pet1YLoc = _pet[0].getYLoc();
-        _pet2YLoc = _pet[1].getYLoc();
-        _pet3YLoc = _pet[2].getYLoc();
-        _pet4YLoc = _pet[3].getYLoc();
-    }
-
 
 
     public void setupInitialPets(){
@@ -314,7 +292,6 @@ public class Game {
             _myPets.add(i, _pet[i]);
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
         }
-        this.getOriginalLocs();
         this.setupPetMover();
         this.setupHandlers();
     }
@@ -346,13 +323,6 @@ public class Game {
         timeline.play();
     }
 
-    public void setupSubCounter() {
-        KeyFrame kf10 = new KeyFrame(Duration.millis(180), new SubCounter());
-        Timeline timeline5 = new Timeline(kf10);
-        timeline5.setCycleCount(Animation.INDEFINITE);
-        timeline5.play();
-    }
-
     public void setupPetMover(){
         KeyFrame kf3 = new KeyFrame(Duration.millis(45), new PetMover());
         Timeline timeline = new Timeline(kf3);
@@ -376,12 +346,6 @@ public class Game {
         }
     }
 
-    private class SubCounter implements EventHandler<ActionEvent>{
-        public void handle(ActionEvent event){
-            _subcounter ++;
-        }
-    }
-
     private class PetMover implements EventHandler<ActionEvent>{
         boolean _direction = true;
 
@@ -394,13 +358,13 @@ public class Game {
                     }
             }
 
-            if ((_pet[0].getYLoc() < (_pet1YLoc - 2)) && (_pet[1].getYLoc() < (_pet2YLoc - 4)) && (_pet[2].getYLoc() < (_pet3YLoc - 6))
-            && (_pet[3].getYLoc() < (_pet4YLoc - 8))){
+            if ((_pet[0].getYLoc() < (_pet[0].getOYL() - 2)) && (_pet[1].getYLoc() < (_pet[1].getOYL() - 4)) && (_pet[2].getYLoc() < (_pet[2].getOYL() - 6))
+                    && (_pet[3].getYLoc() < (_pet[3].getOYL() - 8))){
                 _direction = !_direction;
             }
 
-            if ((_pet[0].getYLoc() > (_pet1YLoc + 2)) && (_pet[1].getYLoc() > (_pet2YLoc + 3)) && (_pet[2].getYLoc() > (_pet3YLoc + 4))
-                    && (_pet[3].getYLoc() > (_pet4YLoc + 5))){
+            if ((_pet[0].getYLoc() > (_pet[0].getOYL() + 2)) && (_pet[1].getYLoc() > (_pet[1].getOYL() + 3)) && (_pet[2].getYLoc() > (_pet[2].getOYL() + 4))
+                    && (_pet[3].getYLoc() > (_pet[3].getOYL() + 5))){
                 _direction = !_direction;
             }
         }

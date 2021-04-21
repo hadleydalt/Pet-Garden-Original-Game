@@ -98,4 +98,8 @@ public class Pet implements Buyable {
     public void removeFromPane(){}
 
     public void addToPane(){}
+
+    public double getOYL(){
+        return 0;
+    }
 }
