@@ -8,6 +8,8 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// Creates the Garden.
+
 public class Garden {
     private Rectangle _grass;
     private Rectangle _sky;
@@ -69,6 +71,8 @@ public class Garden {
                 _framer2, _framer3, _frame);
     }
 
+    // sets Garden's location.
+
     public void setLoc(double x, double y){
         _grass.setX(x);
         _grass.setY(y);
@@ -98,6 +102,8 @@ public class Garden {
         _frame.setY(55);
 
     }
+
+    // gets the sky so its color can be changed in the Game class if the user buys the Sunset.
 
     public Rectangle getSky(){
         return _sky;

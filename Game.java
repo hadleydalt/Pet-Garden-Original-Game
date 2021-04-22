@@ -16,6 +16,8 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.util.Duration;
 
+// The Game class contains most of the game's central logic, including all EventHandlers.
+
 public class Game {
     private Pane gardenPane;
     private Pane buttonPane;
@@ -25,7 +27,7 @@ public class Game {
     private StoreInterface _si;
     private Pane interactPane;
     private Title _title;
-    private boolean _titleNotCompressed;
+    private boolean _titleNotCompressed = true;
     private int _intPercent;
     private int _counter;
     private int _titleXLoc;
@@ -50,39 +52,26 @@ public class Game {
 
     private Sorts sorts;
 
-    private Boolean _onPage1;
-    private Boolean _onPage2;
-    private Boolean _onPage3;
+    private Boolean _onPage1 = true;
+    private Boolean _onPage2 = false;
+    private Boolean _onPage3 = false;
     private Boolean _isSorted = false;
 
     public Game(){
-        _shop = new Buyable[3][2];
         this.setupGame();
         this.setupInitialPets();
-        sorts = new Sorts(_si.getItems());
-        sorts.makeList();
-    }
-
-    public Pane getGardenPane(){
-        return gardenPane;
-    }
-
-    public Pane getStorePane(){
-        return storePane;
-    }
-
-    public Pane getInteractPane(){
-        return interactPane;
+        this.setupSorts();
     }
 
     public void setupGame(){
-        _onPage1 = true;
-        _onPage2 = false;
-        _onPage3 = false;
 
+        // IMPORTANT ELEMENTS
+        _shop = new Buyable[3][2];
         sh = new SpecsHelper();
         pmh = new PetMoverHelper();
         h = new Handlers();
+
+        // PANES AND LOCATIONS
         gardenPane = new Pane();
         storePane = new Pane();
         interactPane = new Pane();
@@ -94,7 +83,8 @@ public class Game {
         _title.setLoc(0, 0);
         _si = new StoreInterface(interactPane, _store.getShopPane());
         _si.setLoc(620,50);
-        _titleNotCompressed = true;
+
+        // KEY EVENTS HANDLER AND INITIAL SCREEN ANIMATION
         interactPane.addEventHandler(KeyEvent.KEY_PRESSED, new AllKeyEventsHandler());
         interactPane.setFocusTraversable(true);
         this.setupLoadingBarTimeline();
@@ -103,6 +93,8 @@ public class Game {
         _titleXLoc = 318;
         _titleYLoc = 270;
         this.setupCounter();
+
+        // BUTTONS
         buttonPane = new Pane();
         buttonPane.relocate(30, 15);
         _verChanger = new Button("Static Version");
@@ -114,6 +106,8 @@ public class Game {
         _quitter.relocate(505, 0);
         buttonPane.getChildren().addAll(_verChanger, _quitter);
         interactPane.getChildren().add(buttonPane);
+
+        // INITIALIZING INTEGERS AND STRINGS
         newName = "";
         newNewName = "";
         searchQuery = "";
@@ -121,6 +115,8 @@ public class Game {
         newNumHours = "";
         intNumHours = 0;
         intLabel = 0;
+
+        // SETTING UP MOUSE EVENT HANDLERS
         _si.getSearchMyPetsCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchGetter());
         _si.getXCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
         _si.getEnterHoursCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterGetter());
@@ -137,6 +133,97 @@ public class Game {
         _si.getShop5().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop5());
         _si.getShop6().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop6());
     }
+
+    // PANE GETTER METHODS
+    public Pane getGardenPane(){
+        return gardenPane;
+    }
+    public Pane getStorePane(){
+        return storePane;
+    }
+    public Pane getInteractPane(){
+        return interactPane;
+    }
+
+    // SETS UP THE 2D ARRAY IN THE GARDEN AND A 1D ARRAY OF THE INITIAL PETS, WHICH ARE ADDED TO THE 2D ARRAY
+    public void setupInitialPets(){
+        _pets = new Buyable[4][4];
+        _pet = new Pet[4];
+        for (int i = 0; i < 4; i++){
+            _pet[i] = this.generatePet();
+            _pet[i].setOpacity(0);
+            _pet[i].setLoc(sh.petXLoc(), sh.petYLoc());
+            _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
+            pmh.setupPetMover(_pet[i]);
+            h.setupHandlers(_pet[i]);
+        }
+    }
+
+    // MAKES A LIST OF ALL BUYABLES SORTED BY PRICE USING THE MERGESORT METHOD DEFINED IN "SORTS" CLASS
+    public void setupSorts(){
+        sorts = new Sorts(_si.getItems());
+        sorts.makeList();
+    }
+
+
+// BUTTONS
+
+    // BUTTON THAT CHANGES WHETHER PETS ARE MOVING OR FROZEN
+    private class VersionChanger implements EventHandler<ActionEvent> {
+        boolean isAnimated = true;
+        public void handle(ActionEvent event) {
+            if (isAnimated) {
+                for (int i = 0; i < 4; i++){
+                    for (int j =0; j < 4; j++){
+                        if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
+                                (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
+                                (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
+                                (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
+                                (_pets[i][j].getType().equals("Pig")) || (_pets[i][j].getType().equals("Reindeer")) ||
+                                (_pets[i][j].getType().equals("Sheep")) || (_pets[i][j].getType().equals("Tiger")) ||
+                                (_pets[i][j].getType().equals("Walrus")))) {
+                            _pets[i][j].getTimeline().stop();
+                            _pets[i][j].setBounceLoc(_pets[i][j].getXLoc(), _pets[i][j].getOYL());
+                        }
+                    }
+                }
+                isAnimated = false;
+                _verChanger.setText("Animated Version");
+            }
+            else {
+                for (int i = 0; i < 4; i++){
+                    for (int j =0; j < 4; j++){
+                        if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
+                                (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
+                                (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
+                                (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
+                                (_pets[i][j].getType().equals("Pig")) || (_pets[i][j].getType().equals("Reindeer")) ||
+                                (_pets[i][j].getType().equals("Sheep")) || (_pets[i][j].getType().equals("Tiger")) ||
+                                (_pets[i][j].getType().equals("Walrus")))) {
+                            _pets[i][j].getTimeline().play();
+                        }
+                    }
+                }
+                _verChanger.setText("Static Version");
+                isAnimated = true;
+            }
+        }
+    }
+
+    // QUIT BUTTON
+    private class ProgramQuitter implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
+            System.exit(0);
+        }
+    }
+
+// MOUSE EVENTS
+
+    // PRICE SORTER
+    /*If this button is clicked, the Shop will reset to Page 1 and the items will appear in the order that they fall on
+    * the itemsList, which is filled in the setupSorts method using a MergeSort to order the items from lowest to highest price.
+    *
+    * If the button is clicked again, the items revert to their original order. */
 
     private class PriceSorter implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
@@ -162,6 +249,12 @@ public class Game {
             }
         }
     }
+
+    // BUY SHOP HANDLERS
+    /*These Handlers are called when the user clicks the Label below an item in the shop. There are 6 handlers for the 6
+    * items on each page. The Handlers will buy different Buyables depending on what page the user is on, because the items
+    * displayed vary from page to page. The Handlers will also buy different Buyables depending on whether the shop is
+    * Sorted or not, because the Buyables on display will be in a different order.*/
 
     private class BuyShop1 implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
@@ -357,11 +450,7 @@ public class Game {
         }
     }
 
-    private class BalIns implements EventHandler<ActionEvent>{
-        public void handle(ActionEvent event){
-                _si.getBalIns().setOpacity(0);
-        }
-    }
+    // PAGE HANDLERS: FILL THE SHOP WITH DIFFERENT BUYABLES DEPENDING ON WHICH PAGE THE USER IS ON.
 
     private class FirstPage implements EventHandler<MouseEvent>{
         public void handle(MouseEvent event){
@@ -411,114 +500,203 @@ public class Game {
         }
     }
 
-    private class VersionChanger implements EventHandler<ActionEvent> {
-        boolean isAnimated = true;
-        public void handle(ActionEvent event) {
-            if (isAnimated) {
-                for (int i = 0; i < 4; i++){
-                    for (int j =0; j < 4; j++){
-                        if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
-                                (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
-                                (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
-                                (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
-                                (_pets[i][j].getType().equals("Pig")) || (_pets[i][j].getType().equals("Reindeer")) ||
-                                (_pets[i][j].getType().equals("Sheep")) || (_pets[i][j].getType().equals("Tiger")) ||
-                                (_pets[i][j].getType().equals("Walrus")))) {
-                            _pets[i][j].getTimeline().stop();
-                            _pets[i][j].setBounceLoc(_pets[i][j].getXLoc(), _pets[i][j].getOYL());
+    // SEARCH GETTER: MAKES THE SEARCH BAR VISIBLE AND RESETS ALL PET PROFILE PICTURES TO INVISIBLE.
+
+    private class SearchGetter implements EventHandler<MouseEvent>{
+        public void handle (MouseEvent event){
+            _si.setSearchOpacity(1);
+            _store.getCat().setOpacity(0);
+            _store.getChicken().setOpacity(0);
+            _store.getCow().setOpacity(0);
+            _store.getDog().setOpacity(0);
+            _store.getFox().setOpacity(0);
+            _store.getGiraffe().setOpacity(0);
+            _store.getOwl().setOpacity(0);
+            _store.getPenguin().setOpacity(0);
+            _store.getPig().setOpacity(0);
+            _store.getReindeer().setOpacity(0);
+            _store.getSheep().setOpacity(0);
+            _store.getTiger().setOpacity(0);
+            _store.getWalrus().setOpacity(0);
+            _store.getPetNamed().setOpacity(0);
+            _si.getTypeToSearch().setText("Type a pet's name to search");
+            searchQuery = "";
+            _searchClicked = true;
+        }
+    }
+
+    // ENTER GETTER: MAKES THE ENTER HOURS BAR VISIBLE AND SETS THE STRING OF ENTERED TEXT BLANK IN CASE ANY HOURS WERE ENTERED PREVIOUSLY
+
+    private class EnterGetter implements EventHandler<MouseEvent>{
+        public void handle (MouseEvent event){
+            _si.setEnterOpacity(1);
+            _si.getTypeHours().setText("Enter hours of productivity");
+            numHours = "";
+        }
+    }
+
+    // MAKES THE SEARCH BAR INVISIBLE IF THE USER CLICKS OUT
+
+    private class SearchDisappear implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            _si.setSearchOpacity(0);
+            _searchClicked = false;
+        }
+    }
+
+    // MAKES THE ENTER HOURS BAR INVISIBLE IF THE USER CLICKS OUT
+
+    private class EnterDisappear implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            _si.setEnterOpacity(0);
+        }
+    }
+
+    // HOURS ENTERER
+    /*Takes the amount of hours entered in the search bar and stores it in a new variable, reverting the current one to blank.
+    * The new variable is then converted to an integer and the user's current balance increments by this integer.
+    * The balance label is then updated to reflect this. */
+
+    private class HoursEnterer implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            newNumHours = numHours;
+            numHours = "";
+            intNumHours = (Integer.parseInt(newNumHours.trim()) * 10);
+            intLabel = intLabel + intNumHours;
+            _si.getBalance().setText(Integer.toString(intLabel));
+        }
+    }
+
+    // SPECS GETTER:
+    /*Makes the info card visible and changes its information based on the pet that is passed in as a parameter. Also,
+    * if any changes have been made to the newName variable (i.e., if the user has typed in info) the pet's name variable is
+    * set to this variable. Depending on the type of pet that is being hovered over, a different profile picture will appear in
+    * the info card. */
+
+    private class SpecsGetter implements EventHandler<MouseEvent> {
+        private Pet _pet;
+        private SpecsGetter(Pet pet) {
+            _pet = pet;
+        }
+        public void handle (MouseEvent event){
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (_pets[i][j] != null) {
+                        _store.getSpecsPane().setOpacity(1);
+                        _store.getMyName().setText(_pet.getPetName());
+                        _store.getMyPersonality().setText(_pet.getPetPersonality());
+                        _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
+                        _store.getMyFavFood().setText(_pet.getPetFavFood());
+                        AllKeyEventsHandler akeh = new AllKeyEventsHandler();
+                        _pet.getNode().addEventHandler(KeyEvent.KEY_TYPED, akeh);
+
+                        if (newName.length() > 1) {
+                            newNewName = newName;
+                            newName = "";
+                            _pet.setPetName(newNewName);
+                            _store.getPetNamed().setOpacity(1);
+                            _pet.setIsNamed();
+                        }
+
+                        if (_pet.getType().equals("Cat")){
+                            _store.getCat().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Chicken")){
+                            _store.getChicken().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Cow")){
+                            _store.getCow().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Dog")){
+                            _store.getDog().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Fox")){
+                            _store.getFox().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Giraffe")){
+                            _store.getGiraffe().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Owl")){
+                            _store.getOwl().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Penguin")){
+                            _store.getPenguin().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Pig")){
+                            _store.getPig().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Reindeer")){
+                            _store.getReindeer().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Sheep")){
+                            _store.getSheep().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Tiger")){
+                            _store.getTiger().setOpacity(1);
+                        }
+                        if (_pet.getType().equals("Walrus")){
+                            _store.getWalrus().setOpacity(1);
                         }
                     }
                 }
-                isAnimated = false;
-                _verChanger.setText("Animated Version");
-            }
-            else {
-                for (int i = 0; i < 4; i++){
-                    for (int j =0; j < 4; j++){
-                        if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
-                                (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
-                                (_pets[i][j].getType().equals("Fox")) || (_pets[i][j].getType().equals("Giraffe")) ||
-                                (_pets[i][j].getType().equals("Owl")) || (_pets[i][j].getType().equals("Penguin")) ||
-                                (_pets[i][j].getType().equals("Pig")) || (_pets[i][j].getType().equals("Reindeer")) ||
-                                (_pets[i][j].getType().equals("Sheep")) || (_pets[i][j].getType().equals("Tiger")) ||
-                                (_pets[i][j].getType().equals("Walrus")))) {
-                            _pets[i][j].getTimeline().play();
-                        }
-                    }
-                }
-                _verChanger.setText("Static Version");
-                isAnimated = true;
             }
         }
     }
 
-    private class ProgramQuitter implements EventHandler<ActionEvent> {
-        public void handle(ActionEvent event) {
-            System.exit(0);
-            }
-    }
+    // SPECS DISAPPEAR: MAKES THE INFO CARD INVISIBLE AND SETS ANY VISIBLE PROFILE PICTURE'S OPACITY TO 0.
 
-    public Pet generatePet(){
-        Pet pet = null;
-        int rand_int = (int) (Math.random() * 13);
-        switch (rand_int) {
-            case 0:
-                pet = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 1:
-                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 2:
-                pet = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 3:
-                pet = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 4:
-                pet = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 5:
-                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 6:
-                pet = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 7:
-                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 8:
-                pet = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 9:
-                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 10:
-                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            case 11:
-                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
-            default:
-                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
-                break;
+    private class SpecsDisappear implements EventHandler<MouseEvent> {
+        public void handle(MouseEvent event) {
+            _store.getSpecsPane().setOpacity(0);
+            _store.getCat().setOpacity(0);
+            _store.getChicken().setOpacity(0);
+            _store.getCow().setOpacity(0);
+            _store.getDog().setOpacity(0);
+            _store.getFox().setOpacity(0);
+            _store.getGiraffe().setOpacity(0);
+            _store.getOwl().setOpacity(0);
+            _store.getPenguin().setOpacity(0);
+            _store.getPig().setOpacity(0);
+            _store.getReindeer().setOpacity(0);
+            _store.getSheep().setOpacity(0);
+            _store.getTiger().setOpacity(0);
+            _store.getWalrus().setOpacity(0);
+            _store.getPetNamed().setOpacity(0);
         }
-        return pet;
     }
 
+    // SPECS CLOSE:
+    /*If the user has searched for a pet and the pet's info card has popped up, there is a close button that pops up with it
+    * whose actions are controlled by this Handler. */
 
-
-    public void setupInitialPets(){
-        _pets = new Buyable[4][4];
-        _pet = new Pet[4];
-        for (int i = 0; i < 4; i++){
-            _pet[i] = this.generatePet();
-            _pet[i].setOpacity(0);
-            _pet[i].setLoc(sh.petXLoc(), sh.petYLoc());
-            _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
-            pmh.setupPetMover(_pet[i]);
-            h.setupHandlers(_pet[i]);
-            }
+    private class SpecsClose implements EventHandler<MouseEvent>{
+        private Buyable _pet;
+        private SpecsClose(Buyable pet){
+            _pet = pet;
+        }
+        public void handle(MouseEvent event){
+            _store.getSpecsPane().setOpacity(0);
+            _store.getCat().setOpacity(0);
+            _store.getChicken().setOpacity(0);
+            _store.getCow().setOpacity(0);
+            _store.getDog().setOpacity(0);
+            _store.getFox().setOpacity(0);
+            _store.getGiraffe().setOpacity(0);
+            _store.getOwl().setOpacity(0);
+            _store.getPenguin().setOpacity(0);
+            _store.getPig().setOpacity(0);
+            _store.getReindeer().setOpacity(0);
+            _store.getSheep().setOpacity(0);
+            _store.getTiger().setOpacity(0);
+            _store.getWalrus().setOpacity(0);
+            _store.getPetNamed().setOpacity(0);
+            _si.setCloseOpacity(0);
+            _cannotChangeName = false;
+            _pet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
+        }
     }
+
+// HANDLER AND TIMELINE SETUP METHODS
 
     public class Handlers {
         public void setupHandlers(Pet pet) {
@@ -553,6 +731,10 @@ public class Game {
         }
     }
 
+// ACTION EVENTS
+
+    // COUNTER: Increments every millisecond to assist with the timing of the loading bar animation and directive text.
+
     private class Counter implements EventHandler<ActionEvent>{
         public void handle(ActionEvent event){
             _counter ++;
@@ -568,6 +750,18 @@ public class Game {
         }
     }
 
+    // BALINS: Sets the Balance Insufficient label back to invisible after 1 second.
+
+    private class BalIns implements EventHandler<ActionEvent>{
+        public void handle(ActionEvent event){
+            _si.getBalIns().setOpacity(0);
+        }
+    }
+
+    // PETMOVER: Enables Pet bouncing by switching the direction of their movement if a certain Y location is reached. These Y locations
+    /* are determined by a getter method called getOYL which sounds for get Original Y Loc. This location is stored as a variable when
+    * each pet is instantiated. */
+
     private class PetMover implements EventHandler<ActionEvent>{
         private Pet thisPet;
         private PetMover(Pet pet){
@@ -576,11 +770,11 @@ public class Game {
         boolean _direction = true;
 
         public void handle(ActionEvent event){
-                if (_direction) {
-                    thisPet.setBounceLoc(thisPet.getXLoc(), thisPet.getYLoc() + 2);
-                } else {
-                    thisPet.setBounceLoc(thisPet.getXLoc(), thisPet.getYLoc() - 2);
-                }
+            if (_direction) {
+                thisPet.setBounceLoc(thisPet.getXLoc(), thisPet.getYLoc() + 2);
+            } else {
+                thisPet.setBounceLoc(thisPet.getXLoc(), thisPet.getYLoc() - 2);
+            }
 
             if (thisPet.getYLoc() < thisPet.getOYL() - 4) {
                 _direction = !_direction;
@@ -591,6 +785,8 @@ public class Game {
             }
         }
     }
+
+    // TITLEMOVER: Controls the shrinking of the blue background of the Title screen and rotation of title text.
 
     private class TitleMover implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
@@ -603,6 +799,8 @@ public class Game {
         }
     }
 
+    // LOADING BAR FILLER: Animation of Loading Bar and incrementation of Percentage Loaded.
+
     private class LoadingBarFiller implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             _title.getLoadingBar().setWidth(_title.getLoadingBar().getWidth()+12);
@@ -611,179 +809,12 @@ public class Game {
         }
     }
 
-    private class SearchGetter implements EventHandler<MouseEvent>{
-        public void handle (MouseEvent event){
-            _si.setSearchOpacity(1);
-            _store.getCat().setOpacity(0);
-            _store.getChicken().setOpacity(0);
-            _store.getCow().setOpacity(0);
-            _store.getDog().setOpacity(0);
-            _store.getFox().setOpacity(0);
-            _store.getGiraffe().setOpacity(0);
-            _store.getOwl().setOpacity(0);
-            _store.getPenguin().setOpacity(0);
-            _store.getPig().setOpacity(0);
-            _store.getReindeer().setOpacity(0);
-            _store.getSheep().setOpacity(0);
-            _store.getTiger().setOpacity(0);
-            _store.getWalrus().setOpacity(0);
-            _store.getPetNamed().setOpacity(0);
-            _si.getTypeToSearch().setText("Type a pet's name to search");
-            searchQuery = "";
-            _searchClicked = true;
-        }
-    }
-
-    private class EnterGetter implements EventHandler<MouseEvent>{
-        public void handle (MouseEvent event){
-            _si.setEnterOpacity(1);
-            _si.getTypeHours().setText("Enter hours of productivity");
-            numHours = "";
-        }
-    }
-
-    private class SearchDisappear implements EventHandler<MouseEvent>{
-        public void handle(MouseEvent event){
-            _si.setSearchOpacity(0);
-            _searchClicked = false;
-        }
-    }
-
-    private class EnterDisappear implements EventHandler<MouseEvent>{
-        public void handle(MouseEvent event){
-            _si.setEnterOpacity(0);
-        }
-    }
-
-    private class HoursEnterer implements EventHandler<MouseEvent>{
-        public void handle(MouseEvent event){
-            newNumHours = numHours;
-            numHours = "";
-                intNumHours = (Integer.parseInt(newNumHours.trim()) * 10);
-                intLabel = intLabel + intNumHours;
-                _si.getBalance().setText(Integer.toString(intLabel));
-        }
-    }
-
-
-    private class SpecsGetter implements EventHandler<MouseEvent> {
-        private Pet _pet;
-        private SpecsGetter(Pet pet) {
-            _pet = pet;
-        }
-            public void handle (MouseEvent event){
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
-                        if (_pets[i][j] != null) {
-                            _store.getSpecsPane().setOpacity(1);
-                            _store.getMyName().setText(_pet.getPetName());
-                            _store.getMyPersonality().setText(_pet.getPetPersonality());
-                            _store.getMyBirthMonth().setText(_pet.getPetBirthMonth());
-                            _store.getMyFavFood().setText(_pet.getPetFavFood());
-                            AllKeyEventsHandler akeh = new AllKeyEventsHandler();
-                            _pet.getNode().addEventHandler(KeyEvent.KEY_TYPED, akeh);
-
-                            if (newName.length() > 1) {
-                                newNewName = newName;
-                                newName = "";
-                                _pet.setPetName(newNewName);
-                                _store.getPetNamed().setOpacity(1);
-                                _pet.setIsNamed();
-                            }
-
-                            if (_pet.getType().equals("Cat")){
-                                _store.getCat().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Chicken")){
-                                _store.getChicken().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Cow")){
-                                _store.getCow().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Dog")){
-                                _store.getDog().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Fox")){
-                                _store.getFox().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Giraffe")){
-                                _store.getGiraffe().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Owl")){
-                                _store.getOwl().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Penguin")){
-                                _store.getPenguin().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Pig")){
-                                _store.getPig().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Reindeer")){
-                                _store.getReindeer().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Sheep")){
-                                _store.getSheep().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Tiger")){
-                                _store.getTiger().setOpacity(1);
-                            }
-                            if (_pet.getType().equals("Walrus")){
-                                _store.getWalrus().setOpacity(1);
-                            }
-                        }
-                    }
-                }
-            }
-    }
-
-    private class SpecsDisappear implements EventHandler<MouseEvent> {
-        public void handle(MouseEvent event) {
-            _store.getSpecsPane().setOpacity(0);
-            _store.getCat().setOpacity(0);
-            _store.getChicken().setOpacity(0);
-            _store.getCow().setOpacity(0);
-            _store.getDog().setOpacity(0);
-            _store.getFox().setOpacity(0);
-            _store.getGiraffe().setOpacity(0);
-            _store.getOwl().setOpacity(0);
-            _store.getPenguin().setOpacity(0);
-            _store.getPig().setOpacity(0);
-            _store.getReindeer().setOpacity(0);
-            _store.getSheep().setOpacity(0);
-            _store.getTiger().setOpacity(0);
-            _store.getWalrus().setOpacity(0);
-            _store.getPetNamed().setOpacity(0);
-        }
-    }
-
-    private class SpecsClose implements EventHandler<MouseEvent>{
-        private Buyable _pet;
-        private SpecsClose(Buyable pet){
-            _pet = pet;
-        }
-        public void handle(MouseEvent event){
-            _store.getSpecsPane().setOpacity(0);
-            _store.getCat().setOpacity(0);
-            _store.getChicken().setOpacity(0);
-            _store.getCow().setOpacity(0);
-            _store.getDog().setOpacity(0);
-            _store.getFox().setOpacity(0);
-            _store.getGiraffe().setOpacity(0);
-            _store.getOwl().setOpacity(0);
-            _store.getPenguin().setOpacity(0);
-            _store.getPig().setOpacity(0);
-            _store.getReindeer().setOpacity(0);
-            _store.getSheep().setOpacity(0);
-            _store.getTiger().setOpacity(0);
-            _store.getWalrus().setOpacity(0);
-            _store.getPetNamed().setOpacity(0);
-                _si.setCloseOpacity(0);
-                _cannotChangeName = false;
-                _pet.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
-        }
-    }
+// KEY EVENTS HANDLER
 
     private class AllKeyEventsHandler implements EventHandler<KeyEvent> {
+
+        // SETUPTITLEBGTIMELINE: called when the Space bar is pressed, sets the Title Background and Title into motion
+
         public void setupTitleBGTimeline() {
             KeyFrame kf1 = new KeyFrame(Duration.millis(45), new TitleMover());
             Timeline timeline = new Timeline(kf1);
@@ -792,9 +823,12 @@ public class Game {
         }
 
         public void handle (KeyEvent event){
-                if (event.getCode() == KeyCode.SPACE) {
-                    _title.getPressSpace().setOpacity(0);
-                    if ((_titleNotCompressed) && (_counter == 2500)) {
+            if (event.getCode() == KeyCode.SPACE) {
+
+                // SPACE: sets the title and title background into motion and the opacity of the buttons, initial pets, and Buyables to 1.
+
+                _title.getPressSpace().setOpacity(0);
+                if ((_titleNotCompressed) && (_counter == 2500)) {
                     this.setupTitleBGTimeline();
                     _titleNotCompressed = false;
                     _verChanger.setOpacity(1);
@@ -810,6 +844,11 @@ public class Game {
                     _si.setOpacity(1);
                 }
             }
+
+            // LETTERS:
+            /* If the user has clicked the Search option and types in letters, the String typed will be stored in the variable
+            * searchQuery. If searchQuery is equal to the name of any pet in the array in the garden, the pet's info card
+            * and profile picture will become visible. */
 
             if ((event.getCode() == KeyCode.A) || (event.getCode() == KeyCode.B) || (event.getCode() == KeyCode.C)
                     || (event.getCode() == KeyCode.D) || (event.getCode() == KeyCode.E) || (event.getCode() == KeyCode.F)
@@ -879,9 +918,12 @@ public class Game {
                                             _store.getWalrus().setOpacity(1);
                                         }
 
+                                        // Stops the returned info card from disappearing if the user hovers off a pet. Also
+                                        // turns on the close button quick allows the user to close the info card.
+
                                         _pets[i][j].getNode().removeEventHandler(MouseEvent.MOUSE_EXITED, new SpecsDisappear());
                                         _si.setCloseOpacity(1);
-                                            _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SpecsClose(_pets[i][j]));
+                                        _si.getXCN1().addEventHandler(MouseEvent.MOUSE_CLICKED, new SpecsClose(_pets[i][j]));
                                     }
                                 }
                             }
@@ -889,12 +931,18 @@ public class Game {
                     }
                 }
 
+                // If the user has not clicked the search bar, which would indicate that they are typing in a pet's name,
+                // the label for the pet's name is set to the text typed in.
+
                 if (!_searchClicked && !_cannotChangeName) {
 
                     newName = newName + event.getText();
                     _store.getMyName().setText(newName);
                 }
             }
+
+            // NUMBERS: If the user has typed in numbers this would suggest they are entering hours. The label in the Hours Entering Bar is
+            // set to the entered text.
 
             if ((event.getCode() == KeyCode.DIGIT1) || (event.getCode() == KeyCode.DIGIT2) || (event.getCode() == KeyCode.DIGIT3) ||
                     (event.getCode() == KeyCode.DIGIT4) || (event.getCode() == KeyCode.DIGIT5) || (event.getCode() == KeyCode.DIGIT6) ||
@@ -907,7 +955,67 @@ public class Game {
         }
     }
 
+// PET GENERATOR: used to generate the user's first 4 pets randomly.
+
+    public Pet generatePet(){
+        Pet pet = null;
+        int rand_int = (int) (Math.random() * 13);
+        switch (rand_int) {
+            case 0:
+                pet = new Cat(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 1:
+                pet = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 2:
+                pet = new Cow(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 3:
+                pet = new Dog(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 4:
+                pet = new Fox(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 5:
+                pet = new Giraffe(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 6:
+                pet = new Owl(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 7:
+                pet = new Penguin(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 8:
+                pet = new Pig(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 9:
+                pet = new Reindeer(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 10:
+                pet = new Sheep(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            case 11:
+                pet = new Tiger(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+            default:
+                pet = new Walrus(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
+                break;
+        }
+        return pet;
+    }
+
+// SPECSHELPER CLASS
+    /* The SpecsHelper class contains all the methods that are called in private classes (i.e., EventHandlers). In private classes,
+    * "this" cannot be used to call methods which are not defined in the private class and so this helper class must be
+    * instantiated as part of the Game constructor so that its methods can be called on an instance of itself within private classes. */
+
     public class SpecsHelper {
+
+    // ADD BUYABLE METHODS
+      /* These methods are called when the user purchases a Buyable. If the user's current balance, stored in intLabel, is greater
+      * than or equal to the price of the Buyable, a new version of the Buyable is instantiated, given a random location, and
+      * added to the Buyable array in the garden. If the Buyable is a Pet, its bouncing timeline (PetMover) and card info Mouse Handlers
+      * (Handlers) are also set up. The user's balance decrements by the Buyable's price. */
 
         public void addCat(){
             if (intLabel >= _si.getCat().getPrice()) {
@@ -924,6 +1032,7 @@ public class Game {
                 sh.setupBalIns();
             }
         }
+
         public void addChicken(){
             if (intLabel >= _si.getChicken().getPrice()) {
                 Chicken newChicken = new Chicken(interactPane, _pets, "Type+CLICK to name", sh.getPersonality(), sh.getBirthMonth(), sh.getFavFood());
@@ -1172,6 +1281,10 @@ public class Game {
             }
         }
 
+        // LOC GENERATORS:
+        /* These methods are called to generate a semi-random location for any pet that is added to the Buyable array.
+        * The location must be semi-randomly so that the pets can line up nicely. */
+
         public int petXLoc(){
             int loc = 0;
             int rand_int = (int) (Math.random() * 4);
@@ -1211,6 +1324,8 @@ public class Game {
             }
             return loc;
         }
+
+        // PET INFO RANDOM GENERATORS
 
         public String getPersonality() {
             String p = null;
@@ -1347,6 +1462,8 @@ public class Game {
             return food;
         }
 
+        // METHOD USED TO GENERATE A RANDOM ARRAY LOCATION ON WHICH TO ADD THE HAT IF IT IS PURCHASED.
+
         public int generateInt(){
             int i = 0;
             int rand_int = (int) (Math.random() * 4);
@@ -1367,6 +1484,10 @@ public class Game {
             return i;
         }
 
+        // HAT ADDER
+        /* This method takes a randomly generated array location in which to add the Hat if it is purchased. If the location is
+        * null or filled with a Buyable that is not a Pet, the method will recurse until a valid array location is found. */
+
         public void addHat(int i, int j) {
                 if (_pets[i][j] != null && ((_pets[i][j].getType().equals("Cat")) || (_pets[i][j].getType().equals("Chicken")) ||
                         (_pets[i][j].getType().equals("Cow")) || (_pets[i][j].getType().equals("Dog")) ||
@@ -1380,12 +1501,16 @@ public class Game {
                 }
         }
 
+        // SETS UP THE "BALANCE INSUFFICIENT" LABEL TIMELINE WHICH REMOVES THE LABEL AFTER 1 SECOND.
+
         public void setupBalIns(){
             KeyFrame kf100 = new KeyFrame(Duration.seconds(1), new BalIns());
             Timeline timeline = new Timeline(kf100);
             timeline.setCycleCount(1);
             timeline.play();
         }
+
+        // RETURNS TRUE IF THE BUYABLE ARRAY IN THE GARDEN IS FULL.
 
         public boolean isFull(){
             return (_pets[0][0] != null) && (_pets[0][1] != null) && (_pets[0][2] != null) && (_pets[0][3] != null) && (_pets[1][0] != null) &&

@@ -9,6 +9,8 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// creates a Sunset background.
+
 public class SunsetBG implements Buyable{
     private Rectangle _sunset;
     private Pane _root;
@@ -20,6 +22,8 @@ public class SunsetBG implements Buyable{
         LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
         _sunset.setFill(lg1);
     }
+
+    // the following methods are explained in the Pet superclass which also implements them.
 
     public int getPrice(){
         return 100;
@@ -33,7 +37,6 @@ public class SunsetBG implements Buyable{
         _sunset.setX(x-30);
         _sunset.setY(y-30);
     }
-    public void setOpacity(double x){}
 
     public void removeFromPane(){
         _root.getChildren().removeAll(_sunset);
@@ -42,10 +45,11 @@ public class SunsetBG implements Buyable{
         _root.getChildren().addAll(_sunset);
     }
 
+    // these methods don't need to be known by the Sunset class but the Sunset class must implement them.
+
     public Timeline getTimeline(){
         return null;
     }
-
     public double getXLoc(){
         return 0;
     }
@@ -70,8 +74,8 @@ public class SunsetBG implements Buyable{
     public Ellipse getNode(){
         return null;
     }
-
     public void setLoc(double x, double y){}
     public void addHat(double x, double y){}
+    public void setOpacity(double x){}
 }
 

@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
+// creates the StoreInterface, or all of the elements in the Store that the user can click on and interact with.
+
 public class StoreInterface {
     private Rectangle _sortByPriceBG;
     private Rectangle _searchMyPetsBG;
@@ -373,6 +375,8 @@ public class StoreInterface {
         this.fillArrayList();
     }
 
+    // returns labels for items in shop.
+
     public Label getShop1(){
         return _shop1;
     }
@@ -396,6 +400,8 @@ public class StoreInterface {
     public Label getShop6(){
         return _shop6;
     }
+
+    // sets the location of most things that are part of the Store Interface.
 
     public void setLoc(double x, double y){
         _sortByPriceBG.setX(x+50);
@@ -447,14 +453,8 @@ public class StoreInterface {
 
     }
 
-    public void setShopLabelO(double x){
-        _shop1.setOpacity(x);
-        _shop2.setOpacity(x);
-        _shop3.setOpacity(x);
-        _shop4.setOpacity(x);
-        _shop5.setOpacity(x);
-        _shop6.setOpacity(x);
-    }
+    // Fills the shop with the initial items displayed on the first page by adding them to the Shop array, adding them graphically
+    // to the Pane, and setting their location.
 
     public void fillShopInitial(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
 
@@ -473,6 +473,10 @@ public class StoreInterface {
             }
         }
     }
+
+    // fills the shop according to the respective page every time a new page is clicked on by setting each item's text label
+    // to its name and price, removing the current items from the pane and from the shop array and by adding the new items
+    // to the Pane and setting their location.
 
     public void fillShop(Buyable b1, Buyable b2, Buyable b3, Buyable b4, Buyable b5, Buyable b6) {
 
@@ -507,9 +511,13 @@ public class StoreInterface {
         }
     }
 
+    // returns the shop array so it can be used in other classes (e.g., Game class)
+
     public Buyable[][] getShop(){
       return __shop;
     }
+
+    // allows for the opacity of items in the Shop Interface to be controlled depending on when they need to appear.
 
     public void setOpacity(double x){
         _sortByPriceBG.setOpacity(x);
@@ -534,6 +542,22 @@ public class StoreInterface {
         this.setShopLabelO(1);
     }
 
+    public void setCloseOpacity(int x){
+        _closeOut1.setOpacity(x);
+        _x1.setOpacity(x);
+    }
+
+    public void setShopLabelO(double x){
+        _shop1.setOpacity(x);
+        _shop2.setOpacity(x);
+        _shop3.setOpacity(x);
+        _shop4.setOpacity(x);
+        _shop5.setOpacity(x);
+        _shop6.setOpacity(x);
+    }
+
+    // returns a series of nodes and labels so they can be used as part of the EventHandlers in the Game class.
+
     public Label getBalIns(){
         return balIns;
     }
@@ -548,11 +572,6 @@ public class StoreInterface {
 
     public Rectangle getThirdCN(){
         return _thirdCN;
-    }
-
-    public void setCloseOpacity(int x){
-        _closeOut1.setOpacity(x);
-        _x1.setOpacity(x);
     }
 
     public Circle getXCN(){
@@ -594,6 +613,20 @@ public class StoreInterface {
     public Rectangle getEnterHoursCN(){
         return _coverNode3;
     }
+
+    public Rectangle getConfirmCN(){
+        return _confirmCN;
+    }
+
+    public Label getBalance(){
+        return _balance;
+    }
+
+    public Label getSortByPrice(){
+        return _sortByPrice;
+    }
+
+    // returns instances of each Buyable so they can be used as display pictures in the shop.
 
     public Cat getCat(){
         return _cat;
@@ -667,13 +700,7 @@ public class StoreInterface {
         return _sunsetBG;
     }
 
-    public Rectangle getConfirmCN(){
-        return _confirmCN;
-    }
-
-    public Label getBalance(){
-        return _balance;
-    }
+    // fills an ArrayList of Buyables so it can be Sorted using the methods in the Sorts class.
 
     public void fillArrayList(){
         _items.add(_cat);
@@ -696,11 +723,9 @@ public class StoreInterface {
         _items.add(_sunsetBG);
     }
 
+    // returns this ArrayList so it can be sorted in the Game class.
+
     public ArrayList<Buyable> getItems(){
         return _items;
-    }
-
-    public Label getSortByPrice(){
-        return _sortByPrice;
     }
 }

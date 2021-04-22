@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// creates a Plant.
+
 public class Plant implements Buyable{
     private Ellipse _petal1;
     private Ellipse _petal2;
@@ -70,6 +72,67 @@ public class Plant implements Buyable{
         _potTopShadow.setFill(Color.rgb(94, 45, 11));
 
     }
+
+    // enables the Petal colors to be randomly generated.
+
+    public Color switchCol() {
+        Color col = null;
+        int rand_int = (int) (Math.random() * 15);
+        switch (rand_int) {
+            case 0:
+                col = Color.DEEPSKYBLUE;
+                break;
+            case 1:
+                col = Color.PINK;
+                break;
+            case 2:
+                col = Color.TURQUOISE;
+                break;
+            case 3:
+                col = Color.VIOLET;
+                break;
+            case 4:
+                col = Color.ORANGE;
+                break;
+            case 5:
+                col = Color.LIGHTSALMON;
+                break;
+            case 6:
+                col = Color.LIGHTGREEN;
+                break;
+            case 7:
+                col = Color.LIGHTCORAL;
+                break;
+            case 8:
+                col = Color.PALETURQUOISE;
+                break;
+            case 9:
+                col = Color.SPRINGGREEN;
+                break;
+            case 10:
+                col = Color.MEDIUMORCHID;
+                break;
+            case 11:
+                col = Color.MEDIUMPURPLE;
+                break;
+            case 12:
+                col = Color.FUCHSIA;
+                break;
+            case 13:
+                col = Color.AQUAMARINE;
+                break;
+            case 14:
+                col = Color.DEEPPINK;
+                break;
+            default:
+                col = Color.CYAN;
+                break;
+        }
+        return col;
+    }
+
+    // the following methods are explained in the Pet superclass which also implements them.
+
     public int getPrice(){
         return 80;
     }
@@ -149,62 +212,6 @@ public class Plant implements Buyable{
         _potTopShadow.setY(y+25);
     }
 
-    public Color switchCol() {
-        Color col = null;
-        int rand_int = (int) (Math.random() * 15);
-        switch (rand_int) {
-            case 0:
-                col = Color.DEEPSKYBLUE;
-                break;
-            case 1:
-                col = Color.PINK;
-                break;
-            case 2:
-                col = Color.TURQUOISE;
-                break;
-            case 3:
-                col = Color.VIOLET;
-                break;
-            case 4:
-                col = Color.ORANGE;
-                break;
-            case 5:
-                col = Color.LIGHTSALMON;
-                break;
-            case 6:
-                col = Color.LIGHTGREEN;
-                break;
-            case 7:
-                col = Color.LIGHTCORAL;
-                break;
-            case 8:
-                col = Color.PALETURQUOISE;
-                break;
-            case 9:
-                col = Color.SPRINGGREEN;
-                break;
-            case 10:
-                col = Color.MEDIUMORCHID;
-                break;
-            case 11:
-                col = Color.MEDIUMPURPLE;
-                break;
-            case 12:
-                col = Color.FUCHSIA;
-                break;
-            case 13:
-                col = Color.AQUAMARINE;
-                break;
-            case 14:
-                col = Color.DEEPPINK;
-                break;
-            default:
-                col = Color.CYAN;
-                break;
-        }
-        return col;
-    }
-
     public int petXLoc(){
         int loc = 0;
         int rand_int = (int) (Math.random() * 4);
@@ -245,7 +252,12 @@ public class Plant implements Buyable{
         return loc;
     }
 
-    public void setOpacity(double x){}
+    public double getXLoc(){
+        return _petal1.getCenterX();
+    }
+    public double getYLoc(){
+        return _petal1.getCenterY()+40;
+    }
 
     public void removeFromPane(){
         _root.getChildren().removeAll(_stem, _petal1, _petal2, _petal3, _petal4, _petal5, _petal6, _petal7, _petal8, _petal9, _middle,
@@ -257,18 +269,10 @@ public class Plant implements Buyable{
                 _pot, _leaf1, _potTop, _potTopShadow);
     }
 
+    // these methods don't need to be known by the Plant class but the Plant class must implement them.
     public Timeline getTimeline(){
         return null;
     }
-
-    public double getXLoc(){
-        return _petal1.getCenterX();
-    }
-
-    public double getYLoc(){
-        return _petal1.getCenterY()+40;
-    }
-
     public double getOYL(){
         return 0;
     }
@@ -288,4 +292,5 @@ public class Plant implements Buyable{
         return null;
     }
     public void addHat(double x, double y){}
+    public void setOpacity(double x){}
 }

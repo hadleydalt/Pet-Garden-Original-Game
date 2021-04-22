@@ -9,6 +9,8 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+// creates the Title screen (blue title background, large title text, loading bar animation, and directive text).
+
 public class Title {
     private Rectangle _bg;
     private Label _title;
@@ -46,10 +48,12 @@ public class Title {
         root.getChildren().addAll(_bg, _title, _loadingbg, _loading, _percent, _pressSpace);
     }
 
+    // sets the location of the title screen.
+
     public void setLoc(double x, double y){
         _bg.setX(x);
         _bg.setY(y);
-        _title.relocate(318, 270); //862, 300
+        _title.relocate(318, 270);
         _loadingbg.setX(x+550);
         _loadingbg.setY(y+480);
         _loading.setX(x+550);
@@ -58,9 +62,13 @@ public class Title {
         _pressSpace.relocate(540, 480);
     }
 
+    // sets the location of the blue background so that it can be animated.
+
     public void setBGXLoc(double x){
         _bg.setX(x);
     }
+
+    // returns elements of the Title screen so they can be controlled in the Game class.
 
     public double getBGXLoc(){
         return _bg.getX();

@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// creates a House.
+
 public class House implements Buyable{
     private Rectangle _roof;
     private Rectangle _rooftop;
@@ -43,6 +45,9 @@ public class House implements Buyable{
         _window2int = new Rectangle(10, 15);
         _window2int.setFill(Color.GOLD);
     }
+
+    // the following methods are explained in the Pet superclass which also implements them.
+
     public int getPrice(){
         return 70;
     }
@@ -98,8 +103,6 @@ public class House implements Buyable{
         }
     }
 
-    public void setOpacity(double x){}
-
     public void removeFromPane(){
         _root.getChildren().removeAll(_rooftop, _roof, _front, _doorFrame, _door, _window1, _window2, _window1int, _window2int);
     }
@@ -107,6 +110,8 @@ public class House implements Buyable{
     public void addToPane(){
         _root.getChildren().addAll(_rooftop, _roof, _front, _doorFrame, _door, _window1, _window2, _window1int, _window2int);
     }
+
+    // enables the Hat's location to be randomly generated.
 
     public int petXLoc(){
         int loc = 0;
@@ -148,18 +153,16 @@ public class House implements Buyable{
         return loc;
     }
 
+    // these methods don't need to be known by the Gnome class but the Gnome class must implement them.
     public Timeline getTimeline(){
         return null;
     }
-
     public double getXLoc(){
         return _roof.getX()+30;
     }
-
     public double getYLoc(){
         return _roof.getY()+60;
     }
-
     public double getOYL(){
         return 0;
     }
@@ -179,4 +182,5 @@ public class House implements Buyable{
         return null;
     }
     public void addHat(double x, double y){}
+    public void setOpacity(double x){}
 }

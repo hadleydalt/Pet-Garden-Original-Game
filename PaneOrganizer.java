@@ -2,6 +2,8 @@ package indy;
 
 import javafx.scene.layout.BorderPane;
 
+// establishes the Root, a BorderPane, sets the background, and adds the main Panes.
+
 public class PaneOrganizer {
     private BorderPane _root;
 

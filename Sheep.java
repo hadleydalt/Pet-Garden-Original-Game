@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 
+// creates a Sheep. Its methods are explained in the Pet superclass.
+
 public class Sheep extends Pet{
     private Ellipse _eye1;
     private Ellipse _eye2;

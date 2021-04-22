@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// creates a Gnome.
+
 public class Gnome implements Buyable{
     private Circle _head;
     private Rectangle _hat;
@@ -52,6 +54,8 @@ public class Gnome implements Buyable{
         _pupil1 = new Circle(1, Color.WHITE);
         _pupil2 = new Circle(1, Color.WHITE);
     }
+
+    // the following methods are explained in the Pet superclass which also implements them.
 
     public void removeFromPane(){
         _root.getChildren().removeAll(_hat, _shirt, _head, _beard, _mouth, _pants, _belt, _foot1, _foot2, _eye1, _eye2, _pupil1, _pupil2);
@@ -102,6 +106,8 @@ public class Gnome implements Buyable{
             this.setLoc(this.petXLoc(), this.petYLoc());
         }
     }
+
+    // enables the gnome's random location to be generated.
 
     public int petXLoc(){
         int loc = 0;
@@ -171,11 +177,6 @@ public class Gnome implements Buyable{
         _pupil2.setCenterX(x+19);
         _pupil2.setCenterY(y-31);
     }
-    public void setOpacity(double x){}
-
-    public Timeline getTimeline(){
-        return null;
-    }
 
     public double getXLoc(){
         return _hat.getX();
@@ -184,6 +185,8 @@ public class Gnome implements Buyable{
     public double getYLoc(){
         return _hat.getY()+50;
     }
+
+    // these methods don't need to be known by the Gnome class but the Gnome class must implement them.
 
     public double getOYL(){
         return 0;
@@ -204,4 +207,8 @@ public class Gnome implements Buyable{
         return null;
     }
     public void addHat(double x, double y){}
+    public void setOpacity(double x){}
+    public Timeline getTimeline(){
+        return null;
+    }
 }

@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// creates a Pig. Its methods are explained in the Pet superclass.
+
 public class Pig extends Pet{
     private Ellipse _eye1;
     private Ellipse _eye2;

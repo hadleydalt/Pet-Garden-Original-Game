@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Font;
 
+// Creates a Cow. Its methods are explained in the Pet superclass.
+
 public class Cow extends Pet{
     private Ellipse _eye1;
     private Ellipse _eye2;

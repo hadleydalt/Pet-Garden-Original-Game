@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+// This class contains the logic for MergeSort which is implemented to sort the items in the shop according to their price.
+
 public class Sorts {
     private LinkedList<Buyable> _itemsList;
     private ArrayList<Buyable> _items;
+
     public Sorts(ArrayList<Buyable> items){
         _items = items;
         _itemsList = new LinkedList<Buyable>();
     }
+
+    // MERGESORT: returns a List of buyables by mergesorting them with the Merge method.
 
     public List<Buyable> mergeSort(List<Buyable> list) {
         if (list.size() == 1) {
@@ -24,6 +29,8 @@ public class Sorts {
 
         return this.merge(left, right);
     }
+
+    // MERGE: Organizes the order of the array of Buyables to be sorted by comparing their prices.
 
     public ArrayList<Buyable> merge(List<Buyable> A, List<Buyable> B) {
         ArrayList<Buyable> result = new ArrayList<Buyable>();
@@ -47,11 +54,15 @@ public class Sorts {
         return result;
     }
 
+    // MAKELIST: creates a LinkedList out of the list of Buyables returned by the MergeSort method when it sorts the array of Buyables passed in.
+
     public void makeList(){
         for (int i = 0; i < _items.size(); i++) {
             _itemsList.add(i, this.mergeSort(_items).get(i));
         }
     }
+
+    // gets the LinkedList created in makeList.
 
     public LinkedList<Buyable> getItemsList(){
         return _itemsList;

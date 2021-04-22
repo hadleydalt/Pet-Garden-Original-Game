@@ -4,6 +4,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
+// creates a Penguin. Its methods are explained in the Pet superclass.
+
 public class Penguin extends Pet{
     private Ellipse _eye1;
     private Ellipse _eye2;

@@ -10,6 +10,9 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+// creates a Store which also includes the Info cards and pet profile pictures, which are created by instantiating new pets within this class.
+// That is why there are getter methods within this class for every pet.
+
 public class Store {
     private Rectangle _storebg;
     private Rectangle _whitebg;
@@ -173,15 +176,7 @@ public class Store {
                 shopPane, _specs);
     }
 
-    /*public void fillShop(Pet pet1, Pet pet2, Pet pet3, Pet pet4, Pet pet5, Pet pet6) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 2; j++) {
-                __shop[i][j] = new Walrus(shopPane, x, "x", "x", "x", "x");
-                __shop[i][j].setBounceLoc(((i * 130) + 730), ((j * 190) + 240));
-                __shop[i][j].setOpacity(0);
-            }
-        }
-    } */
+    // sets the location of everything in the store.
 
     public void setLoc(double x, double y){
         _storebg.setX(x);
@@ -219,6 +214,8 @@ public class Store {
         _walrus.setBounceLoc(95, 153);
 
     }
+
+    // gets labels of the Info Card so they can be changed, as well as the instantiated pets so they can be used for pet profile pictures.
 
     public Label getMyName(){
         return _myName;

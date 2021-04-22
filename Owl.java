@@ -7,6 +7,8 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+// creates an Owl. Its methods are explained in the Pet superclass.
+
 public class Owl extends Pet{
     private Ellipse _eye1;
     private Ellipse _eye2;

@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
+// creates a Hat.
+
 public class Hat implements Buyable{
     private Ellipse _base;
     private Rectangle _top;
@@ -29,24 +31,8 @@ public class Hat implements Buyable{
         _feather.setFill(Color.GOLD);
         _feather.setRotate(36);
     }
-    public int getPrice(){
-        return 20;
-    }
 
-    public String getType(){
-        return "Hat";
-    }
-
-    public void setBounceLoc(double x, double y){
-        _top.setX(x-15);
-        _top.setY(y);
-        _base.setCenterX(x+14);
-        _base.setCenterY(y+30);
-        _band.setX(x-15);
-        _band.setY(y+18);
-        _feather.setCenterX(x+55);
-        _feather.setCenterY(y+7);
-    }
+    // enables the hat's color to be randomly switched every time a new hat is instantiated.
 
     public Color switchCol() {
         Color col = null;
@@ -104,6 +90,27 @@ public class Hat implements Buyable{
         return col;
     }
 
+    // the following methods are explained in the Pet superclass which also implements them.
+
+    public int getPrice(){
+        return 20;
+    }
+
+    public String getType(){
+        return "Hat";
+    }
+
+    public void setBounceLoc(double x, double y){
+        _top.setX(x-15);
+        _top.setY(y);
+        _base.setCenterX(x+14);
+        _base.setCenterY(y+30);
+        _band.setX(x-15);
+        _band.setY(y+18);
+        _feather.setCenterX(x+55);
+        _feather.setCenterY(y+7);
+    }
+
     public void setOpacity(double x){
         _top.setOpacity(x);
         _top.setOpacity(x);
@@ -121,39 +128,6 @@ public class Hat implements Buyable{
 
     public void addToPane(){
         _root.getChildren().addAll(_feather, _base, _top, _band);
-    }
-
-    public Timeline getTimeline(){
-        return null;
-    }
-
-    public double getXLoc(){
-        return 0;
-    }
-
-    public double getYLoc(){
-        return 0;
-    }
-    public double getOYL(){
-        return 0;
-    }
-    public String getPetName(){
-        return null;
-    }
-    public String getPetBirthMonth(){
-        return null;
-    }
-    public String getPetPersonality(){
-        return null;
-    }
-    public String getPetFavFood(){
-        return null;
-    }
-    public Ellipse getNode(){
-        return null;
-    }
-
-    public void setLoc(double x, double y){
     }
 
     public int petXLoc(){
@@ -196,5 +170,35 @@ public class Hat implements Buyable{
         return loc;
     }
 
+    // these methods don't need to be known by the Gnome class but the Gnome class must implement them.
     public void addHat(double x, double y){}
+    public Timeline getTimeline(){
+        return null;
+    }
+    public double getXLoc(){
+        return 0;
+    }
+    public double getYLoc(){
+        return 0;
+    }
+    public double getOYL(){
+        return 0;
+    }
+    public String getPetName(){
+        return null;
+    }
+    public String getPetBirthMonth(){
+        return null;
+    }
+    public String getPetPersonality(){
+        return null;
+    }
+    public String getPetFavFood(){
+        return null;
+    }
+    public Ellipse getNode(){
+        return null;
+    }
+    public void setLoc(double x, double y){
+    }
 }

@@ -3,6 +3,10 @@ package indy;
 import javafx.animation.Timeline;
 import javafx.scene.shape.Ellipse;
 
+// The Buyable interface is implemented by the Pet superclass and by all of the 5 other Buyable classes (Gnome, Hat, House, Plant, and Sunset).
+// Any methods that are part of the Pet class also must be included in Buyable, even if they do not extend to the other Buyable classes.
+// These methods are explained in the classes where they are defined.
+
 public interface Buyable {
     public int getPrice();
     public String getType();
