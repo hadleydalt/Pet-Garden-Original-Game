@@ -7,15 +7,17 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+
 public class StoreInterface {
-    private Rectangle _viewAllPetsBG;
+    private Rectangle _sortByPriceBG;
     private Rectangle _searchMyPetsBG;
     private Rectangle _enterHoursBG;
     private Rectangle _divider1;
     private Rectangle _divider2;
     private Circle _coin;
     private Circle _coinBorder;
-    private Label _viewAllPets;
+    private Label _sortByPrice;
     private Label _searchMyPets;
     private Label _enterHours;
     private Label _currentBalance;
@@ -95,11 +97,13 @@ public class StoreInterface {
 
     private Label balIns;
 
+    private ArrayList<Buyable> _items;
+
     public StoreInterface(Pane root, Pane shopPane){
         _shopPane = shopPane;
-        _viewAllPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
-        _viewAllPetsBG.setFill(Color.POWDERBLUE);
-        _viewAllPetsBG.setOpacity(0);
+        _sortByPriceBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
+        _sortByPriceBG.setFill(Color.POWDERBLUE);
+        _sortByPriceBG.setOpacity(0);
         _coverNode1 = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
         _coverNode1.setFill(Color.TRANSPARENT);
         _searchMyPetsBG = new Rectangle(Constants.INTERFACE_BUTTON_X, Constants.INTERFACE_BUTTON_Y);
@@ -126,10 +130,10 @@ public class StoreInterface {
         _coinBorder.setStroke(Color.POWDERBLUE);
         _coinBorder.setOpacity(0);
         Font font2 = new Font("Gill Sans", 20);
-        _viewAllPets = new Label("VIEW ALL PETS");
-        _viewAllPets.setFont(font2);
-        _viewAllPets.setTextFill(Color.WHITE);
-        _viewAllPets.setOpacity(0);
+        _sortByPrice = new Label("SORT BY PRICE");
+        _sortByPrice.setFont(font2);
+        _sortByPrice.setTextFill(Color.WHITE);
+        _sortByPrice.setOpacity(0);
         _searchMyPets = new Label("SEARCH MY PETS");
         _searchMyPets.setFont(font2);
         _searchMyPets.setTextFill(Color.WHITE);
@@ -360,10 +364,13 @@ public class StoreInterface {
         __shop = new Buyable[3][2];
         this.fillShopInitial(_cat, _chicken, _cow, _dog, _fox, _giraffe);
 
-        root.getChildren().addAll(_viewAllPetsBG, _searchMyPetsBG, _enterHoursBG, _secondBG, _second, _secondCN, _firstBG, _first,
-                _firstCN, _thirdBG, _third, _thirdCN, _divider1, _divider2, _coin, _coinBorder, _viewAllPets, _searchMyPets, _enterHours, _currentBalance,
+        root.getChildren().addAll(_sortByPriceBG, _searchMyPetsBG, _enterHoursBG, _secondBG, _second, _secondCN, _firstBG, _first,
+                _firstCN, _thirdBG, _third, _thirdCN, _divider1, _divider2, _coin, _coinBorder, _sortByPrice, _searchMyPets, _enterHours, _currentBalance,
                 _dollar, _coverNode1, _coverNode2, _coverNode3, _specs, _enter, _closeOut1, _x1, _XCoverNode1, _balance,
                 _shop1, _shop2,_shop3, _shop4, _shop5, _shop6, balIns);
+
+        _items = new ArrayList<Buyable>();
+        this.fillArrayList();
     }
 
     public Label getShop1(){
@@ -391,8 +398,8 @@ public class StoreInterface {
     }
 
     public void setLoc(double x, double y){
-        _viewAllPetsBG.setX(x+50);
-        _viewAllPetsBG.setY(y+533);
+        _sortByPriceBG.setX(x+50);
+        _sortByPriceBG.setY(y+533);
         _searchMyPetsBG.setX(x+50);
         _searchMyPetsBG.setY(y+583);
         _enterHoursBG.setX(x+50);
@@ -411,7 +418,7 @@ public class StoreInterface {
         _coin.setCenterY(y+580);
         _coinBorder.setCenterX(x+330);
         _coinBorder.setCenterY(y+580);
-        _viewAllPets.relocate(x+82, y+536);
+        _sortByPrice.relocate(x+82, y+536);
         _searchMyPets.relocate(x+76, y+586);
         _enterHours.relocate(x+83, y+636);
         _currentBalance.relocate(x+285, y+640);
@@ -505,14 +512,14 @@ public class StoreInterface {
     }
 
     public void setOpacity(double x){
-        _viewAllPetsBG.setOpacity(x);
+        _sortByPriceBG.setOpacity(x);
         _searchMyPetsBG.setOpacity(x);
         _enterHoursBG.setOpacity(x);
         _divider1.setOpacity(x);
         _divider2.setOpacity(x);
         _coin.setOpacity(x);
         _coinBorder.setOpacity(x);
-        _viewAllPets.setOpacity(x);
+        _sortByPrice.setOpacity(x);
         _searchMyPets.setOpacity(x);
         _enterHours.setOpacity(x);
         _currentBalance.setOpacity(x);
@@ -576,7 +583,7 @@ public class StoreInterface {
         return _typeHours;
     }
 
-    public Rectangle getViewAllPetsCN(){
+    public Rectangle getSortByPriceCN(){
         return _coverNode1;
     }
 
@@ -666,5 +673,34 @@ public class StoreInterface {
 
     public Label getBalance(){
         return _balance;
+    }
+
+    public void fillArrayList(){
+        _items.add(_cat);
+        _items.add(_chicken);
+        _items.add(_cow);
+        _items.add(_dog);
+        _items.add(_fox);
+        _items.add(_giraffe);
+        _items.add(_owl);
+        _items.add(_penguin);
+        _items.add(_pig);
+        _items.add(_reindeer);
+        _items.add(_sheep);
+        _items.add(_tiger);
+        _items.add(_walrus);
+        _items.add(_gnome);
+        _items.add(_hat);
+        _items.add(_house);
+        _items.add(_plant);
+        _items.add(_sunsetBG);
+    }
+
+    public ArrayList<Buyable> getItems(){
+        return _items;
+    }
+
+    public Label getSortByPrice(){
+        return _sortByPrice;
     }
 }

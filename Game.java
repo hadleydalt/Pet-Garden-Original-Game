@@ -16,8 +16,6 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.util.Duration;
 
-import java.util.LinkedList;
-
 public class Game {
     private Pane gardenPane;
     private Pane buttonPane;
@@ -36,7 +34,6 @@ public class Game {
     private Pet[] _pet;
     private Button _verChanger;
     private Button _quitter;
-    private LinkedList<Pet> _myPets;
     private String newName;
     private String newNewName;
     private String searchQuery;
@@ -51,14 +48,19 @@ public class Game {
     private PetMoverHelper pmh;
     private Handlers h;
 
+    private Sorts sorts;
+
     private Boolean _onPage1;
     private Boolean _onPage2;
     private Boolean _onPage3;
+    private Boolean _isSorted = false;
 
     public Game(){
         _shop = new Buyable[3][2];
         this.setupGame();
         this.setupInitialPets();
+        sorts = new Sorts(_si.getItems());
+        sorts.makeList();
     }
 
     public Pane getGardenPane(){
@@ -112,7 +114,6 @@ public class Game {
         _quitter.relocate(505, 0);
         buttonPane.getChildren().addAll(_verChanger, _quitter);
         interactPane.getChildren().add(buttonPane);
-        _myPets = new LinkedList<Pet>();
         newName = "";
         newNewName = "";
         searchQuery = "";
@@ -124,6 +125,7 @@ public class Game {
         _si.getXCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SearchDisappear());
         _si.getEnterHoursCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterGetter());
         _si.getXCN2().addEventHandler(MouseEvent.MOUSE_CLICKED, new EnterDisappear());
+        _si.getSortByPriceCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new PriceSorter());
         _si.getFirstCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new FirstPage());
         _si.getSecondCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new SecondPage());
         _si.getThirdCN().addEventHandler(MouseEvent.MOUSE_CLICKED, new ThirdPage());
@@ -134,6 +136,31 @@ public class Game {
         _si.getShop4().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop4());
         _si.getShop5().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop5());
         _si.getShop6().addEventHandler(MouseEvent.MOUSE_CLICKED, new BuyShop6());
+    }
+
+    private class PriceSorter implements EventHandler<MouseEvent>{
+        public void handle(MouseEvent event){
+            if (!_isSorted){
+                _onPage1 = true;
+                _onPage2 = false;
+                _onPage3 = false;
+
+                    _si.fillShop(sorts.getItemsList().get(0), sorts.getItemsList().get(1), sorts.getItemsList().get(2),
+                            sorts.getItemsList().get(3), sorts.getItemsList().get(4), sorts.getItemsList().get(5));
+                _isSorted = true;
+                _si.getSortByPrice().setText("UNDO SORT");
+                _si.getSortByPrice().relocate(717, 586);
+            }
+            else {
+                _onPage1 = true;
+                _onPage2 = false;
+                _onPage3 = false;
+                _si.fillShop(_si.getCat(), _si.getChicken(), _si.getCow(), _si.getDog(), _si.getFox(), _si.getGiraffe());
+                _isSorted = false;
+                _si.getSortByPrice().setText("SORT BY PRICE");
+                _si.getSortByPrice().relocate(702, 586);
+            }
+        }
     }
 
     private class BuyShop1 implements EventHandler<MouseEvent>{
@@ -485,7 +512,14 @@ public class Game {
             _onPage1 = true;
             _onPage2 = false;
             _onPage3 = false;
+
+            if (!_isSorted) {
                 _si.fillShop(_si.getCat(), _si.getChicken(), _si.getCow(), _si.getDog(), _si.getFox(), _si.getGiraffe());
+            }
+            if (_isSorted){
+                _si.fillShop(sorts.getItemsList().get(0), sorts.getItemsList().get(1), sorts.getItemsList().get(2),
+                        sorts.getItemsList().get(3), sorts.getItemsList().get(4), sorts.getItemsList().get(5));
+            }
         }
     }
 
@@ -494,7 +528,14 @@ public class Game {
             _onPage1 = false;
             _onPage2 = true;
             _onPage3 = false;
-            _si.fillShop(_si.getOwl(), _si.getPenguin(), _si.getPig(), _si.getReindeer(), _si.getSheep(), _si.getTiger());
+
+            if (!_isSorted) {
+                _si.fillShop(_si.getOwl(), _si.getPenguin(), _si.getPig(), _si.getReindeer(), _si.getSheep(), _si.getTiger());
+            }
+            if (_isSorted){
+                _si.fillShop(sorts.getItemsList().get(6), sorts.getItemsList().get(7), sorts.getItemsList().get(8),
+                        sorts.getItemsList().get(9), sorts.getItemsList().get(10), sorts.getItemsList().get(11));
+            }
         }
     }
 
@@ -503,7 +544,14 @@ public class Game {
             _onPage1 = false;
             _onPage2 = false;
             _onPage3 = true;
-            _si.fillShop(_si.getWalrus(), _si.getGnome(), _si.getPlant(), _si.getHouse(), _si.getHat(), _si.getSunsetBG());
+
+            if (!_isSorted) {
+                _si.fillShop(_si.getWalrus(), _si.getGnome(), _si.getPlant(), _si.getHouse(), _si.getHat(), _si.getSunsetBG());
+            }
+            if (_isSorted){
+                _si.fillShop(sorts.getItemsList().get(12), sorts.getItemsList().get(13), sorts.getItemsList().get(14),
+                        sorts.getItemsList().get(15), sorts.getItemsList().get(16), sorts.getItemsList().get(17));
+            }
         }
     }
 
@@ -610,7 +658,6 @@ public class Game {
             _pet[i] = this.generatePet();
             _pet[i].setOpacity(0);
             _pet[i].setLoc(sh.petXLoc(), sh.petYLoc());
-            _myPets.add(i, _pet[i]);
             _pets[(int) ((_pet[i].getXLoc()-110)/130)][(int) ((_pet[i].getYLoc()-290)/130)] = _pet[i];
             pmh.setupPetMover(_pet[i]);
             h.setupHandlers(_pet[i]);
@@ -756,11 +803,9 @@ public class Game {
         public void handle(MouseEvent event){
             newNumHours = numHours;
             numHours = "";
-            if (newNumHours.length() > 1) {
                 intNumHours = (Integer.parseInt(newNumHours.trim()) * 10);
                 intLabel = intLabel + intNumHours;
                 _si.getBalance().setText(Integer.toString(intLabel));
-            }
         }
     }
 
