@@ -1,5 +1,7 @@
 # Pet garden
 
+* NOTE: I wrote this code during the culmination of an introductory programming class, which was my first experience with OOP and Java. Since then my coding skills have improved; this is not how I would structure the code today.
+
 PET GARDEN
 ///////////////////////////////////
 
